@@ -59,6 +59,7 @@
 >> 4.将[i,...,j-1]的元素整体后移一位，最后将找到的奇数放入i位置，然后i++。  
 >> 5.終止條件：j向後遍歷查找失敗。  
 
+***
 > 问题： 输入一个链表，输出该链表中倒数第k个结点。   
 > [FindKthToTail::findKthToTail](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/ListNode.java)
 >> 代码的鲁棒性    
@@ -81,15 +82,18 @@
 >> 代码的鲁棒性  递归  
 >> 判断的是二叉树结构上的一致性  
 
+***
 > 问题：操作给定的二叉树，将其变换为源二叉树的镜像。        
 > [Mirror::mirror](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)
 >> 面试思路 
 
+***
 > 问题：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，例如，如果输入如下4 X 4矩阵：1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.  
 > [Matrix::printMatrix](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/Matrix.java)
 >> 画图让抽象形象化   
 >> 每次一圈，注意每一个小循环（从左到右，从上到下，从右到左，从下到上）的划分以及矩阵的形状（方阵，仅一行，仅一列，仅一个数）
 
+***
 > 问题：定义栈的数据结构，请在该类型中实现一个能够得到栈中所含最小元素的min函数（时间复杂度应为O（1））。  
 > [MyStack](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/MyStack.java)
 >> 举例让抽象具体化   
@@ -117,6 +121,7 @@
 >> 举例让抽象具体化   
 >> 递归  深度优先遍历 打印路径多了target==0的判断  
 
+***
 > 问题：输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）  
 > [RandomListNodeUtil::clone](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/RandomListNode.java)
 >> 分解让复杂问题简单  
@@ -133,3 +138,6 @@
 > [Permutation::permutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/Permutation.java)
 >> 分解让复杂问题简单  
 >> 求出全排列(当前位置字符和后面每一个字符交换，递归)；排序
+
+***
+> 问题：
