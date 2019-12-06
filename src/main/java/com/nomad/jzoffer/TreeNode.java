@@ -9,9 +9,75 @@ public class TreeNode {
     TreeNode left = null;
     TreeNode right = null;
 
+    public TreeNode() {
+
+    }
+
     public TreeNode(int val) {
         this.val = val;
     }
+
+    public TreeNode(int[] array) {
+        assert (array.length > 0);
+        this.val = array[0];
+        for (int i = 1; i < array.length; i++) {
+            createBST(this, array[i]);
+        }
+    }
+
+    private TreeNode createBST(TreeNode root, int i) { //不像c++有&类型，所以只能返回TreeNode而不是boolean
+        if (root == null) {
+            return new TreeNode(i);
+        }
+        if (root.val == i) { //BST不允许同样的值
+            throw new Error("BST不允许同样的值");
+        }else if (i < root.val) {
+            root.left = createBST(root.left, i); //插入左子树
+        } else {
+            root.right = createBST(root.right, i); //插入右子树
+        }
+        return root;
+    }
+
+    public void printPreOrder(){ //先序遍历打印输出
+        printPreOrder(this);
+    }
+
+    private void printPreOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        System.out.println(root.val);
+        printPreOrder(root.left);
+        printPreOrder(root.right);
+    }
+
+    public void printInOrder(){ //中序遍历打印输出
+        printInOrder(this);
+    }
+
+    private void printInOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        printInOrder(root.left);
+        System.out.println(root.val);
+        printInOrder(root.right);
+    }
+
+    public void printPostOrder() { // 后序遍历打印输出
+        printPostOrder(this);
+    }
+
+    private void printPostOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        printPostOrder(root.left);
+        printPostOrder(root.right);
+        System.out.println(root.val);
+    }
+
 }
 
 class HasSubtree {
@@ -119,7 +185,7 @@ class FindPath {
     ArrayList<ArrayList<Integer>> listAll = new ArrayList<>(); //所有路径
     ArrayList<Integer> list = new ArrayList<>(); //一条路径
 
-    public ArrayList<ArrayList<Integer>> findPath(TreeNode root,int target) {
+    public ArrayList<ArrayList<Integer>> findPath(TreeNode root,int target) {//根到叶子节点的所有路径
         if (root == null) {
             return listAll;
         }
@@ -137,3 +203,36 @@ class FindPath {
     }
 }
 
+class InOrder{
+    TreeNode pre = null;  //因为没有c++的&类型，所以能作为函数参数进行修改，只能作为类的字段进行修改
+    public TreeNode convert(TreeNode pRootOfTree) {
+        if (pRootOfTree == null) {
+            return null;
+        }
+//        TreeNode pre = null; //指向pRootOfTree的前一个节点
+        convertAll(pRootOfTree);
+
+        TreeNode result = pRootOfTree;
+        while (result.left != null) {
+            result = result.left;
+        }
+
+        return result;
+    }
+
+    private void convertAll(TreeNode cur) {
+        if (cur == null) {
+            return;
+        }
+        convertAll(cur.left);  //处理左子树
+
+        //引用更新
+        cur.left = pre;
+        if (pre != null) {
+            pre.right = cur;
+        }
+        pre = cur;
+
+        convertAll(cur.right); //处理右子树
+    }
+}
