@@ -140,4 +140,35 @@
 >> 求出全排列(当前位置字符和后面每一个字符交换，递归)；排序
 
 ***
-> 问题：
+> 问题：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。  
+> [MoreThanHalfNum::moreThanHalfNum_Solution](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/MoreThanHalfNum.java)
+>> 时间效率  
+>> HashMap的key存放array[i],value存放出现的次数  没有用桶是因为不知道最大的数是多少   
+>> 妙解：注意到超过数组长度一半，那么每次同时去掉两个不同的数字，到最后只剩下一个数字或者两个相同的数字就是结果，最后对该数字回到数组做一下验证就即可。
+
+> 问题：输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,  
+> [GetLeastNumbers::getLeastNumbers_Solution](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/GetLeastNumbers.java)
+>> 时间效率  
+>> 使用排序工具类：对于数组，Arrays.sort(int[] a)为快排,Arrays.sort(T[], Comparator<> c)为归并排序(稳定)；对于集合，Collections.sort(list...)都是稳定的。  
+>> 数组的深复制：Arrays.copyOf()(超过长度范围的默认值填充),Arrays.copyOfRange()(超过长度范围的默认值填充),System.arrayCopy()(不能超过数组长度),Object.clone()  
+>> 排序 最大堆保存K个最小的数（PriorityQueue:底层为数组实现的小顶堆,可以通过传入Comparator改变比较规则）  冒泡排序的最外层循环k次
+
+> 问题：HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。给一个数组，返回它的最大连续子序列的和，你会不会被他忽悠住？(子向量的长度至少是1)  
+> [FindGreatestSumOfSubArray::findGreatestSumOfSubArray](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/FindGreatestSumOfSubArray.java)  
+>> 时间效率  
+>> 动态规划(dp) 关键在于状态转移方程: F（i）：以array[i]为末尾元素的子数组的和的最大值，子数组的元素的相对位置不变;F（i）=max（F（i-1）+array[i] ， array[i]）
+
+> 问题：求出1~13的整数中1出现的次数,并算出100~1300的整数中1出现的次数？为此他特别数了一下1~13中包含1的数字有1、10、11、12、13因此共出现6次,但是对于后面问题他就没辙了。ACMer希望你们帮帮他,并把问题更加普遍化,可以很快的求出任意非负整数区间中1出现的次数（从1 到 n 中1出现的次数）。  
+> [NumberOf1Between1AndN::numberOf1Between1AndN_Solution](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/NumberOf1Between1AndN.java)  
+>> 时间效率  
+>> 枚举法 int转string进行对字符的判断  
+>> 妙解[NumberOf1Between1AndN::numberOf1Between1AndN_Solution1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/NumberOf1Between1AndN.java)  
+>> 分别求出个位、十位、百位。。。中出现1的次数. e.g. 316:  
+>> 1. 1,11,21,...,301,311  共31+1=32个,即(316/1+8)/10*1+(316/1%10==1?0+1:0)  
+>> 2. 10-19,110-119,210-219,310-316   共3*10+7=37个，即(316/10+8)/10\*10+(316/10%10==1?6+1:0)  
+>> 3. 100-199  共100个，即(316/100+8)/10*100+(316/100%10==1?16+1:0)
+
+> 问题：输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。  
+> [PrintMinNumber::printMinNumber](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/PrintMinNumber.java)
+>> 时间效率  
+>> 关键在于字符串(int2string)的比较规则(拼接起来比较)：s1+s2和s2+s1比较，把小的放在前面  

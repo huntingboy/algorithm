@@ -2,11 +2,13 @@ package com.nomad.main;
 
 import com.nomad.jzoffer.*;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        new Main().testInOrder();
+        new Main().testNumberOf1Between1AndN();
     }
 
     public void testPower() {
@@ -70,4 +72,32 @@ public class Main {
         }
     }
 
+    public void testPriorityQueue(){
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            int N = scanner.nextInt();
+            PriorityQueue<Integer> maxHeap = new PriorityQueue<>(N, new Comparator<Integer>() {
+                @Override
+                public int compare(Integer o1, Integer o2) { //o2：parent  >0则break  默认是小顶堆o1.compareTo(o2)
+                    return o2.compareTo(o1);
+                }
+            });
+            for (int i = 0; i < N; i++) {
+                maxHeap.offer(scanner.nextInt());
+            }
+
+            for (Integer i : maxHeap) {
+                System.out.println(i);
+            }
+        }
+    }
+
+    public void testNumberOf1Between1AndN(){
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            int N = scanner.nextInt();
+            System.out.println(new NumberOf1Between1AndN().numberOf1Between1AndN_Solution(N));
+        }
+
+    }
 }
