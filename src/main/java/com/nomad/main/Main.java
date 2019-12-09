@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        new Main().testNumberOf1Between1AndN();
+        new Main().testFirstNotRepeatingChar();
     }
 
     public void testPower() {
@@ -98,6 +98,21 @@ public class Main {
             int N = scanner.nextInt();
             System.out.println(new NumberOf1Between1AndN().numberOf1Between1AndN_Solution(N));
         }
+    }
 
+    public void testUglyNumber(){
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            int N = scanner.nextInt();
+            System.out.println(new GetUglyNumber().getUglyNumber_Solution(N));
+        }
+    }
+
+    public void testFirstNotRepeatingChar(){
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            String str = scanner.next();
+            System.out.println(new FirstNotRepeatingChar().firstNotRepeatingChar(str));
+        }
     }
 }

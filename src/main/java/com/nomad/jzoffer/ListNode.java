@@ -120,3 +120,41 @@ class Merge {
         }
     }
 }
+
+class FindFirstCommonNode {
+    public ListNode findFirstCommonNode(ListNode pHead1, ListNode pHead2) { //两个链表的第一个公共结点  让长的链表先走长度差步
+        if (pHead1 == null || pHead2 == null) {
+            return null;
+        }
+        ListNode p1 = pHead1;
+        ListNode p2 = pHead2;
+
+        int len1 = 0, len2 = 0;
+        while (p1 != null) { //链表长度计算
+            len1++;
+            p1 = p1.next;
+        }
+        while (p2 != null) {
+            len2++;
+            p2 = p2.next;
+        }
+
+        p1 = pHead1;
+        p2 = pHead2;
+        if (len1 > len2) {
+            for (int i = 0; i < len1 - len2; i++) {
+                p1 = p1.next;
+            }
+        } else {
+            for (int i = 0; i < len2 - len1; i++) {
+                p2 = p2.next;
+            }
+        }
+        while (p1 != p2) {
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        return p1;
+    }
+}

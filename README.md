@@ -171,4 +171,31 @@
 > 问题：输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。  
 > [PrintMinNumber::printMinNumber](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/PrintMinNumber.java)
 >> 时间效率  
->> 关键在于字符串(int2string)的比较规则(拼接起来比较)：s1+s2和s2+s1比较，把小的放在前面  
+>> 关键在于字符串(int2string后拼接，然后string2int进行比较)的比较规则(拼接起来比较)：s1+s2和s2+s1比较，把小的放在前面  
+
+> 问题：把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。  
+> [GetUglyNumber::getUglyNumber_Solution](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/GetUglyNumber.java)  
+>> 时间空间效率的平衡  
+>> 丑数（2^x3^y5^z） 妙解[GetUglyNumber::getUglyNumber_Solution1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/GetUglyNumber.java) 空间换时间
+
+> 问题：在一个字符串(0<=字符串长度<=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置, 如果没有则返回 -1（需要区分大小写）.  
+> [FirstNotRepeatingChar::firstNotRepeatingChar](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/FirstNotRepeatingChar.java)  
+>> 时间空间效率的平衡  
+
+> 问题：在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。 即输出P%1000000007  
+> 输入描述：  
+>> 题目保证输入的数组中没有相同的数字  
+>> 数据范围：  
+>> 对于%50的数据,size<=10^4  
+>> 对于%75的数据,size<=10^5  
+>> 对于%100的数据,size<=2*10^5  
+> [InversePairs::inversePairs](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/InversePairs.java)  
+>> 时间空间效率的平衡  
+>> 归并排序+二路归并  问题转化为二路归并交换次序的次数  
+
+> 问题：输入两个链表，找出它们的第一个公共结点。  
+> [FindFirstCommonNode::findFirstCommonNode](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/ListNode.java)  
+>> 时间空间效率的平衡    
+>> 让长的链表先走长度差步，然后一起走
+
+> 问题：
