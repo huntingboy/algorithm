@@ -173,6 +173,7 @@
 >> 时间效率  
 >> 关键在于字符串(int2string后拼接，然后string2int进行比较)的比较规则(拼接起来比较)：s1+s2和s2+s1比较，把小的放在前面  
 
+***  
 > 问题：把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。  
 > [GetUglyNumber::getUglyNumber_Solution](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/GetUglyNumber.java)  
 >> 时间空间效率的平衡  
@@ -198,4 +199,52 @@
 >> 时间空间效率的平衡    
 >> 让长的链表先走长度差步，然后一起走
 
-> 问题：
+***
+> 问题：统计一个数字在排序数组中出现的次数。   
+> [GetNumberOfK::getNumberOfK](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/GetNumberOfK.java)  
+>> 知识迁移能力  
+>> 注意题目排好序的数组，所有设置flag标识是否已经检查完k的所有值
+
+> 问题：输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。  
+> [TreeNode::treeDepth](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)  
+>> 知识迁移能力  
+>> 递归 子树高度(左子树和右子树的最大值)+1
+
+> 问题：输入一棵二叉树，判断该二叉树是否是平衡二叉树。  
+> [TreeNode::isBalanced_Solution](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)  
+>> 知识迁移能力  
+>> AVL树：任一节点对应的两棵子树的最大高度差为1   递归求树的高度  带剪枝处理
+
+> 问题：一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字。  
+> [FindNumsAppearOnce::findNumsAppearOnce](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/FindNumsAppearOnce.java)  
+>> 知识迁移能力  
+>> HashMap方法   
+>> 位运算方法（妙解[FindNumsAppearOnce::findNumsAppearOnce1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/FindNumsAppearOnce.java)),先求不同的2个元素的异或值和最后一个为1的bit位的位置，并根据它对所有元素分组,不同的2个数肯定在不同的组里    
+
+> 问题：小明很喜欢数学,有一天他在做数学作业时,要求计算出9~16的和,他马上就写出了正确答案是100。但是他并不满足于此,他在想究竟有多少种连续的正数序列的和为100(至少包括两个数)。没多久,他就得到另一组连续正数和为100的序列:18,19,20,21,22。现在把问题交给你,你能不能也很快的找出所有和为S的连续正数序列? Good Luck!  
+> 输出描述：输出所有和为S的连续正数序列。序列内按照从小至大的顺序，序列间按照开始数字从小到大的顺序  
+> [FindContinuousSequence::findContinuousSequence](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/FindContinuousSequence.java)
+>> 知识迁移能力    
+>> 穷举 双指针(窗口)技术
+
+> 问题：输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。  
+> 输入描述：对应每个测试案例，输出两个数，小的先输出。  
+> [FindNumbersWithSum::findNumbersWithSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/FindNumbersWithSum.java)
+>> 知识迁移能力    
+>> 同上 穷举 双指针（窗口）技术
+
+> 问题：汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！  
+> [LeftRotateString::leftRotateString](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/LeftRotateString.java)
+>> 知识迁移能力    
+>> 数组 队列 注意对长度取余和str的合法性验证 和 ch2string的API
+
+> 问题：牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？  
+> [ReverseSentence::reverseSentence](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/ReverseSentence.java)  
+>> 知识迁移能力    
+>> StringBuffer  先分解为单词数组  在从后向前拼接
+
+
+
+
+
+***

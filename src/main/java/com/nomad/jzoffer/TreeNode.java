@@ -78,6 +78,43 @@ public class TreeNode {
         System.out.println(root.val);
     }
 
+    public int treeDepth(){
+        return treeDepth(this);
+    }
+
+    private int treeDepth(TreeNode root) { //树的深度  即树的高度!=节点的深度   深度:从当前节点到root   高度:从当前节点到leaf
+        if (root == null) {
+            return 0;
+        }
+
+        return Math.max(treeDepth(root.left), treeDepth(root.right)) + 1;
+    }
+
+    public boolean isBalanced_Solution(){
+        return isBalanced_Solution(this);
+    }
+
+    private boolean isBalanced_Solution(TreeNode root) { //平衡二叉树判断  最大、最小高度差<=1  在求高度时带剪枝，减少了重复的树的遍历
+        return (getHeight(root) != -1);
+    }
+
+    private int getHeight(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int left = getHeight(root.left);
+        if (left == -1) {
+            return -1;
+        }
+        int right = getHeight(root.right);
+        if (right == -1) {
+            return -1;
+        }
+
+        return Math.abs(left - right) <= 1 ? Math.max(left, right) + 1 : -1;  //如果子树不是AVL树就直接返回-1,退出
+    }
+
+
 }
 
 class HasSubtree {
@@ -236,3 +273,4 @@ class InOrder{
         convertAll(cur.right); //处理右子树
     }
 }
+
