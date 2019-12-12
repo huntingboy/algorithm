@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        new Main().testFirstNotRepeatingChar();
+        new Main().testLastRemaining();
     }
 
     public void testPower() {
@@ -114,5 +114,16 @@ public class Main {
             String str = scanner.next();
             System.out.println(new FirstNotRepeatingChar().firstNotRepeatingChar(str));
         }
+    }
+
+    public void testLastRemaining(){
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            int n = scanner.nextInt();
+            int m = scanner.nextInt();
+
+            System.out.println(new LastRemaining().lastRemaining_Solution(n, m));
+        }
+
     }
 }
