@@ -255,5 +255,14 @@
 >> 妙解[LastRemaining::lastRemaining_Solution1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/LastRemaining.java)： 通过归纳找出递归关系 f[1]=0; f[i]=(f[i-1]+m)%i (i>1)  
 
 ***
+> 问题：求1+2+3+...+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。  
+> [Sum::sum_Solution](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/Sum.java)  
+>> 发散思维能力  
+>> 短路求值
+
+> 问题：写一个函数，求两个整数之和，要求在函数体内不得使用+、-、*、/四则运算符号。  
+> [Add::add](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/Add.java)  
+>> 发散思维能力  
+>> ^:异或求和（忽略会产生进位的位）  &:求出所有会产生进位的位   然后左移1位    2者相加即可
 
 ***
