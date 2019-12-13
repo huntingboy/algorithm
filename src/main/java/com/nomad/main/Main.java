@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        new Main().testLastRemaining();
+        new Main().testStr2Int();
     }
 
     public void testPower() {
@@ -124,6 +124,13 @@ public class Main {
 
             System.out.println(new LastRemaining().lastRemaining_Solution(n, m));
         }
+    }
 
+    public void testStr2Int(){
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            String str = scanner.next();
+            System.out.println(new StrToInt().strToInt(str));
+        }
     }
 }
