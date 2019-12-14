@@ -301,4 +301,17 @@
 >> StringBuffer和HashMap<Charater, Integer>
 
 ***
+> 问题：给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。  
+> [EntryNodeOfLoop::entryNodeOfLoop](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/ListNode.java)
+>> 链表  
+>> 使用辅助存储空间HashMap<ListNode, Boolean>，当map存在该key时即入口   
+>> 妙解[EntryNodeOfLoop::entryNodeOfLoop1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/ListNode.java):快慢指针法（同求链表倒数第k个节点）  
+>>> 1. 快指针一次走两步，慢指针一次走一步，设链表起点到入口结点的长度是x1，快慢指针第一次相遇时距离入口结点的长度是x2，此时慢指针走了x1+x2，快指针走了2x1+2x2，也就是说x1+x2的长度正好是环的一圈大小的倍数。  
+>>> 2. 此时让一个指针从起点出发，一个指针从相遇结点出发，都是一次走一步，当两个指针第一次相遇时恰好是在入口结点。
 
+> 问题：在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5  
+> [DeleteDuplication::deleteDuplication](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/ListNode.java)  
+>> 链表  
+>> 新建一个头结点来统一重复节点可能出现在开头或者中间的情况  让p指向不重复的节点，q指向要比较的节点（q和q.next比较）
+
+***

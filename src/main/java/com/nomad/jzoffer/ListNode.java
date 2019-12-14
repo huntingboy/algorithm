@@ -1,6 +1,10 @@
 package com.nomad.jzoffer;
 
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import java.util.HashMap;
+
 public class ListNode {
     int val;
     ListNode next = null;
@@ -156,5 +160,72 @@ class FindFirstCommonNode {
         }
 
         return p1;
+    }
+}
+
+class EntryNodeOfLoop {
+    public ListNode entryNodeOfLoop(ListNode pHead)  //链表中环的入口结点  辅助空间HashMap
+    {
+        HashMap<ListNode, Boolean> map = new HashMap<>();
+        ListNode p = pHead;
+        while (p != null) {
+            if (!map.containsKey(p)) {
+                map.put(p, true);
+                p = p.next;
+            } else {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public ListNode entryNodeOfLoop1(ListNode pHead) {//链表中环的入口结点  快慢指针法
+        ListNode l = pHead, h = pHead;  //慢指针每次走1步，快指针每次走2步
+        boolean flag = false;  //标志是否存在环
+        while (h != null && h.next != null) {
+            if (l == h) {
+                flag = true;
+                break;
+            } else {
+                l = l.next;
+                h = h.next.next;
+            }
+        }
+
+        if (flag) {
+            l = pHead;  //l~h的步长为环包括节点的数量的倍数  然后同步走，当第一次相遇时即为入口
+            while (l != h) {
+                l = l.next;
+                h = h.next;
+            }
+            return l;
+        }
+        return null;
+    }
+}
+
+class DeleteDuplication {
+    public ListNode deleteDuplication(ListNode pHead) // 删除链表中重复的结点  新建一个头结点来统一重复节点可能出现在开头或者中间的情况
+    {
+        ListNode head = new ListNode(0);
+        head.next = pHead;
+        ListNode p = head, q = pHead;
+        boolean flag = false;  //标志是否存在重复的节点
+        while (q != null) {
+            while (q.next != null && q.val == q.next.val) {
+                q = q.next;
+                p.next = q;
+                flag = true;
+            }
+            if (flag) { //如果存在重复的节点，需要把最后一个重复的节点也过滤掉
+                q = q.next;
+                p.next = q;
+                flag = false;
+            } else {
+                p = p.next;
+                q = q.next;
+            }
+        }
+        return head.next;
     }
 }
