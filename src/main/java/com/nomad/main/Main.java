@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        new Main().testStr2Int();
+        new Main().testIsNumeric();
     }
 
     public void testPower() {
@@ -131,6 +131,14 @@ public class Main {
         while (scanner.hasNext()) {
             String str = scanner.next();
             System.out.println(new StrToInt().strToInt(str));
+        }
+    }
+
+    public void testIsNumeric(){
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            String str = scanner.next();
+            System.out.println(new IsNumeric().isNumeric(str.toCharArray()));
         }
     }
 }
