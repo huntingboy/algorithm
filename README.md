@@ -19,7 +19,10 @@
 >> 递归  关键在于递归函数的参数的确定  一般都是固定的，可以记住一些常见的
 
 ***
-> 问题：
+> 问题：把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。  
+> [MinNumberInRotateArray::minNumberInRotateArray](https://github.com/huntingboy/algorithm/blob/master/src/test/java/com/nomad/sort/MinNumberInRotateArray.java)
+>> 查找和排序  
+>> 等价于找旋转支点（梯度）下标位置
 
 ***
 > 问题：斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项（从0开始，第0项为0）  
