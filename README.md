@@ -315,3 +315,44 @@
 >> 新建一个头结点来统一重复节点可能出现在开头或者中间的情况  让p指向不重复的节点，q指向要比较的节点（q和q.next比较）
 
 ***
+> 问题：给定一个二叉树和其中的一个结点，请找出中序遍历顺序的下一个结点并且返回。注意，树中的结点不仅包含左右子结点，同时包含指向父结点的指针。  
+> [GetNext::getNext](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeLinkNode.java) 
+>> 树  
+>> 1. 存在右子树，则为右子树的最左子节点
+>> 2. 如果右子树为空并且是parent的左子树root，则为父节点
+>> 3. 如果右子树为空并且是parent的右子树root，则向上找parent一直到它是parent的左子树root
+
+> 问题：请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。  
+> [IsSymmetrical::isSymmetrical](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)
+>> 树  
+>> 递归
+
+> 问题：请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。  
+> [Print::print](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)
+>> 树  
+>> 使用Queue(LinkedList)存放当前行所有的节点  如果是偶数行使用Stack作为中介逆序得到结果，否则直接放到res中  
+
+> 问题：从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。  
+> [Print::print1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)
+>> 树  
+>> 队列Queue(LinkedList:Deque和List的子类)  类似上题
+
+> 问题： 请实现两个函数，分别用来序列化和反序列化二叉树。 二叉树的序列化是指：把一棵二叉树按照某种遍历方式的结果以某种格式保存为字符串，从而使得内存中建立起来的二叉树可以持久保存。序列化可以基于先序、中序、后序、层序的二叉树遍历方式来进行修改，序列化的结果是一个字符串，序列化时通过 某种符号表示空节点（#），以 ！ 表示一个结点值的结束（value!）。 二叉树的反序列化是指：根据某种遍历顺序得到的序列化字符串结果str，重构二叉树。  
+> [Serialize::serialize/deserialize](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)
+>> 树   
+>> 先序遍历的结果
+
+> 问题：给定一棵二叉搜索树，请找出其中的第k小的结点。例如， （5，3，7，2，4，6，8）    中，按结点数值大小顺序第三小结点的值为4。　　
+> [KthNode::kthNode](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)
+>> 树  
+>> 非递归中序遍历接住栈Stack   递归[KthNode::kthNode1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)
+
+> 问题：如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用Insert()方法读取数据流，使用GetMedian()方法获取当前读取数据的中位数。　　
+> [GetMedian::getMedian](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/GetMedian.java)  
+>> 树  
+>> LinkedList  也可以用PriorityQueue(默认小顶堆,底层是数组实现)
+
+
+
+
+

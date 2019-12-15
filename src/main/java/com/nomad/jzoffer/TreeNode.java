@@ -1,13 +1,11 @@
 package com.nomad.jzoffer;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Queue;
+import java.util.*;
 
 public class TreeNode {
-    int val = 0;
-    TreeNode left = null;
-    TreeNode right = null;
+    public int val = 0;
+    public TreeNode left = null;
+    public TreeNode right = null;
 
     public TreeNode() {
 
@@ -274,3 +272,181 @@ class InOrder{
     }
 }
 
+class IsSymmetrical {
+    boolean isSymmetrical(TreeNode pRoot) //对称的二叉树
+    {
+        return pRoot == null || judge(pRoot.left, pRoot.right);
+    }
+
+    private boolean judge(TreeNode left, TreeNode right) { //递归判断
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null || left.val != right.val) { //注意val的比较
+            return false;
+        }
+
+        return judge(left.left, right.right) && judge(left.right, right.left);
+    }
+}
+
+class Print {
+    public ArrayList<ArrayList<Integer>> print(TreeNode pRoot) { // 按之字形顺序打印二叉树
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        if (pRoot == null) {
+            return res;
+        }
+        Queue<TreeNode> nodes = new LinkedList<>(); //队列存放所有的nodes
+        boolean flag = false; //标志是否是偶数行，从1开始
+        nodes.add(pRoot);
+        while (!nodes.isEmpty()) {
+            int size = nodes.size();
+            if (flag) { //偶数行逆序放进res  使用临时栈
+                Stack<Integer> tmp = new Stack<>();
+                for (int i = 0; i < size; i++) {
+                    TreeNode cur = nodes.poll();
+                    tmp.add(cur.val);
+                    if (cur.left != null) {
+                        nodes.add(cur.left);
+                    }
+                    if (cur.right != null) {
+                        nodes.add(cur.right);
+                    }
+                }
+                //从栈中取出结果放到res中
+                ArrayList<Integer> row = new ArrayList<>();
+                while (!tmp.isEmpty()) {
+                    row.add(tmp.pop());
+                }
+                res.add(row);
+                flag = false;
+            } else { //奇数列  直接从队列取值放到res中
+                ArrayList<Integer> row = new ArrayList<>();
+                for (int i = 0; i < size; i++) {
+                    TreeNode cur = nodes.poll();
+                    row.add(cur.val);
+                    if (cur.left != null) {
+                        nodes.add(cur.left);
+                    }
+                    if (cur.right != null) {
+                        nodes.add(cur.right);
+                    }
+                }
+                res.add(row);
+                flag = true;
+            }
+        }
+
+        return res;
+    }
+
+    ArrayList<ArrayList<Integer> > print1(TreeNode pRoot) { // 把二叉树打印成多行
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        if (pRoot == null) {
+            return res;
+        }
+        Queue<TreeNode> nodes = new LinkedList<>();
+        nodes.add(pRoot);
+        while (!nodes.isEmpty()) {
+            int size = nodes.size();
+            ArrayList<Integer> row = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = nodes.poll();
+                row.add(cur.val);
+                if (cur.left != null) {
+                    nodes.add(cur.left);
+                }
+                if (cur.right != null) {
+                    nodes.add(cur.right);
+                }
+            }
+            res.add(row);
+        }
+        return res;
+    }
+}
+
+class Serialize {
+    String serialize(TreeNode root) { //序列化二叉树
+        StringBuilder res = new StringBuilder();
+        if (root == null) {
+            res.append("#!");
+            return res.toString();
+        }
+        res.append(root.val + "!");
+        res.append(serialize(root.left));
+        res.append(serialize(root.right));
+
+        return res.toString();
+    }
+
+    private int index = -1;
+    TreeNode deserialize(String str) {
+        if (str == null || str.length() == 0) {
+            return null;
+        }
+        String[] vals = str.split("!");
+        return doDeserialize(vals);
+    }
+
+    private TreeNode doDeserialize(String[] vals) {
+        index++;
+        TreeNode node = null;
+        if (index < vals.length && !vals[index].equals("#")) {
+            node = new TreeNode(Integer.valueOf(vals[index]));
+            node.left = doDeserialize(vals);
+            node.right = doDeserialize(vals);
+        }
+
+        return node;
+    }
+}
+
+class KthNode {
+    TreeNode kthNode(TreeNode pRoot, int k) //二叉搜索树的第k个结点  非递归中序遍历
+    {
+        if (pRoot == null || k == 0) {
+            return null;
+        }
+        Stack<TreeNode> nodes = new Stack<>();
+        int count = 0;
+        while (pRoot != null || !nodes.empty()) {
+            while (pRoot != null) {//从最左(小)开始
+                nodes.push(pRoot);
+                pRoot = pRoot.left;
+            }
+            pRoot = nodes.pop(); //当前子树的根
+            count++;
+            if (count == k) {
+                return pRoot;
+            }
+            pRoot = pRoot.right; //右子树遍历
+        }
+        return null; //没找到
+    }
+
+    private int count = 0;
+    TreeNode kthNode1(TreeNode pRoot, int k) //二叉搜索树的第k个结点  递归解法
+    {
+        if (pRoot == null || k == 0) {
+            return null;
+        }
+
+        TreeNode node = kthNode1(pRoot.left, k); //左子树找
+        if (node != null) {//左子树找到
+            return node;
+        }
+
+        count++;
+        if (count == k) { //当前节点找到
+            return pRoot;
+        }
+
+        node = kthNode1(pRoot.right, k); //右子树找
+        if (node != null) { //右子树找到
+            return node;
+        }
+
+        return null;
+    }
+}
