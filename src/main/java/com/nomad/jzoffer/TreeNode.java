@@ -450,3 +450,24 @@ class KthNode {
         return null;
     }
 }
+
+class ReConstructBinaryTree {
+    public TreeNode reConstructBinaryTree(int [] pre,int [] in) { //重建二叉树
+        return reConstructBinaryTree(pre, 0, pre.length - 1, in, 0, in.length - 1);
+    }
+
+    private TreeNode reConstructBinaryTree(int[] pre, int startPre, int endPre, int[] in, int startIn, int endIn) { //递归  关键在于递归函数的参数的确定  一般都是固定的，可以记住一些常见的
+        if (startPre > endPre || startIn > endIn) {
+            return null;
+        }
+        TreeNode root = new TreeNode(pre[startPre]); //先根，后左右孩子
+        for (int i = startIn; i <= endIn; i++) {
+            if (pre[startPre] == in[i]) {
+                root.left = reConstructBinaryTree(pre, startPre + 1, i - startIn + startPre, in, startIn, i - 1);
+                root.right = reConstructBinaryTree(pre, i - startIn + startPre + 1, endPre, in, i + 1, endIn);
+                break;
+            }
+        }
+        return root;
+    }
+}

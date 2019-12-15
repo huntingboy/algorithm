@@ -13,6 +13,15 @@
 >> 工资范围如果小可以考虑使用array\[salaryCount++\]来做  
 
 ***
+> 问题：输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。  
+> [ReConstructBinaryTree::reConstructBinaryTree](https://github.com/huntingboy/algorithm/blob/master/src/test/java/com/nomad/sort/TreeNode.java)  
+>> 树  
+>> 递归  关键在于递归函数的参数的确定  一般都是固定的，可以记住一些常见的
+
+***
+> 问题：
+
+***
 > 问题：斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项（从0开始，第0项为0）  
 > [Fibonacci::fibonacci](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/Fibonacci.java)
 >> 递归和循环
