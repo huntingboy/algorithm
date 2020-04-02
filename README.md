@@ -1,5 +1,15 @@
 # algorithm
-## 一些算法编程题
+**一些算法编程题**
+## 目录
+- [剑指offer](#剑指offer)
+- [LeetCode](#Leetcode)
+- [校招](#校招)
+    - [Tencent](#Tencent)
+    - [Alibaba](#Alibaba)
+    - [美团](#美团)
+    - [ByteDance](#ByteDance)
+
+## 剑指offer
 ***
 > 问题：工资按照出现频次降序排序  
 > 输入：num(员工人数)，salaries(工资列表)  
@@ -381,5 +391,23 @@
 >> 回溯法  
 >> 类似上题  上下左右递归遍历+出口(下标越界||位置已访问过||不满足规定条件)  一般递归函数的参数都是固定的，可以记住
 
-***
+## Leetcode
+
+
+## 校招
+### Tencent
+**2020**
+> 问题：压缩字符串解压缩  
+> 输入：HG[3|B[2|CA]]F  
+> 输出：HGBCACABCACABCACAF(HG[3|B[2|CA]]F->HG[3|BCACA]F->HGBCACABCACABCACAF)  
+> [Unzip::unzip](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/tencent/twozero/Unzip.java)
+>> 递归  
+>> (input, begin, end)
+
+**2019**
+
+
+### Alibaba
+### 美团
+### ByteDance
 
