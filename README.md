@@ -11,7 +11,7 @@
 
 ## 剑指offer
 ***
-<center>集合</center>
+<h3 style="text-align:center">集合</h3>
 
 > *问题*：工资按照出现频次降序排序  
 > 输入：num(员工人数)，salaries(工资列表)  
