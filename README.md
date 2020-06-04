@@ -392,7 +392,52 @@
 >> 类似上题  上下左右递归遍历+出口(下标越界||位置已访问过||不满足规定条件)  一般递归函数的参数都是固定的，可以记住
 
 ## Leetcode
+***
+> 问题：求给定二叉树的最小深度。最小深度是指树的根结点到最近叶子结点的最短路径上结点的数量。  
+> [MinDepth::run](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MinDepth.java)  
+>> 树  
 
+> 问题：求给定的二叉树的后序遍历。   
+> [Traversal::postorderTraversal](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Traversal.java)
+>> 树  
+>> 递归  先左右子树,后根  
+>> 栈（非递归）[Traversal::postorderTraversal1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Traversal.java) 注意放到栈的次序，先右孩子后左孩子  pre指向刚访问过的节点
+
+> 问题：求给定的二叉树的前序遍历。   
+> [Traversal::preorderTraversal](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Traversal.java)
+>> 树  
+>> 递归  
+>> 栈（非递归）[Traversal::preorderTraversal1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Traversal.java)  先访问根节点（从栈pop）  注意放到栈的次序，先右孩子后左孩子  非递归实现树的遍历套路差不多，记住   
+
+***
+> 问题： 计算逆波兰式（后缀表达式）的值，运算符仅包含"+","-","*"和"/"，被操作数可能是整数或其他表达式   
+> e.g. ["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9↵ ["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6
+> [EvalRPN::evalRPN](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/EvalRPN.java)  
+>> 栈  
+
+***
+> 问题：对于给定的n个位于同一二维平面上的点，求最多能有多少个点位于同一直线上  
+> [MaxPoints::maxPoints](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MaxPoints.java)  
+>> 穷举  
+>> map<Double, Integer>  key:斜率  value:点个数  
+>> 3种情况：垂直  相同的点  斜率
+
+***
+> 问题：在O(n log n)的时间内使用常数级空间复杂度对链表进行排序。  
+> [SortList::sortList](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/SortList.java)  
+>> 排序  链表  
+>> 归并排序时间复杂度O(1)  对于链表，排序只需要修改引用，空间复杂度O(1)   注意sortListMerge函数的参数列表对于链表和数组的不同，本质都是范围
+
+> 问题：使用插入排序对链表进行排序。  
+> [SortList::insertionSortList](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/SortList.java)  
+>> 排序  
+>> 创建一个新链表头（哨兵），对于每个要插入到该链表的节点，首先找到要插入的位置，然后在末尾插入或者在在中间插入该节点。
+
+***
+> 问题： 将给定的单链表L： L 0→L 1→…→L n-1→L n, 重新排序为： L 0→L n →L 1→L n-1→L 2→L n-2→…  要求使用原地算法，并且不改变节点的值  
+> [ReorderList::reorderList](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/ReorderList.java)  
+>> 链表  
+>> 快慢指针找到中间节点，将后面的链表反转（前插法），合并链表
 
 ## 校招
 ### Tencent
