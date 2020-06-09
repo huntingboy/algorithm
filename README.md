@@ -410,7 +410,7 @@
 >> 栈（非递归）[Traversal::preorderTraversal1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Traversal.java)  先访问根节点（从栈pop）  注意放到栈的次序，先右孩子后左孩子  非递归实现树的遍历套路差不多，记住   
 
 ### 栈
-> **问题**： 计算逆波兰式（后缀表达式）的值，运算符仅包含"+","-","*"和"/"，被操作数可能是整数或其他表达式   
+> **问题**：计算逆波兰式（后缀表达式）的值，运算符仅包含"+","-","*"和"/"，被操作数可能是整数或其他表达式   
 > e.g. ["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9↵ ["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6
 > [EvalRPN::evalRPN](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/EvalRPN.java)  
 >> 栈  
@@ -434,10 +434,20 @@
 >> 创建一个新链表头（哨兵），对于每个要插入到该链表的节点，首先找到要插入的位置，然后在末尾插入或者在在中间插入该节点。
 
 ### 链表
-> **问题**： 将给定的单链表L： L 0→L 1→…→L n-1→L n, 重新排序为： L 0→L n →L 1→L n-1→L 2→L n-2→…  要求使用原地算法，并且不改变节点的值  
+> **问题**：将给定的单链表L： L 0→L 1→…→L n-1→L n, 重新排序为： L 0→L n →L 1→L n-1→L 2→L n-2→…  要求使用原地算法，并且不改变节点的值  
 > [ReorderList::reorderList](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/ReorderList.java)  
 >> 链表  
 >> 快慢指针找到中间节点，将后面的链表反转（前插法），合并链表
+
+### 题库
+1. 两数之和
+**问题**：给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍   
+**示例**：
+> 给定 nums = [2, 7, 11, 15], target = 9  
+> 因为 nums[0] + nums[1] = 2 + 7 = 9  
+> 所以返回 [0, 1]
+2. hihi  
+fdsa
 
 ## 校招
 ### Tencent
