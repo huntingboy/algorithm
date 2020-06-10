@@ -28,4 +28,44 @@ public class Sum {
         }
         return null;
     }
+
+    //两数相加
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode p1 = l1, p2 = l2, l=null, p = l;
+        int tmp = 0;
+        while (p1 != null && p2 != null) {
+            ListNode node = new ListNode((p1.val + p2.val + tmp) % 10);
+            tmp = (p1.val + p2.val + tmp) / 10;
+            if (l == null) {
+                l = node;
+                p = l;
+            } else {
+                p.next = node;
+                p = node;
+            }
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        while (p1 != null) {
+            ListNode node = new ListNode((p1.val + tmp) % 10);
+            tmp = (p1.val + tmp) / 10;
+            p.next = node;
+            p = node;
+            p1 = p1.next;
+        }
+        while (p2 != null) {
+            ListNode node = new ListNode((p2.val + tmp) % 10);
+            tmp = (p2.val + tmp) / 10;
+            p.next = node;
+            p = node;
+            p2 = p2.next;
+        }
+        if (tmp != 0) {
+            ListNode node = new ListNode(tmp);
+            p.next = node;
+            p = node;
+        }
+        p.next = null;
+        return l;
+    }
 }

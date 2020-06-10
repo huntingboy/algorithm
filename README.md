@@ -444,13 +444,73 @@
 **问题**：给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍   
 **示例**：
     > 给定 nums = [2, 7, 11, 15], target = 9  
-    因为 nums[0] + nums[1] = 2 + 7 = 9  
-    所以返回 [0, 1]  
-    []()
-    >> 
-2. hihi  
-fdsa
-
+      因为 nums[0] + nums[1] = 2 + 7 = 9  
+      所以返回 [0, 1]  
+      [Sum::twoSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Sum.java)  
+2. 两数相加  
+**问题**：给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。您可以假设除了数字 0 之外，这两个数都不会以 0 开头。  
+**示例**：
+    > 输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)  
+      输出：7 -> 0 -> 8  
+      原因：342 + 465 = 807
+      [Sum::addTwoNumbers](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Sum.java)  
+      >> 链表
+3. 无重复字符的最长子串  
+**问题**：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。  
+**示例**：
+    > 输入: "abcabcbb"  
+      输出: 3   
+      解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。  
+      输入: "bbbbb"  
+      输出: 1  
+      解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。  
+      输入: "pwwkew"  
+      输出: 3  
+      解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。  
+      请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。  
+      [MyString::lengthOfLongestSubstring0](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)    
+      [MyString::lengthOfLongestSubstring](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> 字符串 双指针 Set
+4. 寻找两个正序数组的中位数  
+**问题**：给定两个大小为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出这两个正序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。你可以假设 nums1 和 nums2 不会同时为空  
+**示例**：
+    > nums1 = [1, 3]  
+      nums2 = [2]  
+      则中位数是 2.0  
+      nums1 = [1, 2]  
+      nums2 = [3, 4]  
+      则中位数是 (2 + 3)/2 = 2.5  
+      [MyNumber::findMedianSortedArrays](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 二分查找 O(logm+n) 中位数（分奇数和偶数） 第k小的数
+5. 最长回文子串  
+**问题**：给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。  
+**示例**
+    > 输入: "babad"  
+      输出: "bab"  
+      注意: "aba" 也是一个有效答案。
+      输入: "cbbd"  
+      输出: "bb"  
+      [MyString::longestPalindrome](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> 回文串（左右剥皮后仍是回文串）  
+         暴力枚举法 O(n^2)  
+         动态规划法 O(n^2)：
+         
+         状态转移方程：P(i,j)=P(i+1,j-1)&&(Si==Sj), P(i,j)表示Si...j是否为回文串。
+         边界条件：P(i,i)=true和P(i,i+1)=(Si==Si+1)
+         
+      >> 中心拓展法 O(n^2) O(1)：  
+       
+         S(i,i)->S(i-1,i+1)->... 直到无法拓展，拓展条件Si-1==Si+1
+         S(i,i+1)->S(i-1,i+2)->... 直到无法拓展，拓展条件Si-1==Si+2
+         取上两者长度最大值, start、end记录回文串边界下标
+           
+      >> Manacher法（马拉车） O(n) :
+      
+         对中心拓展法的优化，跳过重复检查，验证i时先验证2j-i处的臂长并跳过
+         只处理奇数长度串，偶数/奇数长度串通过在每个间隙插入任意相同的一个字符即可变为奇数长度
+         aaba 处理后会变成 #a#a#b#a#
+         aba 会变成长度仍然为奇数的回文字符串 #a#b#a#
+       
 ## 校招
 ### Tencent
 **2020**
