@@ -62,4 +62,25 @@ public class MyNumber {
         }
     }
 
+    //整数反转  整数->String->整数
+    public int reverse(int x) {
+
+        if (x == Integer.MIN_VALUE || x == 0) {
+            return 0;
+        }
+        boolean positive = true;
+        if (x < 0) {
+            positive = false;
+            x = -x;
+        }
+        String s = "" + x;
+        StringBuilder sb = new StringBuilder(s);
+        s = sb.reverse().toString();
+        long ret = Long.valueOf(s);
+        if(!positive) ret = -ret;
+        if (ret > Integer.MAX_VALUE || ret < Integer.MIN_VALUE) {
+            return 0;
+        }
+        return (int) ret;
+    }
 }

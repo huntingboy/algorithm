@@ -1,8 +1,6 @@
 package com.nomad.leetcode;
 
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class MyString {
 
@@ -10,7 +8,7 @@ public class MyString {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             String input = scanner.next();
-            System.out.println(new MyString().lengthOfLongestSubstring(input));
+            System.out.println(new MyString().myAtoi(input));
         }
     }
 
@@ -109,4 +107,99 @@ public class MyString {
         return ans;
     }*/
 
+    //Z字形变换 遍历s，按行存储，控制移动方向（行的下标）
+    public String convert(String s, int numRows) {
+
+        if (numRows == 1 || s == null || s.isEmpty()) {
+            return s;
+        }
+
+        List<StringBuilder> rows = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            rows.add(new StringBuilder());
+        }
+
+        int curRow = 0;
+        boolean down = false;
+        for (char c : s.toCharArray()) {
+            rows.get(curRow).append(c);
+            if (curRow == 0 || curRow == numRows - 1) {
+                down = !down;
+            }
+            curRow += down ? 1 : -1;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (StringBuilder row : rows) {
+            sb.append(row);
+        }
+        return sb.toString();
+    }
+
+    //Z字形变换 找出s中字符位置和目标串中字符位置之间的关系+按行遍历直接输出
+    //第0行：k(2⋅numRows−2) k=0,1...
+    //第i行：k(2⋅numRows−2)+i和(k+1)(2⋅numRows−2)−i
+    //第numRows-1行：k(2⋅numRows−2)+numRows−1 (i=numRows-1的特例)
+    public String convert1(String s, int numRows) {
+
+        if (numRows == 1 || s == null || s.isEmpty()) {
+            return s;
+        }
+
+        int cycleLen = 2 * numRows - 2, n = s.length();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < numRows; i++) { //行
+            for (int j = 0; j + i < n; j += cycleLen) { //列 步长为cycleLen
+                sb.append(s.charAt(j + i)); //k(2⋅numRows−2)+i
+                if (i != 0 && i != numRows - 1 && j + cycleLen - i < n)
+                    sb.append(s.charAt(j + cycleLen - i)); //(k+1)(2⋅numRows−2)−i
+            }
+        }
+        return sb.toString();
+    }
+
+    //字符串转整数
+    public int myAtoi(String str) {
+
+        if (str == null) {
+            return 0;
+        }
+        str = str.trim();
+        if (str.isEmpty()) {
+            return 0;
+        }
+        if (!digitValidate(str)) {
+            return 0;
+        }
+
+        boolean positive = true;
+        int i = 0;
+        long ret = 0;
+        if (str.charAt(0) == '-') {
+            positive = false;
+            i = 1;
+        }
+        if (str.charAt(0) == '+') {
+            i = 1;
+        }
+        for (; i < str.length() && Character.isDigit(str.charAt(i)); i++) {
+            ret = ret * 10 + str.charAt(i) - '0';
+            if(ret >= Integer.MAX_VALUE && positive) return Integer.MAX_VALUE;
+            if(ret > Integer.MAX_VALUE && !positive) return Integer.MIN_VALUE;
+        }
+
+        if (!positive) {
+            ret = -ret;
+        }
+
+        return (int) ret;
+    }
+
+    private boolean digitValidate(String str) {
+        char start = str.charAt(0);
+        if (Character.isDigit(start) || ((start == '-' || start == '+') && str.length() > 1 && Character.isDigit(str.charAt(1)))) {
+            return true;
+        }
+        return false;
+    }
 }
