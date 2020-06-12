@@ -553,13 +553,13 @@
          递归取余(pop)，右移累加(push，溢出判断：如果temp=rev⋅10+pop导致溢出，那么一定有rev≥INTMAX/10;大于，肯定会溢出；等于，只要pop>7，但是本题不存在此种情况 )
 8. 字符串转换整数 (atoi)  
 **问题**：请你来实现一个 atoi 函数，使其能将字符串转换成整数。首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。接下来的转化规则如下：  
-        &emsp;&emsp;如果第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字字符组合起来，形成一个有符号整数。  
-        &emsp;&emsp;假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成一个整数。  
-        &emsp;&emsp;该字符串在有效的整数部分之后也可能会存在多余的字符，那么这些字符可以被忽略，它们对函数不应该造成影响。  
-        &emsp;&emsp;注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换，即无法进行有效转换。  
-        &emsp;&emsp;在任何情况下，若函数不能进行有效的转换时，请返回 0 。  
-        &emsp;&emsp;本题中的空白字符只包括空格字符 ' ' 。   
-        &emsp;&emsp;假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−2^31,  2^31 − 1]。如果数值超过这个范围，请返回  INT_MAX (2^31 − 1) 或 INT_MIN (−2^31) 。  
+    &emsp;&emsp;如果第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字字符组合起来，形成一个有符号整数。  
+    &emsp;&emsp;假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成一个整数。  
+    &emsp;&emsp;该字符串在有效的整数部分之后也可能会存在多余的字符，那么这些字符可以被忽略，它们对函数不应该造成影响。  
+    &emsp;&emsp;注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换，即无法进行有效转换。  
+    &emsp;&emsp;在任何情况下，若函数不能进行有效的转换时，请返回 0 。  
+    &emsp;&emsp;本题中的空白字符只包括空格字符 ' ' 。   
+    &emsp;&emsp;假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−2^31,  2^31 − 1]。如果数值超过这个范围，请返回  INT_MAX (2^31 − 1) 或 INT_MIN (−2^31) 。  
 **示例**  
     > 输入: "42"  
       输出: 42  
@@ -577,7 +577,108 @@
       解释: 数字 "-91283472332" 超过 32 位有符号整数范围。因此返回 INT_MIN (−2^31) 。  
       [MyString::myAtoi](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)        
       >> 也可用有限状态向量机  
-9. todo  
+9. 回文数  
+**问题**：判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。  
+**示例**
+    > 输入: 121  
+      输出: true  
+      输入: -121  
+      输出: false  
+      解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。  
+      输入: 10  
+      输出: false  
+      解释: 从右向左读, 为 01 。因此它不是一个回文数。  
+      [MyNumber::reverse](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 计算翻转后数值  
+         也可以转为字符串做
+10. 正则表达式匹配  
+**问题**：给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '\*' 的正则表达式匹配。  
+    &emsp;&emsp;'.' 匹配任意单个字符  
+    &emsp;&emsp;'\*' 匹配零个或多个前面的那一个元素  
+    &emsp;&emsp;所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。  
+    &emsp;&emsp;s 可能为空，且只包含从 a-z 的小写字母。  
+    &emsp;&emsp;p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。  
+**示例**
+    > s = "aa"  
+      p = "a"  
+      输出: false  
+      解释: "a" 无法匹配 "aa" 整个字符串。  
+      s = "aa"  
+      p = "a*"  
+      输出: true  
+      解释: 因为 '\*' 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 'a'。因此，字符串 "aa" 可被视为 'a' 重复了一次。  
+      s = "ab"  
+      p = ".\*"   
+      输出: true  
+      解释: ".\*" 表示可匹配零个或多个（'\*'）任意字符（'.'）。  
+      s = "aab"  
+      p = "c\*a\*b"  
+      输出: true  
+      解释: 因为 '\*' 表示零个或多个，这里 'c' 为 0 个, 'a' 被重复一次。因此可以匹配字符串 "aab"。  
+      s = "mississippi"  
+      p = "mis\*is\*p*."  
+      输出: false  
+      [MyString::isMatch](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      [MyString::isMatch1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      [MyString::isMatch2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      [MyString::isMatch3](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> Pattern+Matcher  m.find():部分匹配  m.matches():完全匹配  Pattern.matches(regex, s):一次性+完全匹配  
+         回溯法  按p分3种情况:"", .\*/a*（长度>=2且第二个是*）, 其他（长度=1或第二个不是*）   
+         动态规划（自顶向下，自底向上）  
+11. 盛最多水的容器  
+**问题**：给你 n 个非负整数 a1，a2，...，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。  
+    &emsp;&emsp;说明：你不能倾斜容器，且n的值至少为 2    
+**示例**  
+    > 输入：\[1,8,6,2,5,4,8,3,7]  
+      输出：49  
+      [MyNumber::maxArea](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 双指针 木桶原理 消状态 指针移动规则：  
+         设每一状态下水槽面积为 S(i,j)(0<=i<j<n)，由于水槽的实际高度由两板中的短板决定，则可得面积公式 S(i,j)=min(h\[i],h\[j])×(j−i)。  
+         在每一个状态下，无论长板或短板收窄1格，都会导致水槽 底边宽度-1：  
+         若向内移动短板，水槽的短板 min(h\[i],h\[j])可能变大，因此水槽面积可能增大。  
+         若向内移动长板，水槽的短板 min(h\[i],h\[j])不变或变小，下个水槽的面积一定小于当前水槽面积。
+12. 整数转罗马数字  
+**问题**：罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。  
+
+        字符          数值
+        I             1
+        V             5
+        X             10
+        L             50
+        C             100
+        D             500
+        M             1000
+
+    &emsp;&emsp;例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。    
+    &emsp;&emsp;通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：  
+    
+        I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。
+        X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 
+        C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
+
+    &emsp;&emsp;给定一个整数，将其转为罗马数字。输入确保在 1 到 3999 的范围内。         
+**示例**
+    > 输入: 3  
+      输出: "III"  
+      输入: 4  
+      输出: "IV"  
+      输入: 9  
+      输出: "IX"  
+      输入: 58  
+      输出: "LVIII"  
+      解释: L = 50, V = 5, III = 3.  
+      输入: 1994  
+      输出: "MCMXCIV"  
+      解释: M = 1000, CM = 900, XC = 90, IV = 4.  
+      [MyNumber::intToRoman](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>    
+13.   
+**问题**：  
+**示例**
+    > 
+      [MyNumber::reverse](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>   
+
 ## 校招
 ### Tencent
 **2020**

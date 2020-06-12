@@ -1,6 +1,16 @@
 package com.nomad.leetcode;
 
+import java.util.Scanner;
+
 public class MyNumber {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            int input = scanner.nextInt();
+            System.out.println(new MyNumber().isPalindrome(input));
+        }
+    }
 
     //两个正序数组的中位数
     //二分法找第k小的元素  奇数：k=totalLength / 2   偶数：k=[(totalLength / 2 - 1) + (totalLength / 2)] / 2
@@ -82,5 +92,41 @@ public class MyNumber {
             return 0;
         }
         return (int) ret;
+    }
+
+    //回文数
+    public boolean isPalindrome(int x) {
+        if (x == 0) {
+            return true;
+        }
+        if (x < 0 || x % 10 == 0) {
+            return false;
+        }
+
+        int sum = 0, x1 = x;
+        while (x1 != 0) {
+            int m = x1 / 10, n = x1 % 10;
+            sum = sum * 10 + n;
+            x1 = m;
+        }
+        return (sum == x);
+    }
+
+    //盛最多水的容器 双指针
+    public int maxArea(int[] height) {
+
+        int i = 0, j = height.length - 1, res = 0;
+        while (i < j) {
+            res = height[i] < height[j] ?
+                    Math.max(res, (j - i) * height[i++]) :
+                    Math.max(res, (j - i) * height[j--]);
+        }
+        return res;
+    }
+
+    //整数转罗马数字
+    public String intToRoman(int num) {
+
+        return null;
     }
 }

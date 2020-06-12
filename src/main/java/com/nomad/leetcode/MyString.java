@@ -1,6 +1,8 @@
 package com.nomad.leetcode;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MyString {
 
@@ -201,5 +203,83 @@ public class MyString {
             return true;
         }
         return false;
+    }
+
+    //正则匹配  Pattern+Matcher
+    public boolean isMatch(String s, String p) {
+
+        return Pattern.matches(p, s);//一次性，完全匹配
+    }
+
+    //正则匹配 回溯法 按p分3种情况
+    public boolean isMatch1(String s, String p) {
+        if (p == null || s == null) {
+            return false;
+        }
+        if (p.isEmpty()) { //""
+            return s.isEmpty();
+        }
+
+        boolean first_match = (!s.isEmpty() &&
+                (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.'));
+        if (p.length() >= 2 && p.charAt(1) == '*') { //长度>=2且第二个是*
+            return (isMatch(s, p.substring(2))) || //r个(a*)匹配失败
+                    (first_match && isMatch(s.substring(1), p)); //第一个字符匹配成功就用p继续匹配s的子串
+        } else { //长度=1或第二个不是*
+            return first_match && isMatch(s.substring(1), p.substring(1)); ////第一个字符匹配成功就用p的子串继续匹配s的子串
+        }
+    }
+
+    //正则匹配  动态规划（dp） 自顶向下
+    enum Result {
+        TRUE, FALSE
+    }
+    Result[][] memo;
+    public boolean isMatch2(String s, String p) {
+        memo = new Result[s.length() + 1][p.length() + 1];
+        return dp(0, 0, s, p);
+    }
+
+    public boolean dp(int i, int j, String text, String pattern) {
+        if (memo[i][j] != null) {
+            return memo[i][j] == Result.TRUE;
+        }
+        boolean ans;
+        if (j == pattern.length()){
+            ans = i == text.length();
+        } else{
+            boolean first_match = (i < text.length() &&
+                    (pattern.charAt(j) == text.charAt(i) ||
+                            pattern.charAt(j) == '.'));
+
+            if (j + 1 < pattern.length() && pattern.charAt(j+1) == '*'){
+                ans = (dp(i, j+2, text, pattern) ||
+                        first_match && dp(i+1, j, text, pattern));
+            } else {
+                ans = first_match && dp(i+1, j+1, text, pattern);
+            }
+        }
+        memo[i][j] = ans ? Result.TRUE : Result.FALSE;
+        return ans;
+    }
+
+    //正则匹配  动态规划（dp） 自底向上
+    public boolean isMatch3(String text, String pattern) {
+        boolean[][] dp = new boolean[text.length() + 1][pattern.length() + 1];
+        dp[text.length()][pattern.length()] = true;
+
+        for (int i = text.length(); i >= 0; i--){
+            for (int j = pattern.length() - 1; j >= 0; j--){
+                boolean first_match = (i < text.length() &&
+                        (pattern.charAt(j) == text.charAt(i) ||
+                                pattern.charAt(j) == '.'));
+                if (j + 1 < pattern.length() && pattern.charAt(j+1) == '*'){
+                    dp[i][j] = dp[i][j+2] || first_match && dp[i+1][j];
+                } else {
+                    dp[i][j] = first_match && dp[i+1][j+1];
+                }
+            }
+        }
+        return dp[0][0];
     }
 }
