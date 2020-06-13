@@ -1,5 +1,8 @@
 package com.nomad.leetcode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Sum {
@@ -67,5 +70,50 @@ public class Sum {
         }
         p.next = null;
         return l;
+    }
+
+    //三数之和 排序+双指针
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums == null || nums.length < 3) {
+            return res;
+        }
+
+        Arrays.sort(nums);//排序
+        for (int i = 0; i < nums.length; i++) { //第一个数
+            if (nums[i] > 0) { //不可能再有新的情况
+                return res;
+            }
+            if (i > 0 && nums[i] == nums[i-1]) {//跳过重复的情况
+                continue;
+            }
+
+            int cur = nums[i];
+            int L = i + 1, R = nums.length - 1; //双指针指向另外两个数
+            while (L < R) {
+                int tmp = cur + nums[L] + nums[R];
+                if (tmp == 0) { //和为0的情况
+                    List<Integer> list = new ArrayList<>();
+                    list.add(cur);
+                    list.add(nums[L]);
+                    list.add(nums[R]);
+                    res.add(list);//添加当前情况解
+                    while (L < R && nums[L + 1] == nums[L]) {//跳过重复的情况
+                        L++;
+                    }
+                    while (L < R && nums[R - 1] == nums[R]) {//跳过重复的情况
+                        R--;
+                    }
+                    L++;
+                    R--;
+                } else if (tmp < 0) {//和小于0的情况
+                    ++L;
+                } else {//和大于0的情况
+                    --R;
+                }
+            }
+        }
+
+        return res;
     }
 }

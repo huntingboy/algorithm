@@ -588,7 +588,7 @@
       输入: 10  
       输出: false  
       解释: 从右向左读, 为 01 。因此它不是一个回文数。  
-      [MyNumber::reverse](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      [MyNumber::isPalindrome](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >> 计算翻转后数值  
          也可以转为字符串做
 10. 正则表达式匹配  
@@ -670,9 +670,69 @@
       输入: 1994  
       输出: "MCMXCIV"  
       解释: M = 1000, CM = 900, XC = 90, IV = 4.  
-      [MyNumber::intToRoman](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>    
-13.   
+      [MyNumber::intToRoman](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)    
+      [MyNumber::intToRoman1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 贪心算法 同找零钱问题：用最少的张数，面值如下（第二列）：    
+      
+        M 	1000
+        CM 	900
+        D 	500
+        CD 	400
+        C 	100
+        XC 	90
+        L 	50
+        XL 	40
+        X 	10
+        IX 	9
+        V 	5
+        IV 	4
+        I 	1
+13. 罗马数字转整数     
+**问题**：12题的逆操作, 规则一样  
+**示例**
+    > 输入: "III"  
+      输出: 3  
+      输入: "IV"  
+      输出: 4  
+      输入: "IX"  
+      输出: 9  
+      输入: "LVIII"  
+      输出: 58  
+      解释: L = 50, V= 5, III = 3.  
+      输入: "MCMXCIV"  
+      输出: 1994  
+      解释: M = 1000, CM = 900, XC = 90, IV = 4.  
+      [MyNumber::romanToInt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> hash 思路：  
+         首先将所有的组合可能性列出并添加到哈希表中   
+         然后对字符串进行遍历，由于组合只有两种，一种是 1 个字符，一种是 2 个字符，其中 2 个字符优先于 1 个字符  
+         先判断两个字符的组合在哈希表中是否存在，存在则将值取出加到结果 ans 中，并向后移2个字符。不存在则将判断当前 1 个字符是否存在，存在则将值取出加到结果 ans 中，并向后移 1 个字符  
+         遍历结束返回结果 ans  
+14. 最长公共前缀   
+**问题**：编写一个函数来查找字符串数组中的最长公共前缀。 如果不存在公共前缀，返回空字符串 ""。所有输入只包含小写字母 a-z 。    
+**示例**
+    > 输入: \["flower","flow","flight"]  
+      输出: "fl"  
+      输入: \["dog","racecar","car"]  
+      输出: ""  
+      解释: 输入不存在公共前缀。  
+      [MyString::longestCommonPrefix](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)    
+      >> 水平扫描 把第一个串当做前缀，外部循环：遍历所有串 内部循环：每次直到找到当前串和前缀的公共前缀，否则前缀长度减1   
+         垂直扫描 外部循环：遍历第一个串 内部循环：遍历所有串，每次所有串当前字符相同才继续  
+         分治法  
+15. 三数之和     
+**问题**：给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。  
+    &emsp;&emsp;注意：答案中不可以包含重复的三元组。  
+**示例**
+    > 给定数组 nums = [-1, 0, 1, 2, -1, -4]，        
+      满足要求的三元组集合为：  
+      [  
+        [-1, 0, 1],  
+        [-1, -1, 2]  
+      ]        
+      [Sum::threeSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Sum.java)  
+      >> 排序+双指针  
+16.   
 **问题**：  
 **示例**
     > 

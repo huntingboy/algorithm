@@ -1,5 +1,7 @@
 package com.nomad.leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MyNumber {
@@ -7,8 +9,8 @@ public class MyNumber {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
-            int input = scanner.nextInt();
-            System.out.println(new MyNumber().isPalindrome(input));
+            String input = scanner.next();
+            System.out.println(new MyNumber().romanToInt(input));
         }
     }
 
@@ -124,9 +126,75 @@ public class MyNumber {
         return res;
     }
 
-    //整数转罗马数字
+    //整数转罗马数字 贪心算法 同找零钱问题：用最少的张数，每次都用面值尽量大的
     public String intToRoman(int num) {
 
-        return null;
+        int nums[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] romans = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
+        StringBuilder sb = new StringBuilder();
+        int index = 0;
+        while (index < 13) {
+            while (num >= nums[index]) {
+                sb.append(nums[index]);
+                num -= nums[index];
+            }
+            index++;
+        }
+
+        return sb.toString();
+    }
+
+    //整数转罗马数字 针对题目最大数不超过3999，用数组枚举出来
+    public String intToRoman1(int num) {
+
+        String[][] str = {
+                {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"},
+                {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"},
+                {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"},
+                {"", "M", "MM", "MMM"}
+        };
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(str[3][num / 1000]);
+        sb.append(str[2][num / 100 % 10]);
+        sb.append(str[1][num / 10 % 10]);
+        sb.append(str[0][num % 10]);
+        return sb.toString();
+    }
+
+    //罗马数字转整数 hash
+    //首先将所有的组合可能性列出并添加到哈希表中
+    //然后对字符串进行遍历，由于组合只有两种，一种是 1 个字符，一种是 2 个字符，其中 2 个字符优先于 1 个字符
+    //先判断两个字符的组合在哈希表中是否存在，存在则将值取出加到结果 ans 中，并向后移2个字符。不存在则将判断当前 1 个字符是否存在，存在则将值取出加到结果 ans 中，并向后移 1 个字符
+    //遍历结束返回结果 ans
+    public int romanToInt(String s) {
+
+        Map<String, Integer> map = new HashMap<>();
+        map.put("I", 1);
+        map.put("IV", 4);
+        map.put("V", 5);
+        map.put("IX", 9);
+        map.put("X", 10);
+        map.put("XL", 40);
+        map.put("L", 50);
+        map.put("XC", 90);
+        map.put("C", 100);
+        map.put("CD", 400);
+        map.put("D", 500);
+        map.put("CM", 900);
+        map.put("M", 1000);
+
+        int res = 0;
+        for (int i = 0; i < s.length();) {
+            if (i + 1 < s.length() && map.containsKey(s.substring(i, i + 2))) {
+                res += map.get(s.substring(i, i + 2));
+                i += 2;
+            } else {
+                res += map.get(s.substring(i, i + 1));
+                i++;
+            }
+        }
+        return res;
     }
 }
