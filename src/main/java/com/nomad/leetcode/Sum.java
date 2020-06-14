@@ -116,4 +116,44 @@ public class Sum {
 
         return res;
     }
+
+    //最接近的三数之和 排序+双指针
+    public int threeSumClosest(int[] nums, int target) {
+        if (nums == null || nums.length < 3) {
+            return 0;
+        }
+
+        Arrays.sort(nums);
+        int res = nums[0] + nums[1] + nums[2];
+        for (int i = 0; i < nums.length - 2; i++) {
+            int L = i + 1, R = nums.length - 1;
+            while (L < R) { //双指针
+                int sum = nums[i] + nums[L] + nums[R];
+                if (Math.abs(target - sum) < Math.abs(target - res)) {//sum更更接近target,更新res
+                    res = sum;
+                }
+                if (sum < target) { //左指针右移
+                    while (L + 1 < R && nums[L + 1] == nums[L]) { //跳过重复的情况
+                        L++;
+                    }
+                    L++;
+                } else if (sum > target) { //有指针左移
+                    while (L < R - 1 && nums[R - 1] == nums[R]) { //跳过重复的情况
+                        R--;
+                    }
+                    R--;
+                } else {
+                    return res;
+                }
+            }
+        }
+        return res;
+    }
+
+    //四数之和
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+
+
+        return null;
+    }
 }

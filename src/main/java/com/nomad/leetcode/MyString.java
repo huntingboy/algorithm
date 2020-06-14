@@ -1,5 +1,7 @@
 package com.nomad.leetcode;
 
+import sun.security.util.Length;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,7 +12,7 @@ public class MyString {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             String input = scanner.next();
-            System.out.println(new MyString().myAtoi(input));
+            System.out.println(new MyString().letterCombinations(input));
         }
     }
 
@@ -300,4 +302,69 @@ public class MyString {
         }
         return strs[0];
     }
+
+    //电话号码的字母组合  队列
+    public List<String> letterCombinations(String digits) {
+        List<String> res = new ArrayList<>();
+        if (digits == null || digits.isEmpty()) {
+            return res;
+        }
+
+        String[] letter_map = {//0-9和字符之间的映射关系
+            " ","*","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"
+        };
+
+        res.add("");//把“”入队列
+        for (int i = 0; i < digits.length(); i++) {
+            String letter = letter_map[digits.charAt(i) - '0']; //要拼接的串
+            int size = res.size();
+            for (int j = 0; j < size; j++) { //遍历队列，旧的串出队拼接成新的串后入队
+                String tmp = res.remove(0);
+                for (int k = 0; k < letter.length(); k++) { //拼接串的长度
+                    res.add(tmp + letter.charAt(k)); //旧的串+拼接串 拼接成新的串后入队
+                }
+            }
+        }
+        return res;
+    }
+
+    //电话号码的字母组合 回溯：深度遍历所有的情况，走通（到了边界条件）就把挡墙情况加入结果集，否则回退（注意状态重置）  此题没有回退
+    public List<String> letterCombinations1(String digits) {
+        if (digits.length() != 0)
+            backtrack("", digits);
+        return output;
+    }
+    Map<String, String> phone = new HashMap<String, String>() {{
+        put("2", "abc");
+        put("3", "def");
+        put("4", "ghi");
+        put("5", "jkl");
+        put("6", "mno");
+        put("7", "pqrs");
+        put("8", "tuv");
+        put("9", "wxyz");
+    }};
+    List<String> output = new ArrayList<String>();
+    public void backtrack(String combination, String next_digits) {
+        // if there is no more digits to check
+        if (next_digits.length() == 0) {
+            // the combination is done
+            output.add(combination);
+        }
+        // if there are still digits to check
+        else {
+            // iterate over all letters which map
+            // the next available digit
+            String digit = next_digits.substring(0, 1);
+            String letters = phone.get(digit);
+            for (int i = 0; i < letters.length(); i++) {
+                String letter = phone.get(digit).substring(i, i + 1);
+                // append the current letter to the combination
+                // and proceed to the next digits
+                backtrack(combination + letter, next_digits.substring(1));
+            }
+        }
+    }
+
+
 }
