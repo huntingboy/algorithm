@@ -16,8 +16,11 @@ public class Sum {
                 a[i] = scanner.nextInt();
             }
             int t = scanner.nextInt();
-            a = new Sum().twoSum(a, t);
-            System.out.println("" + a[0] + ":" + a[1]);
+            List<List<Integer>> lists = new Sum().fourSum(a, t);
+            for (List<Integer> list : lists) {
+                //System.out.println("[" + list.get(0) + "," + list.get(1) + "," + list.get(2) + "," + list.get(3) + "]");
+                System.out.println(Arrays.toString(list.toArray()));
+            }
         }
     }
 
@@ -150,10 +153,59 @@ public class Sum {
         return res;
     }
 
-    //四数之和
+    //四数之和 排序+双指针
     public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums == null || nums.length < 4) {
+            return res;
+        }
 
+        Arrays.sort(nums);
+        if (nums[0] + nums[1] + nums[2] + nums[3] > target) {
+            return res;
+        }
+        for (int i = 0; i < nums.length - 3; i++) { //第一个数
+            for (int j = i + 1; j < nums.length - 2; j++) { //第二个数
+                int L = j + 1, R = nums.length - 1; //双指针
+                while (L < R) {
+                    int tmp = nums[i] + nums[j] + nums[L] + nums[R];
+                    if (tmp == target) { //添加当前情况到结果集
+                        List<Integer> list = new ArrayList<>();
+                        list.add(nums[i]);
+                        list.add(nums[j]);
+                        list.add(nums[L]);
+                        list.add(nums[R]);
+                        res.add(list);
+                        while (L + 1 < R && nums[L] == nums[L + 1]) { //去掉重复情况
+                            L++;
+                        }
+                        L++;
+                        while (R - 1 > L && nums[R] == nums[R - 1]) { //去掉重复情况
+                            R--;
+                        }
+                        R--;
+                    } else if (tmp < target) {//左指针右移
+                        while (L + 1 < R && nums[L] == nums[L + 1]) {
+                            L++;
+                        }
+                        L++;
+                    }else {//右指针左移
+                        while (R - 1 > L && nums[R] == nums[R - 1]) {
+                            R--;
+                        }
+                        R--;
+                    }
+                }
 
-        return null;
+                while(j + 1 < nums.length - 2 && nums[j + 1] == nums[j]) { //去掉重复情况
+                     j++;
+                }
+            }
+
+            while(i + 1 < nums.length - 1 && nums[i + 1] == nums[i]) { //去掉重复情况
+                i++;
+            }
+        }
+        return res;
     }
 }

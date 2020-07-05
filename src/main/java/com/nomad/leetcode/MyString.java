@@ -1,9 +1,6 @@
 package com.nomad.leetcode;
 
-import sun.security.util.Length;
-
 import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MyString {
@@ -11,8 +8,7 @@ public class MyString {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
-            String input = scanner.next();
-            System.out.println(new MyString().letterCombinations(input));
+
         }
     }
 
@@ -188,8 +184,8 @@ public class MyString {
         }
         for (; i < str.length() && Character.isDigit(str.charAt(i)); i++) {
             ret = ret * 10 + str.charAt(i) - '0';
-            if(ret >= Integer.MAX_VALUE && positive) return Integer.MAX_VALUE;
-            if(ret > Integer.MAX_VALUE && !positive) return Integer.MIN_VALUE;
+            if (ret >= Integer.MAX_VALUE && positive) return Integer.MAX_VALUE;
+            if (ret > Integer.MAX_VALUE && !positive) return Integer.MIN_VALUE;
         }
 
         if (!positive) {
@@ -236,7 +232,9 @@ public class MyString {
     enum Result {
         TRUE, FALSE
     }
+
     Result[][] memo;
+
     public boolean isMatch2(String s, String p) {
         memo = new Result[s.length() + 1][p.length() + 1];
         return dp(0, 0, s, p);
@@ -247,18 +245,18 @@ public class MyString {
             return memo[i][j] == Result.TRUE;
         }
         boolean ans;
-        if (j == pattern.length()){
+        if (j == pattern.length()) {
             ans = i == text.length();
-        } else{
+        } else {
             boolean first_match = (i < text.length() &&
                     (pattern.charAt(j) == text.charAt(i) ||
                             pattern.charAt(j) == '.'));
 
-            if (j + 1 < pattern.length() && pattern.charAt(j+1) == '*'){
-                ans = (dp(i, j+2, text, pattern) ||
-                        first_match && dp(i+1, j, text, pattern));
+            if (j + 1 < pattern.length() && pattern.charAt(j + 1) == '*') {
+                ans = (dp(i, j + 2, text, pattern) ||
+                        first_match && dp(i + 1, j, text, pattern));
             } else {
-                ans = first_match && dp(i+1, j+1, text, pattern);
+                ans = first_match && dp(i + 1, j + 1, text, pattern);
             }
         }
         memo[i][j] = ans ? Result.TRUE : Result.FALSE;
@@ -270,15 +268,15 @@ public class MyString {
         boolean[][] dp = new boolean[text.length() + 1][pattern.length() + 1];
         dp[text.length()][pattern.length()] = true;
 
-        for (int i = text.length(); i >= 0; i--){
-            for (int j = pattern.length() - 1; j >= 0; j--){
+        for (int i = text.length(); i >= 0; i--) {
+            for (int j = pattern.length() - 1; j >= 0; j--) {
                 boolean first_match = (i < text.length() &&
                         (pattern.charAt(j) == text.charAt(i) ||
                                 pattern.charAt(j) == '.'));
-                if (j + 1 < pattern.length() && pattern.charAt(j+1) == '*'){
-                    dp[i][j] = dp[i][j+2] || first_match && dp[i+1][j];
+                if (j + 1 < pattern.length() && pattern.charAt(j + 1) == '*') {
+                    dp[i][j] = dp[i][j + 2] || first_match && dp[i + 1][j];
                 } else {
-                    dp[i][j] = first_match && dp[i+1][j+1];
+                    dp[i][j] = first_match && dp[i + 1][j + 1];
                 }
             }
         }
@@ -311,7 +309,7 @@ public class MyString {
         }
 
         String[] letter_map = {//0-9和字符之间的映射关系
-            " ","*","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"
+                " ", "*", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"
         };
 
         res.add("");//把“”入队列
@@ -334,6 +332,7 @@ public class MyString {
             backtrack("", digits);
         return output;
     }
+
     Map<String, String> phone = new HashMap<String, String>() {{
         put("2", "abc");
         put("3", "def");
@@ -345,6 +344,7 @@ public class MyString {
         put("9", "wxyz");
     }};
     List<String> output = new ArrayList<String>();
+
     public void backtrack(String combination, String next_digits) {
         // if there is no more digits to check
         if (next_digits.length() == 0) {
@@ -366,5 +366,65 @@ public class MyString {
         }
     }
 
+    //有效的括号
+    public boolean isValid(String s) {
+        if (s == null || s.length() % 2 == 1) {
+            return false;
+        }
+        if (s.isEmpty()) {
+            return true;
+        }
 
+        Map<Character, Character> mappings = new HashMap<>();
+        mappings.put('}', '{');
+        mappings.put(']', '[');
+        mappings.put(')', '(');
+        Stack<Character> stack = new Stack<>();
+        stack.add(s.charAt(0));
+        for (int i = 1; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (mappings.containsValue(ch)) {
+                stack.add(ch);
+            } else if (mappings.get(ch).equals(stack.peek())) {
+                stack.pop();
+            } else
+                break;
+        }
+        return stack.empty();
+    }
+
+    //括号生成 动态规划(自底向上)
+    public List<String> generateParenthesis(int n) {
+        List<List<String>> res = new ArrayList<>();
+        List<String> list0 = new ArrayList<>();
+        list0.add(""); //0对括号
+        if (n <= 0) {
+            return list0;
+        }
+        res.add(list0);
+        List<String> list1 = new ArrayList<>();
+        list1.add("()"); //1对括号
+        res.add(list1);
+        for (int i = 2; i <= n; i++) { //计算2~n对括号的情况: i对括号的情况="(p对括号)q对括号"
+            List<String> listi = new ArrayList<>();
+            for (int j = 0; j < i; j++) { //p,q遍历,p+q=i-1
+                List<String> inner = res.get(j); //p对括号的情况
+                List<String> outer = res.get(i - 1 - j); //q对括号的情况
+                for (String in : inner) {
+                    for (String out : outer) {
+                        String tmp = "(" + in + ")" + out;
+                        listi.add(tmp);
+                    }
+                }
+            }
+            res.add(listi);
+        }
+
+        return res.get(n);
+    }
+
+    //实现 strStr()
+    public int strStr(String haystack, String needle) {
+        return haystack.indexOf(needle);
+    }
 }

@@ -8,10 +8,12 @@ public class MyNumber {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            String input = scanner.next();
-            System.out.println(new MyNumber().romanToInt(input));
+        int n = scanner.nextInt();
+        int nums[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i]=scanner.nextInt();
         }
+        System.out.println(new MyNumber().divide(nums[0], nums[1]));
     }
 
     //两个正序数组的中位数
@@ -196,5 +198,67 @@ public class MyNumber {
             }
         }
         return res;
+    }
+
+    //删除排序数组中的重复项
+    public int removeDuplicates(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int res = nums.length;
+        for (int i = 1; i < res; i++) {
+            int j = i;
+            while (j < res && nums[j] == nums[i - 1]) j++; //注意j < res条件
+            if (j > i) {
+                res -= (j - i);
+                for (int k = j; k < nums.length; k++) {
+                    nums[k - (j - i)] = nums[k];
+                }
+            }
+        }
+
+        return res;
+    }
+
+    //移除元素
+    public int removeElement(int[] nums, int val) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int res = nums.length;
+        for (int i = 0; i < res;) {
+            if (nums[i] == val) {
+                nums[i] = nums[res - 1];
+                res--;
+                continue;
+            }
+            i++;
+        }
+
+        return res;
+    }
+
+    //两数相除  位运算加倍减去除数+转为负数处理省去越界考虑
+    public int divide(int dividend, int divisor) {
+        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+            return Integer.MAX_VALUE;
+        }
+
+        int res = 0;
+        boolean sign = (dividend > 0) ^ (divisor > 0); //true: 异号,商<0
+        dividend = -Math.abs(dividend);
+        divisor = -Math.abs(divisor);
+        while (dividend <= divisor) {
+            int tmp = divisor, c = 1; //tmp:每次减去的数(倍数增长)  c:计数,即减去的除数个数(商)
+            while (dividend - tmp <= tmp) {
+                tmp = tmp << 1;
+                c = c << 1;
+            }
+            dividend -= tmp;
+            res += c;
+        }
+        return sign ? -res : res;
     }
 }

@@ -773,13 +773,141 @@
         [-2, -1, 1, 2],  
         [-2,  0, 0, 2]   
       ]  
-      [MyNumber::reverse](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>   
-19.   
+      [MyNumber::fourSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 排序+外面双层循环+双指针 每层循环跳过重复元素   
+19. 删除链表的倒数第N个节点  
+**问题**：给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。   
+**示例**
+    > 给定一个链表: 1->2->3->4->5, 和 n = 2.  
+      当删除了倒数第二个节点后，链表变为 1->2->3->5.  
+      给定的 n 保证是有效的  
+      [MyList::removeNthFromEnd](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
+      >> 双指针+固定步长  
+20. 有效的括号  
+**问题**：给定一个只包括 '('，')'，'{'，'}'，'\['，']' 的字符串，判断字符串是否有效。有效字符串需满足：  
+    &emsp;&emsp;左括号必须用相同类型的右括号闭合。  
+    &emsp;&emsp;左括号必须以正确的顺序闭合。  
+    &emsp;&emsp;注意空字符串可被认为是有效字符串。 
+**示例**
+    > 输入: "()"  
+      输出: true  
+      输入: "()[]{}"  
+      输出: true  
+      输入: "(]"  
+      输出: false  
+      输入: "(\[)]"  
+      输出: false  
+      输入: "{[]}"  
+      输出: true  
+      [MyString::isValid](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> Stack继承自Vector,多了push,peek,top,empty,search方法,两者都是方法线程安全  
+21. 合并两个有序链表  
+**问题**：将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。   
+**示例**
+    > 输入：1->2->4, 1->3->4  
+      输出：1->1->2->3->4->4
+      [MyList::mergeTwoLists](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
+      >> 链表  
+22. 括号生成  
+**问题**：数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且**有效**括号组合。   
+**示例**
+    > 输入：n = 3  
+      输出：\[  
+             "((()))",  
+             "(()())",  
+             "(())()",  
+             "()(())",  
+             "()()()"  
+           ]  
+      [MyString::generateParenthesis](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> 动态规划(自底向上):状态转移方程(**F(n) = "(" + 【i=p时所有括号的排列组合】 + ")" + 【i=q时所有括号的排列组合】,中 p + q = n-1，且 p,q 均为非负整数**)  
+23. 合并K个排序链表  
+**问题**：合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。   
+**示例**
+    > 输入:  
+      \[  
+        1->4->5,  
+        1->3->4,  
+        2->6  
+      ]  
+      输出: 1->1->2->3->4->4->5->6  
+      [MyList::mergeKLists](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
+      >> 链表  
+24. 两两交换链表中的节点  
+**问题**：给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。   
+**示例**
+    > 给定 1->2->3->4, 你应该返回 2->1->4->3.  
+      [MyList::swapPairs](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
+      >> 链表  
+25. K 个一组翻转链表  
+**问题**：给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。k 是一个正整数，它的值小于或等于链表的长度。如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。   
+**示例**
+    > 给你这个链表：1->2->3->4->5  
+      当 k = 2 时，应当返回: 2->1->4->3->5  
+      当 k = 3 时，应当返回: 3->2->1->4->5  
+      说明:你的算法只能使用常数的额外空间。你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。  
+      [MyList::reverseKGroup](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
+      >> 递归(衔接各个组)+迭代(反转一个组)  
+26. 删除排序数组中的重复项  
+**问题**：给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。   
+**示例**
+    > 给定数组 nums = \[1,1,2],         
+      函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。              
+      你不需要考虑数组中超出新长度后面的元素。  
+      给定 nums = \[0,0,1,1,1,2,2,3,3,4],        
+      函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。        
+      你不需要考虑数组中超出新长度后面的元素。             
+      [MyNumber::removeDuplicates](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 数组原地移动  
+27. 移除元素  
+**问题**：给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。   
+**示例**
+    > 给定 nums = \[3,2,2,3], val = 3,  
+      函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。  
+      你不需要考虑数组中超出新长度后面的元素。  
+      给定 nums = \[0,1,2,2,3,0,4,2], val = 2,  
+      函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。  
+      注意这五个元素可为任意顺序。  
+      你不需要考虑数组中超出新长度后面的元素。  
+      [MyNumber::removeElement](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 数组原地移动,和上一题的区别:不用考虑数组顺序,所以每次从数组尾部找一个数来填充重复的数  
+28. 实现 strStr()  
+**问题**：实现 strStr() 函数。给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。  
+**示例**
+    > 输入: haystack = "hello", needle = "ll"  
+      输出: 2  
+      输入: haystack = "aaaaa", needle = "bba"  
+      输出: -1  
+      注意:当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。  
+      [MyString::strStr](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> 字符串匹配kmp算法(最长公共子串)  
+29. 两数相除  
+**问题**：给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。返回被除数 dividend 除以除数 divisor 得到的商。  整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2  
+**示例**
+    > 输入: dividend = 10, divisor = 3  
+      输出: 3  
+      解释: 10/3 = truncate(3.33333..) = truncate(3) = 3    
+      输入: dividend = 7, divisor = -3  
+      输出: -2  
+      解释: 7/-3 = truncate(-2.33333..) = -2  
+      被除数和除数均为 32 位有符号整数。  
+      除数不为 0。  
+      假设我们的环境只能存储 32 位有符号整数，其数值范围是 \[−2^31,  2^31 − 1]。本题中，如果除法结果溢出，则返回 2^31 − 1。  
+      [MyNumber::divide](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 位运算加倍减去除数+转为负数处理省去越界考虑   
+        （/）除号的正负取舍和一般的算数一样，符号相同为正，相异为负           
+        （%）求余符号的正负取舍和被除数符号相同  
+29.   
 **问题**：  
 **示例**
-    > 
-      [MyNumber::reverse](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >   
+      [MyString::strStr](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >>   
+30.   
+**问题**：  
+**示例**
+    >   
+      [MyString::strStr](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
       >>   
 
 ## 校招

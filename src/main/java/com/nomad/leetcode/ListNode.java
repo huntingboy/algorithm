@@ -17,4 +17,13 @@ public class ListNode {
         p.next = new ListNode(x);
         return this;
     }
+
+    @Override
+    public String toString() {
+        String res = "" + val;
+        if (next != null) {
+            res += "->" + next.toString();
+        }
+       return res;
+    }
 }
