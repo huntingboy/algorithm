@@ -521,4 +521,10 @@ public class MyString {
 
         return res;
     }
+
+    //有效的数独
+    public boolean isValidSudoku(char[][] board) {
+
+        return false;
+    }
 }

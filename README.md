@@ -724,23 +724,23 @@
 **问题**：给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。  
     &emsp;&emsp;注意：答案中不可以包含重复的三元组。  
 **示例**
-    > 给定数组 nums = [-1, 0, 1, 2, -1, -4]，        
+    > 给定数组 nums = \[-1, 0, 1, 2, -1, -4]，        
       满足要求的三元组集合为：  
-      [  
-        [-1, 0, 1],  
-        [-1, -1, 2]  
+      \[  
+        \[-1, 0, 1],  
+        \[-1, -1, 2]  
       ]        
       [Sum::threeSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Sum.java)  
       >> 排序+双指针  
 16. 最接近的三数之和   
 **问题**：给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。    
 **示例**
-    > 输入：nums = [-1,2,1,-4], target = 1  
+    > 输入：nums = \[-1,2,1,-4], target = 1  
       输出：2  
       解释：与 target 最接近的和是 2 (-1 + 2 + 1 = 2) 。  
       提示：  
       3 <= nums.length <= 10^3  
-      -10^3 <= nums[i] <= 10^3  
+      -10^3 <= nums\[i] <= 10^3  
       -10^4 <= target <= 10^4  
       [MyNumber::threeSumClosest](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >> 类似上一题，排序+双指针：   
@@ -766,12 +766,12 @@
 18. 四数之和  
 **问题**：给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。    
 **示例**
-    > 给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target = 0。  
+    > 给定数组 nums = \[1, 0, -1, 0, -2, 2]，和 target = 0。  
       满足要求的四元组集合为：  
-      [  
-        [-1,  0, 0, 1],  
-        [-2, -1, 1, 2],  
-        [-2,  0, 0, 2]   
+      \[  
+        \[-1,  0, 0, 1],  
+        \[-2, -1, 1, 2],  
+        \[-2,  0, 0, 2]   
       ]  
       [MyNumber::fourSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >> 排序+外面双层循环+双指针 每层循环跳过重复元素   
@@ -787,7 +787,7 @@
 **问题**：给定一个只包括 '('，')'，'{'，'}'，'\['，']' 的字符串，判断字符串是否有效。有效字符串需满足：  
     &emsp;&emsp;左括号必须用相同类型的右括号闭合。  
     &emsp;&emsp;左括号必须以正确的顺序闭合。  
-    &emsp;&emsp;注意空字符串可被认为是有效字符串。 
+    &emsp;&emsp;注意空字符串可被认为是有效字符串。   
 **示例**
     > 输入: "()"  
       输出: true  
@@ -820,7 +820,7 @@
              "()()()"  
            ]  
       [MyString::generateParenthesis](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >> 动态规划(自底向上):状态转移方程(**F(n) = "(" + 【i=p时所有括号的排列组合】 + ")" + 【i=q时所有括号的排列组合】,中 p + q = n-1，且 p,q 均为非负整数**)  
+      >> 动态规划(自底向上):状态转移方程(**F(n) = "(" + \[i=p时所有括号的排列组合] + ")" + \[i=q时所有括号的排列组合],中 p + q = n-1，且 p,q 均为非负整数**)  
 23. 合并K个排序链表  
 **问题**：合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。   
 **示例**
@@ -942,19 +942,91 @@
             ii. 类似于这种"……((……))"，我们看一下下面的图来看下，所以我们要判断第i -1- dp[i - 1]个字符是否是"(",如果是，那么递推公式是dp[i]=dp[i] = dp[i - 1] + 2 + dp[i - dp[i - 1] - 2].
             
        ![图解](https://github.com/huntingboy/algorithm/blob/master/src/main/resources/com/nomad/leetcode/32.png)
-33.   
-**问题**：  
+33. 搜索旋转排序数组  
+**问题**：假设按照升序排序的数组在预先未知的某个点上进行了旋转。( 例如，数组 \[0,1,2,4,5,6,7] 可能变为 \[4,5,6,7,0,1,2] )。搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。你可以假设数组中不存在重复的元素。你的算法时间复杂度必须是 O(log n) 级别。    
 **示例**
-    > 
-      [MyString::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    > 输入: nums = \[4,5,6,7,0,1,2], target = 0  
+      输出: 4  
+      输入: nums = \[4,5,6,7,0,1,2], target = 3  
+      输出: -1  
+      [MyNumber::search](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 二分搜索:
+      
+         a. nums[0] <= nums[mid]（0 - mid不包含旋转）且nums[0] <= target <= nums[mid] 时 high 向前规约；
+         b. nums[mid] < nums[0]（0 - mid包含旋转），target <= nums[mid] < nums[0] 时向前规约（target 在旋转位置到 mid 之间）
+         c. nums[mid] < nums[0]，nums[mid] < nums[0] <= target 时向前规约（target 在 0 到旋转位置之间）
+         d. 其他情况向后规约             
+34. 在排序数组中查找元素的第一个和最后一个位置  
+**问题**：给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。你的算法时间复杂度必须是 O(log n) 级别。如果数组中不存在目标值，返回 \[-1, -1]。  
+**示例**
+    > 输入: nums = \[5,7,7,8,8,10], target = 8  
+      输出: \[3,4]  
+      输入: nums = \[5,7,7,8,8,10], target = 6  
+      输出: \[-1,-1]  
+      [MyNumber::searchRange](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 二分查找
+         Arrays.binarySearch(nums, target); //nums需要有序, 对于包含多个相同的target,索引结果取决于target的位置,如不存在target,返回"-插入位置"   
+35. 搜索插入位置  
+**问题**：给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。你可以假设数组中无重复元素。    
+**示例**
+    > 输入: \[1,3,5,6], 5  
+      输出: 2  
+      输入: \[1,3,5,6], 2  
+      输出: 1  
+      输入: \[1,3,5,6], 7  
+      输出: 4  
+      输入: \[1,3,5,6], 0  
+      输出: 0  
+      [MyNumber::searchInsert](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>  数组遍历   
+36. 有效的数独  
+**问题**：判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。  
+
+         a. 数字 1-9 在每一行只能出现一次。
+         b. 数字 1-9 在每一列只能出现一次。
+         c. 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次.  
+
+      &emsp;&emsp;数独部分空格内已填入了数字，空白格用 '.' 表示。  
+**示例**
+    > 输入:      
+      \[
+        \["5","3",".",".","7",".",".",".","."],  
+        \["6",".",".","1","9","5",".",".","."],  
+        \[".","9","8",".",".",".",".","6","."],  
+        \["8",".",".",".","6",".",".",".","3"],  
+        \["4",".",".","8",".","3",".",".","1"],  
+        \["7",".",".",".","2",".",".",".","6"],  
+        \[".","6",".",".",".",".","2","8","."],  
+        \[".",".",".","4","1","9",".",".","5"],  
+        \[".",".",".",".","8",".",".","7","9"]     
+      ]           
+      输出: true     
+      说明:  
+      一个有效的数独（部分已被填充）不一定是可解的。  
+      只需要根据以上规则，验证已经填入的数字是否有效即可。  
+      给定数独序列只包含数字 1-9 和字符 '.' 。  
+      给定数独永远是 9x9 形式的。   
+      [MyString::isValidSudoku](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
       >>     
-34.   
+37.   
 **问题**：  
 **示例**
     > 
       [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
-34.   
+38.   
+**问题**：  
+**示例**
+    > 
+      [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+39.   
+**问题**：  
+**示例**
+    > 
+      [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+40.   
 **问题**：  
 **示例**
     > 

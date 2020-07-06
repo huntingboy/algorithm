@@ -1,5 +1,6 @@
 package com.nomad.leetcode;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -8,12 +9,15 @@ public class MyNumber {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int nums[] = new int[n];
-        for (int i = 0; i < n; i++) {
-            nums[i]=scanner.nextInt();
+        while (scanner.hasNext()) {
+            int n = scanner.nextInt();
+            int nums[] = new int[n];
+            for (int i = 0; i < n; i++) {
+                nums[i] = scanner.nextInt();
+            }
+            int target = scanner.nextInt();
+            System.out.println("new MyNumber().searchRange(nums, target) = " + Arrays.toString(new MyNumber().searchRange(nums, target)));
         }
-        System.out.println(new MyNumber().divide(nums[0], nums[1]));
     }
 
     //两个正序数组的中位数
@@ -296,5 +300,61 @@ public class MyNumber {
         while (start < end) {
             swap(nums, start++, end--);
         }
+    }
+
+    //搜索旋转排序数组
+    public int search(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        int l = 0, h = nums.length - 1;
+        while (l < h) {
+            int mid = (l + h) / 2;
+            if (nums[l] <= target && target <= nums[mid]) {  //l - mid不包含旋转且target在其中
+                h = mid;
+            } else if (nums[l] > nums[mid] && nums[mid] >= target) { //l - mid包含旋转且target在其中未旋转部分
+                h = mid;
+            } else if (nums[l] > nums[mid] && target >= nums[l]) { //l - mid包含旋转且target在其中旋转部分
+                h = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+
+        return nums[l] == target ? l : -1;
+    }
+
+    // 在排序数组中查找元素的第一个和最后一个位置  二分查找
+    public int[] searchRange(int[] nums, int target) {
+        int[] res = new int[]{-1, -1};
+        if (nums == null || nums.length == 0) {
+            return res;
+        }
+
+        int i = Arrays.binarySearch(nums, target); //nums需要有序, 对于包含多个相同的target,索引结果取决于target的位置.如不存在target,返回"-插入位置"
+        if (i >= 0) {
+            int start = i - 1;
+            int end = i + 1;
+            while (start >= 0 && nums[start] == target) start--;
+            while (end < nums.length && nums[end] == target) end++;
+            res[0] = start + 1;
+            res[1] = end - 1;
+        }
+        return res;
+    }
+
+    //搜索插入位置
+    public int searchInsert(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int i = 0;
+        while (i < nums.length && target > nums[i]) {
+            i++;
+        }
+
+        return i;
     }
 }
