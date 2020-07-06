@@ -261,4 +261,40 @@ public class MyNumber {
         }
         return sign ? -res : res;
     }
+
+    //下一个排列
+    //从右向左扫描,升序直接跳过(因为升序的下一个排列是最小值,只需要反转即可.e.g. 6,5,4->4,5,6),
+    //直到遇到降序:a\[i-1]<a\[i],就把a\[i-1]和a\[j](j>=i)交换并且保证a\[i-1]右侧仍是升序,
+    //最后反转a\[i-1]~a\[n.length-1]即可
+    public void nextPermutation(int[] nums) {
+        if (nums == null || nums.length < 2) {
+            return;
+        }
+
+        int i = nums.length - 2;
+        while (i >= 0 && nums[i] >= nums[i + 1]) { //从右向左找到第一个降序的位置i,i+1
+            i--;
+        }
+        if (i >= 0) { //找到了
+            int j = nums.length - 1;
+            while (nums[j] <= nums[i]) { //从右向左找第一个比a[i]大的数,即要交换的数,且仍然保持a[i]右侧升序
+                j--;
+            }
+            swap(nums, i, j);
+        }
+        reverse(nums, i+1); //从i+1开始反转
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+
+    private void reverse(int[] nums, int start) {
+        int end = nums.length - 1;
+        while (start < end) {
+            swap(nums, start++, end--);
+        }
+    }
 }

@@ -897,18 +897,69 @@
       >> 位运算加倍减去除数+转为负数处理省去越界考虑   
         （/）除号的正负取舍和一般的算数一样，符号相同为正，相异为负           
         （%）求余符号的正负取舍和被除数符号相同  
-29.   
+30. 串联所有单词的子串  
+**问题**：给定一个字符串 s 和一些长度相同的单词 words。找出 s 中恰好可以由 words 中所有单词串联形成的子串的起始位置。注意子串要与 words 中的单词完全匹配，中间不能有其他字符，但不需要考虑 words 中单词串联的顺序。    
+**示例**
+    > 输入：  
+        s = "barfoothefoobarman",  
+        words = \["foo","bar"]  
+      输出：\[0,9]  
+      解释：  
+      从索引 0 和 9 开始的子串分别是 "barfoo" 和 "foobar" 。
+      输出的顺序不重要, \[9,0] 也是有效答案。   
+      输入：  
+        s = "wordgoodgoodgoodbestword",  
+        words = \["word","good","best","word"]  
+      输出：[]  
+      [MyString::findSubstring](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> HashMap1/2存放单词计数+滑动窗口    
+31. 下一个排列  
+**问题**：实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。必须原地修改，只允许使用额外常数空间。  
+**示例**
+    > 1,2,3 → 1,3,2  
+      3,2,1 → 1,2,3  
+      1,1,5 → 1,5,1  
+      [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 从右向左扫描,升序直接跳过(因为升序的下一个排列是最小值,只需要反转即可.e.g. 6,5,4->4,5,6),直到遇到降序:a\[i-1]<a\[i],就把a\[i-1]和a\[j](j>=i)交换并且保证a\[i-1]右侧仍是升序,最后反转a\[i-1]~a\[n.length-1]即可    
+32. 最长有效括号  
+**问题**：给定一个只包含 '(' 和 ')' 的字符串，找出最长的包含有效括号的子串的长度    
+**示例**
+    > 输入: "(()"  
+      输出: 2  
+      解释: 最长有效括号子串为 "()"  
+      输入: ")()())"  
+      输出: 4  
+      解释: 最长有效括号子串为 "()()"  
+      [MyString::longestValidParentheses](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      [MyString::longestValidParenthesesDP](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> 栈:存放符号下标, stack.push(-1), 防止栈空pop抛异常并和正常"()"匹配区分开,因为"()"匹配情况stack是不会为空的  
+         动态规划:
+         
+         用dp[i]表示字符串前i个字符的最长有效括号。
+         a. 第i个字符是左括号"("，那么以他结尾的是构不成有效括号的，所以dp[i]=0(此处"dp[i]!=dp[i-1)",因为后面基于它,不能累加,要重新开始计算);
+         b. 第i个字符是右括号")"，那么以他结尾的是有可能构成有效括号的，所以还需要判断
+            i. 类似于这种"……()"，我们需要判断第i-1个字符是不是"("，如果是的话，那么最长有效括号就是第i-2个字符之前构成的最长有效括号+2，也就是dp[i]=dp[i-2]+2。
+            ii. 类似于这种"……((……))"，我们看一下下面的图来看下，所以我们要判断第i -1- dp[i - 1]个字符是否是"(",如果是，那么递推公式是dp[i]=dp[i] = dp[i - 1] + 2 + dp[i - dp[i - 1] - 2].
+            
+       ![图解](https://github.com/huntingboy/algorithm/blob/master/src/main/resources/com/nomad/leetcode/32.png)
+33.   
 **问题**：  
 **示例**
-    >   
-      [MyString::strStr](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >>   
-30.   
+    > 
+      [MyString::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >>     
+34.   
 **问题**：  
 **示例**
-    >   
-      [MyString::strStr](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >>   
+    > 
+      [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+34.   
+**问题**：  
+**示例**
+    > 
+      [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
 
 ## 校招
 ### Tencent

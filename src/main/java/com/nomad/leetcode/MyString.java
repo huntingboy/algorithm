@@ -6,9 +6,19 @@ import java.util.regex.Pattern;
 public class MyString {
 
     public static void main(String[] args) {
+        int[] a = new int[100];
+        for (int i = 0; i < 100; i++) {
+            System.out.println("a[i] = " + a[i]);
+        }
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
-
+            String s = scanner.next();
+            /*int n = scanner.nextInt();
+            String[] words = new String[n];
+            for (int i = 0; i < n; i++) {
+                words[i] = scanner.next();
+            }*/
+            System.out.println("new MyString().longestValidParentheses(s) = " + new MyString().longestValidParentheses(s));
         }
     }
 
@@ -426,5 +436,89 @@ public class MyString {
     //实现 strStr()
     public int strStr(String haystack, String needle) {
         return haystack.indexOf(needle);
+    }
+
+    //串联所有单词的子串
+    public List<Integer> findSubstring(String s, String[] words) {
+        List<Integer> res = new ArrayList<>();
+        if (s == null || s.isEmpty() || words ==null || words.length == 0) {
+            return res;
+        }
+
+        Map<String, Integer> wordCounts = new HashMap<>();
+        for (String word : words) { //key:word  value:单词在数组中出现的次数
+            wordCounts.put(word, wordCounts.getOrDefault(word, 0) + 1);
+        }
+        int wordNum = words.length;
+        int wordLen = words[0].length();
+        for (int i = 0; i < wordLen; i++) {//分类以固定步长words.len向后移动 (感觉也可以分多个线程,每个线程处理一个类别,最后综合结果,需要用到CountDownLatch)
+            for (int k = i; k <= s.length() - wordLen * wordNum; k+=wordLen) {//每种类别需要遍历的次数,步长为单词组 (内部可优化, 前面已经比较的部分可以直接跳过)
+                Map<String, Integer> hasWordCounts = new HashMap<>(); //(优化:可以不用重置,只需要移除第一个单词的计数)
+                for (int j = 0; j < wordNum; j++) {//判断每一个单词
+                    int start = k + j * wordLen;
+                    int end = start + wordLen;
+                    String tmpj = s.substring(start, end);
+                    if (!wordCounts.containsKey(tmpj)) break;
+                    int count = hasWordCounts.getOrDefault(tmpj, 0);
+                    if (count == wordCounts.get(tmpj)) break;
+                    hasWordCounts.put(tmpj, count + 1);
+                    if (j == wordNum - 1) {
+                        res.add(k);
+                    }
+                }
+            }
+        }
+
+        return res;
+    }
+
+    //最长有效括号  栈
+    public int longestValidParentheses(String s) {
+        if (s == null || s.length() < 2) {
+            return 0;
+        }
+
+        Stack<Integer> stack = new Stack<>(); //存放字符下标
+        stack.push(-1); //防止栈空pop抛异常并和正常匹配区分开
+
+        int res = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (ch == '(') {
+                stack.push(i);
+            } else {
+                stack.pop();
+                if (stack.empty()) { //()匹配情况是不会为空的
+                    stack.push(i); //防止栈空pop抛异常
+                } else {
+                    res = Math.max(res, i - stack.peek()); //每次()匹配都计算一次
+                }
+            }
+        }
+
+        return res;
+    }
+
+    //最长有效括号  动态规划
+    public int longestValidParenthesesDP(String s) {
+        if (s == null || s.length() < 2) {
+            return 0;
+        }
+
+        int res = 0;
+        s = " " + s; //统一dp[i - 2]使用
+        int[] dp = new int[s.length()]; //默认值都是0
+        for (int i = 2; i < s.length(); i++) {
+            if (s.charAt(i) == ')') {
+                if (s.charAt(i - 1) == '(') { //.....()型
+                    dp[i] = dp[i - 2] + 2; //第0个字符是空格
+                } else if (s.charAt(i - 1 - dp[i - 1]) == '(') { //...((...))型
+                    dp[i] = dp[i - 1] + 2 + dp[i - 2 - dp[i - 1]];
+                }
+                res = Math.max(res, dp[i]);
+            }
+        }
+
+        return res;
     }
 }
