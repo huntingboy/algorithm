@@ -1,9 +1,6 @@
 package com.nomad.leetcode;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class MyNumber {
 
@@ -15,8 +12,7 @@ public class MyNumber {
             for (int i = 0; i < n; i++) {
                 nums[i] = scanner.nextInt();
             }
-            int target = scanner.nextInt();
-            System.out.println("new MyNumber().searchRange(nums, target) = " + Arrays.toString(new MyNumber().searchRange(nums, target)));
+            System.out.println("new MyNumber().trap(nums) = " + new MyNumber().trap(nums));
         }
     }
 
@@ -356,5 +352,139 @@ public class MyNumber {
         }
 
         return i;
+    }
+
+    //组合总和  回溯法 DFS 递归
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (candidates == null || candidates.length == 0) {
+            return res;
+        }
+
+        Arrays.sort(candidates); //帮助剪枝,提前终止搜索
+        dfs(candidates, candidates.length, target, 0, new ArrayDeque<>(), res);
+        return res;
+    }
+
+    /**
+     * @param candidates 数组输入
+     * @param length        输入数组的长度，冗余变量
+     * @param target    剩余数值
+     * @param i      本轮搜索的起点下标
+     * @param path       从根结点到任意结点的路径
+     * @param res        结果集变量
+     */
+    private void dfs(int[] candidates, int length, int target, int i, ArrayDeque<Integer> path, List<List<Integer>> res) {
+        if (target == 0) {//找到一种方案
+             res.add(new ArrayList<>(path));
+             return;
+        }
+        for (int j = i; j < length; j++) {
+            if (target < candidates[j]) { //剪枝,提前终止
+                break;
+            }
+            if (j > i && candidates[j] == candidates[j - 1]) { //小剪枝,跳过重复情况
+                continue;
+            }
+            path.addLast(candidates[j]);
+            dfs(candidates, length, target - candidates[j], j, path, res); //从j开始,避免res中path重复
+            path.removeLast(); //恢复状态(删除刚才添加的节点值),下一轮DFS分支搜搜
+        }
+    }
+
+    //组合总和 II
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (candidates == null || candidates.length == 0) {
+            return res;
+        }
+
+        Arrays.sort(candidates); //帮助剪枝,提前终止搜索
+        dfs2(candidates, candidates.length, target, 0, new ArrayDeque<>(), res);
+        return res;
+    }
+
+    /**
+     * @param candidates 数组输入
+     * @param length        输入数组的长度，冗余变量
+     * @param target    剩余数值
+     * @param i      本轮搜索的起点下标
+     * @param path       从根结点到任意结点的路径
+     * @param res        结果集变量
+     */
+    private void dfs2(int[] candidates, int length, int target, int i, ArrayDeque<Integer> path, List<List<Integer>> res) {
+        if (target == 0) {//找到一种方案
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        for (int j = i; j < length; j++) {
+            if (target < candidates[j]) { //大剪枝,提前终止
+                break;
+            }
+            if (j > i && candidates[j] == candidates[j - 1]) { //小剪枝,跳过重复情况
+                continue;
+            }
+            path.addLast(candidates[j]);
+            dfs2(candidates, length, target - candidates[j], j + 1, path, res);// 因为元素不可以重复使用，这里递归传递下去的是 i + 1 而不是 i
+            path.removeLast(); //恢复状态(删除刚才添加的节点值),下一轮DFS分支搜搜
+        }
+    }
+
+    //缺失的第一个正数  将数组视为hash表进行原地hash
+    public int firstMissingPositive(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 1;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            while (nums[i] > 0 && nums[i] <= nums.length && nums[nums[i] - 1] != nums[i]) { //满足条件就交换  nums[nums[i] - 1] != nums[i]:已经在正确位置的不用交换,重复数字不用交换
+                int targetIndex = nums[i] - 1;
+                int tmp = nums[i];
+                nums[i] = nums[targetIndex];
+                nums[targetIndex] = tmp;
+            }
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (i + 1 != nums[i]) {
+                return i + 1;
+            }
+        }
+
+        return nums.length + 1;
+    }
+
+    //接雨水
+    public int trap(int[] height) {
+        if (height == null || height.length < 2) {
+            return 0;
+        }
+
+        int res = 0;
+        int i = 0, j = 0, exclude = 0;
+        while (j < height.length - 1) { //左边找递减序列,右边找递增序列
+            i = j;
+            exclude = 0;
+            while (i + 1 < height.length && height[i] <= height[i + 1]) { //找左边递减开始的位置a[i] > a[i+1]
+                i++;
+            }
+            j = i;
+            while (j + 1 < height.length && height[j] >= height[j + 1]) { //跳过递减的
+                j++;
+            }
+            while (j + 1 < height.length && height[j] <= height[j + 1]) { //找右边递增结束的位置a[j] > a[j+1]并累加右边递增侧柱子占用的面积
+                j++;
+            }
+            int w = j - i - 1, h = Math.min(height[i], height[j]);
+            //找出(i,j)之间柱子占用的
+            while (i < j - 1) {
+                i++;
+                int tmp = height[i] > h ? h : height[i];
+                exclude += tmp;
+            }
+            res += w * h - exclude;
+        }
+
+        return res;
     }
 }

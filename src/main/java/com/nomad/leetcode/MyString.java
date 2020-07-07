@@ -6,19 +6,30 @@ import java.util.regex.Pattern;
 public class MyString {
 
     public static void main(String[] args) {
-        int[] a = new int[100];
-        for (int i = 0; i < 100; i++) {
-            System.out.println("a[i] = " + a[i]);
-        }
+        /*char[][] a = {
+                {'5', '3', '.', '.', '7', '.', '.', '.', '.'},
+                {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
+                {'.', '9', '8', '.', '.', '.', '.', '6', '.'},
+                {'8', '.', '.', '.', '6', '.', '.', '.', '3'},
+                {'4', '.', '.', '8', '.', '3', '.', '.', '1'},
+                {'7', '.', '.', '.', '2', '.', '.', '.', '6'},
+                {'.', '6', '.', '.', '.', '.', '2', '8', '.'},
+                {'.', '.', '.', '4', '1', '9', '.', '.', '5'},
+                {'.', '.', '.', '.', '8', '.', '.', '7', '9'}
+        };
+        new MyString().solveSudoku(a);
+        for (int i = 0; i < a.length; i++) {
+            System.out.println("Arrays.toString(a[i]) = " + Arrays.toString(a[i]));
+        }*/
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
-            String s = scanner.next();
             /*int n = scanner.nextInt();
             String[] words = new String[n];
             for (int i = 0; i < n; i++) {
                 words[i] = scanner.next();
             }*/
-            System.out.println("new MyString().longestValidParentheses(s) = " + new MyString().longestValidParentheses(s));
+            int n = scanner.nextInt();
+            System.out.println("new MyString().countAndSay(n) = " + new MyString().countAndSay(n));
         }
     }
 
@@ -524,7 +535,128 @@ public class MyString {
 
     //有效的数独
     public boolean isValidSudoku(char[][] board) {
+        if (board == null) {
+            return false;
+        }
 
-        return false;
+        boolean[][] row = new boolean[9][10];
+        boolean[][] col = new boolean[9][10];
+        boolean[][] box = new boolean[9][10];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char ch = board[i][j];
+                if (ch == '.') {
+                    continue;
+                }
+                int number = ch - '0';
+                int index = (i / 3) * 3 + j / 3;
+                if (row[i][number] || col[j][number] || box[index][number]) {
+                    return false;
+                }
+                row[i][number]=true;
+                col[j][number]=true;
+                box[index][number] = true;
+            }
+        }
+
+        return true;
+    }
+
+    private char[][] board;
+    boolean[][] row = new boolean[9][10];
+    boolean[][] col = new boolean[9][10];
+    boolean[][] box = new boolean[9][10];
+    boolean sudoSolved;
+    //解数独 回溯
+    public void solveSudoku(char[][] board) {
+        this.board = board;
+        if (board == null) {
+            return;
+        }
+
+        //初始化状态
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char ch = board[i][j];
+                if (ch != '.') {
+                    int number = Character.getNumericValue(ch);
+                    placeNumber(number, i, j);
+                }
+            }
+        }
+
+        //回溯求解
+        backtrack(0, 0);
+    }
+
+    private void backtrack(int i, int j) { //回溯求数独解
+        char ch = board[i][j];
+        if (ch == '.') {
+            for (int k = 1; k < 10; k++) { //依次尝试在(i,j)放入1~9这9个数字
+                if (couldPlaceNumber(k, i, j)) {
+                    placeNumber(k, i, j);
+                    placeNextNumber(i, j); //在(i,j)的下一个位置放数
+                    if (!sudoSolved) {
+                        removeNumber(k, i, j); //如果(i,j)放number,后面行不通,移除(i,j)的number,尝试下一种情况
+                    }
+                }
+            }
+        } else {
+            placeNextNumber(i, j);
+        }
+    }
+
+    private void removeNumber(int number, int i, int j) { //重置board[i][j]的值和状态标志
+        board[i][j] = '.';
+        row[i][number] = false;
+        col[j][number] = false;
+        int index = (i / 3) * 3 + j /  3;
+        box[index][number] = false;
+    }
+
+    private void placeNextNumber(int i, int j) { //(i,j)下一个位置放数
+        if (i == 8 && j == 8) {
+            sudoSolved = true;
+        } else {
+            if (j == 8) {
+                backtrack(i + 1, 0);
+            } else {
+                backtrack(i, j + 1);
+            }
+        }
+    }
+
+    private boolean couldPlaceNumber(int number, int i, int j) { //(i,j)放number合法
+        int index = (i / 3) * 3 + j / 3;
+        return !row[i][number] && !col[j][number] && !box[index][number];
+    }
+
+    private void placeNumber(int number, int i, int j) { //把number放入board[i][j]并改变相应状态数组值
+        board[i][j] = (char) ('0' + number);
+        row[i][number] = true;
+        col[j][number] = true;
+        int index = (i / 3) * 3 + j / 3;
+        box[index][number] = true;
+    }
+
+    //外观数列
+    public String countAndSay(int n) {
+        StringBuilder sb = new StringBuilder("1");
+        for (int i = 2; i <= n; i++) {
+            StringBuilder tmp = new StringBuilder();
+            for (int j = 0; j < sb.length(); j++) {
+                int count = 1;
+                char ch = sb.charAt(j);
+                while (j + 1 < sb.length() && sb.charAt(j + 1) == ch) {
+                    j++;
+                    count++;
+                }
+                tmp.append(count);
+                tmp.append(ch);
+            }
+            sb = tmp;
+        }
+
+        return sb.toString();
     }
 }

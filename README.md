@@ -1007,26 +1007,118 @@
       给定数独序列只包含数字 1-9 和字符 '.' 。  
       给定数独永远是 9x9 形式的。   
       [MyString::isValidSudoku](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >>     
-37.   
+      >> 一次遍历 空换时   
+37. 解数独  
+**问题**：编写一个程序，通过已填充的空格来解决数独问题。  
+**示例**
+    > 同上题  
+      [MyString::solveSudoku](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> 约束编程(状态数组更新)+回溯(状态重置,换条路/换数据重新尝试, e.g. 迷宫问题,9皇后问题等)       
+38. 外观数列  
+**问题**：给定一个正整数 n（1 ≤ n ≤ 30），输出外观数列的第 n 项。注意：整数序列中的每一项将表示为一个字符串。「外观数列」是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。前五项如下：
+
+        1.     1
+        2.     11
+        3.     21
+        4.     1211
+        5.     111221
+    &emsp;&emsp;第一项是数字 1  
+    &emsp;&emsp;描述前一项，这个数是 1 即 “一个 1 ”，记作 11
+    &emsp;&emsp;描述前一项，这个数是 11 即 “两个 1 ” ，记作 21  
+    &emsp;&emsp;描述前一项，这个数是 21 即 “一个 2 一个 1 ” ，记作 1211  
+    &emsp;&emsp;描述前一项，这个数是 1211 即 “一个 1 一个 2 两个 1 ” ，记作 111221  
+**示例**
+    > 输入: 1  
+      输出: "1"  
+      输入: 4  
+      输出: "1211"  
+      [MyString::countAndSay](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> 字符串计数遍历  
+39. 组合总和  
+**问题**：给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。所有数字（包括 target）都是正整数。解集不能包含重复的组合。   
+**示例**
+    > 输入: candidates = \[2,3,6,7], target = 7,  
+      所求解集为:                                    
+      \[                                        
+        \[7],                                   
+        \[2,2,3]                                
+      ]    
+      输入: candidates = \[2,3,5], target = 8,  
+      所求解集为:                                  
+      \[                                      
+        \[2,2,2,2],                           
+        \[2,3,3],                             
+        \[3,5]                                
+      ]                                       
+      [MyNumber::combinationSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 回溯法 DFS 递归函数:
+
+         /**
+              * @param candidates 数组输入
+              * @param len        输入数组的长度，冗余变量
+              * @param residue    剩余数值
+              * @param begin      本轮搜索的起点下标
+              * @param path       从根结点到任意结点的路径
+              * @param res        结果集变量
+              */
+             private void dfs(int[] candidates,
+                              int len,
+                              int residue,
+                              int begin,
+                              Deque<Integer> path,
+                              List<List<Integer>> res) {...}
+       ![](https://github.com/huntingboy/algorithm/blob/master/src/main/resources/com/nomad/leetcode/39.png)
+40. 组合总和 II  
+**问题**：给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的每个数字在每个组合中**只能使用一次**。所有数字（包括目标数）都是正整数。解集不能包含重复的组合。   
+**示例**
+    > 输入: candidates = \[10,1,2,7,6,1,5], target = 8,  
+      所求解集为:                                           
+      \[                                               
+        \[1, 7],                                       
+        \[1, 2, 5],                                    
+        \[2, 6],                                       
+        \[1, 1, 6]                                     
+      ]                                                
+      输入: candidates = \[2,5,2,1,2], target = 5,       
+      所求解集为:                                           
+      \[                                               
+        \[1,2,2],                                      
+        \[5]                                           
+      ]                                                
+      [MyNumber::combinationSum2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 同上,dfs函数从j+1开始   
+41. 缺失的第一个正数  
+**问题**：给你一个未排序的整数数组，请你找出其中没有出现的最小的正整数。你的算法的时间复杂度应为O(n)，并且只能使用常数级别的额外空间。    
+**示例**
+    > 输入: \[1,2,0]      
+      输出: 3  
+      输入: \[3,4,-1,1]  
+      输出: 2  
+      输入: \[7,8,9,11,12]  
+      输出: 1   
+      [MyNumber::firstMissingPositive](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 将数组视为hash表进行原地hash: f(nums\[i])=nums\[i]-1 (0<nums\[i]<=len才进行hash),最后遍历nums,nums\[i]!=i+1时结果为i+1   
+42. 接雨水   
+**问题**：给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。下面是由数组 \[0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）    
+![](https://github.com/huntingboy/algorithm/blob/master/src/main/resources/com/nomad/leetcode/42.png)  
+**示例**
+    > 输入: \[0,1,0,2,1,0,1,3,2,1,2,1]  
+      输出: 6  
+      [MyNumber::trap](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 木桶原理 双指针 找两侧递增开始/结束位置,累计中间柱子占用面积   
+43.   
 **问题**：  
 **示例**
     > 
       [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
-38.   
+44.   
 **问题**：  
 **示例**
     > 
       [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
-39.   
-**问题**：  
-**示例**
-    > 
-      [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-40.   
+45.   
 **问题**：  
 **示例**
     > 
