@@ -1105,24 +1105,184 @@
     > 输入: \[0,1,0,2,1,0,1,3,2,1,2,1]  
       输出: 6  
       [MyNumber::trap](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 木桶原理 双指针 找两侧递增开始/结束位置,累计中间柱子占用面积   
-43.   
-**问题**：  
+      >> 木桶原理 双指针 先找到最高的柱子,然后从两侧向中间遍历并累计面积   
+43. 字符串相乘  
+**问题**：给定两个以字符串形式表示的非负整数 num1 和 num2，返回 num1 和 num2 的乘积，它们的乘积也表示为字符串形式。num1 和 num2 的长度小于110。num1 和 num2 只包含数字 0-9。num1 和 num2 均不以零开头，除非是数字 0 本身。能使用任何标准库的大数类型（比如 BigInteger）或直接将输入转换为整数来处理。    
 **示例**
-    > 
-      [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    > 输入: num1 = "2", num2 = "3"  
+      输出: "6"  
+      输入: num1 = "123", num2 = "456"  
+      输出: "56088"  
+      [MyString::multiply](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      [MyString::multiply2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> 模拟手算  优化版模拟手算(每次计算两个数字.最终位置为i+j和i+j-1)    
+44. 通配符匹配   
+**问题**：给定一个字符串 (s) 和一个字符模式 (p) ，实现一个支持 '?' 和 '*' 的通配符匹配。'?' 可以匹配任何单个字符。'\*' 可以匹配任意字符串（包括空字符串）。两个字符串完全匹配才算匹配成功。s 可能为空，且只包含从 a-z 的小写字母。p 可能为空，且只包含从 a-z 的小写字母，以及字符 ? 和 *。    
+**示例**
+    > 输入:  
+      s = "aa"  
+      p = "a"  
+      输出: false  
+      输入:  
+      s = "aa"  
+      p = "\*"  
+      输出: true  
+      输入:  
+      s = "cb"  
+      p = "?a"  
+      输出: false  
+      输入:  
+      s = "adceb"  
+      p = "\*a\*b"  
+      输出: true  
+      输入:  
+      s = "acdcb"  
+      p = "a*c?b"  
+      输出: false  
+      [NyString::isMatchWildcard](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/NyString.java)  
+      [NyString::isMatchWildcard2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/NyString.java)  
+      >> 递归(超时) 动态规划
+      
+        if (p.charAt(i - 1) == s.charAt(j - 1) || p.charAt(i - 1) == '?') { //状态转移方程1
+            res[i][j] = res[i - 1][j - 1];
+        } else if (p.charAt(i - 1) == '*') { //状态转移方程2
+            res[i][j] = res[i - 1][j] || res[i][j - 1];
+        }   
+45. 跳跃游戏 II  
+**问题**：给定一个非负整数数组，你最初位于数组的第一个位置。数组中的每个元素代表你在该位置可以跳跃的最大长度。你的目标是使用最少的跳跃次数到达数组的最后一个位置。    
+**示例**
+    > 输入: \[2,3,1,1,4]  
+      输出: 2  
+      解释: 跳到最后一个位置的最小跳跃数是 2。从下标为 0 跳到下标为 1 的位置，跳 1 步，然后跳 3 步到达数组的最后一个位置。假设你总是可以到达数组的最后一个位置。  
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      [MyNumber::jump2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 贪心算法(从出口倒着找,从左往右找与当前间距最大的那个位置)  
+      >> 「贪心」地进行正向查找，每次找到可到达的最远位置，end维护当前能够到达的最大下标位置，记为边界。我们从左到右遍历数组，到达边界时，更新边界并将跳跃次数增加 1, 就可以在线性时间内得到最少的跳跃次数。    
+46. 全排列  
+**问题**：给定一个 没有重复 数字的序列，返回其所有可能的全排列。      
+**示例**
+    > 输入: \[1,2,3]  
+      输出:  
+      \[  
+        \[1,2,3],  
+        \[1,3,2],  
+        \[2,1,3],  
+        \[2,3,1],  
+        \[3,1,2],  
+        \[3,2,1]   
+      ]  
+      [MyNumber::permute](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> (隐式树) 回溯 主函数处理一些特殊情况和定义状态值,递归函数是核心(递归出口+递归体),关键是函数参数确定   
+         ![](https://github.com/huntingboy/algorithm/blob/master/src/main/resources/com/nomad/leetcode/46.png) 
+47. 全排列 II  
+**问题**：给定一个**可包含重复数字**的序列，返回所有不重复的全排列。      
+**示例**
+    > 输入: \[1,1,2]  
+      输出:  
+      \[  
+        \[1,1,2],  
+        \[1,2,1],  
+        \[2,1,1]  
+      ]    
+      [MyNumber::permuteUnique](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 同上题,多一个剪枝去重: if (i > 0 && nums\[i - 1] == nums\[i] && !used\[i-1]) continue;   
+         另解,计算n次下一个排列(31题:nextPermutation)
+48. 旋转图像  
+**问题**：给定一个 n × n 的二维矩阵表示一个图像。将图像顺时针旋转 90 度。你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。      
+**示例**
+    > 给定 matrix =   
+      \[  
+        \[1,2,3],  
+        \[4,5,6],  
+        \[7,8,9]   
+      ],  
+      原地旋转输入矩阵，使其变为:  
+      \[  
+        \[7,4,1],  
+        \[8,5,2],  
+        \[9,6,3]  
+      ]  
+      [MyNumber::rotate](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 找转换前后关系   
+         原地情况:一圈圈(分奇数/偶数圈)连续交换
+         非原地情况:行:i ==>col - 1 - 1; 列:j ==>j;  (行, 列):(i,j)==>(col - 1 - i, j)    
+49.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
-44.   
-**问题**：  
+50.   
+**问题**：    
 **示例**
-    > 
-      [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
-45.   
-**问题**：  
+51.   
+**问题**：    
 **示例**
-    > 
-      [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+52.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+52.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+53.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+54.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+55.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+56.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+57.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+58.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+59.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+60.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
 
 ## 校招

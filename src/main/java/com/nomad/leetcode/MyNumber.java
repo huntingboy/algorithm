@@ -12,7 +12,7 @@ public class MyNumber {
             for (int i = 0; i < n; i++) {
                 nums[i] = scanner.nextInt();
             }
-            System.out.println("new MyNumber().trap(nums) = " + new MyNumber().trap(nums));
+            System.out.println("new MyNumber().trap(nums) = " + new MyNumber().permuteUnique(nums));
         }
     }
 
@@ -456,35 +456,145 @@ public class MyNumber {
 
     //接雨水
     public int trap(int[] height) {
-        if (height == null || height.length < 2) {
+        if (height == null || height.length < 3) {
             return 0;
         }
 
-        int res = 0;
-        int i = 0, j = 0, exclude = 0;
-        while (j < height.length - 1) { //左边找递减序列,右边找递增序列
-            i = j;
-            exclude = 0;
-            while (i + 1 < height.length && height[i] <= height[i + 1]) { //找左边递减开始的位置a[i] > a[i+1]
-                i++;
+        int res = 0, maxi = 0;
+        for (int i = 1; i < height.length; i++) { //找到最大高度的柱子
+            if (height[maxi] < height[i]) {
+                maxi = i;
             }
-            j = i;
-            while (j + 1 < height.length && height[j] >= height[j + 1]) { //跳过递减的
-                j++;
+        }
+        //计算maxi左边的积水面积
+        int leftHeight = height[0];
+        for (int i = 1; i < maxi; i++) {
+            if (leftHeight <= height[i]) {
+                leftHeight = height[i];
+            } else {
+                res += leftHeight - height[i];
             }
-            while (j + 1 < height.length && height[j] <= height[j + 1]) { //找右边递增结束的位置a[j] > a[j+1]并累加右边递增侧柱子占用的面积
-                j++;
+        }
+
+        //计算maxi右边的积水面积
+        int rightHight = height[height.length - 1];
+        for (int i = height.length - 2; i > maxi; i--) {
+            if (rightHight <= height[i]) {
+                rightHight = height[i];
+            } else {
+                res += rightHight - height[i];
             }
-            int w = j - i - 1, h = Math.min(height[i], height[j]);
-            //找出(i,j)之间柱子占用的
-            while (i < j - 1) {
-                i++;
-                int tmp = height[i] > h ? h : height[i];
-                exclude += tmp;
-            }
-            res += w * h - exclude;
         }
 
         return res;
+    }
+
+    //跳跃游戏 II  反向查找
+    public int jump(int[] nums) {
+        int res = 0, pos = nums.length - 1;
+        while (pos > 0) {
+            for (int i = 0; i < pos; i++) {
+                if (nums[i] + i >= pos) {
+                    pos = i;
+                    res++;
+                }
+            }
+        }
+
+        return res;
+    }
+
+    //跳跃游戏 II  正向查找 O(n)
+    public int jump2(int[] nums) {
+        int len = nums.length, res = 0, maxPos = 0, end = 0; //end维护当前能够到达的最大下标位置，记为边界。我们从左到右遍历数组，到达边界时，更新边界并将跳跃次数增加 1
+        for (int i = 0; i < len - 1; i++) { //不需要到最后一个元素
+            maxPos = Math.max(maxPos, i + nums[i]);
+            if (i == end) {
+                end = maxPos;
+                res++;
+            }
+        }
+
+        return res;
+    }
+
+    //全排列(隐式树) 回溯 主函数处理一些特殊情况和定义状态值,递归函数是核心(递归出口+递归体),关键是函数参数确定
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        int len = nums.length;
+        if (nums == null || len < 1) {
+            return res;
+        }
+
+        List<Integer> path = new ArrayList<>();
+        boolean[] used = new boolean[len];
+        dfs(nums, len, 0, path, used, res);
+        return res;
+    }
+
+    private void dfs(int[] nums, int len, int depth, List<Integer> path, boolean[] used, List<List<Integer>> res) {
+        //递归出口 对应结果集中一种情况
+        if (depth == len) {
+            res.add(new ArrayList<>(path)); //path可以理解为全局的,所有res.add(path)是错的
+            return;
+        }
+
+        for (int i = 0; i < len; i++) {
+            if (!used[i]) {
+                used[i] = true;
+                path.add(nums[i]);
+                dfs(nums, len, depth + 1, path, used, res);
+                used[i] = false; //回溯(状态重置)
+                path.remove(path.size() - 1);
+            }
+        }
+    }
+
+    //全排列 II 剪枝去重复 提前排好序
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        int len = nums.length;
+        if (nums == null || len < 1) {
+            return res;
+        }
+
+        Arrays.sort(nums);
+
+        List<Integer> path = new ArrayList<>();
+        boolean[] used = new boolean[len];
+        dfs2(nums, len, 0, path, used, res);
+        return res;
+    }
+
+    private void dfs2(int[] nums, int len, int depth, List<Integer> path, boolean[] used, List<List<Integer>> res) {
+        //递归出口 对应结果集中一种情况
+        if (depth == len) {
+            res.add(new ArrayList<>(path)); //path可以理解为全局的,所有res.add(path)是错的
+            return;
+        }
+
+        for (int i = 0; i < len; i++) {
+            if (i > 0 && nums[i - 1] == nums[i] && !used[i - 1]) { //剪枝去重
+                continue;
+            }
+            if (!used[i]) {
+                used[i] = true;
+                path.add(nums[i]);
+                dfs2(nums, len, depth + 1, path, used, res);
+                used[i] = false; //回溯(状态重置)
+                path.remove(path.size() - 1);
+            }
+        }
+    }
+
+    //旋转图像
+    public void rotate(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            return;
+        }
+
+        for (int i = 0; i < matrix.length / 2; i++) { //4:2次  3:1次
+
+        }
     }
 }

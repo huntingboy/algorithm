@@ -28,8 +28,10 @@ public class MyString {
             for (int i = 0; i < n; i++) {
                 words[i] = scanner.next();
             }*/
-            int n = scanner.nextInt();
-            System.out.println("new MyString().countAndSay(n) = " + new MyString().countAndSay(n));
+            //int n = scanner.nextInt();
+            String a = scanner.next();
+            String b = scanner.next();
+            System.out.println("new MyString().isMatchWildcard(a, b) = " + new MyString().isMatchWildcard(a, b));
         }
     }
 
@@ -658,5 +660,167 @@ public class MyString {
         }
 
         return sb.toString();
+    }
+
+    //字符串相乘  模拟手算 傻瓜做法
+    public String multiply(String num1, String num2) {
+        if ("0".equals(num1) || "0".equals(num2)) {
+            return "0";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        if (num1.length() < num2.length()) {//交换:12*12345==>12345*12
+            String swap = num1;
+            num1 = num2;
+            num2 = swap;
+        }
+        for (int i = num2.length() - 1; i >= 0; i--) {
+            String tmp = multiplyOneNumber(num1, num2.charAt(i) - '0', num2.length() - 1 - i);
+            sb = add(sb.toString(), tmp);
+        }
+
+        return sb.toString();
+    }
+
+    private String multiplyOneNumber(String num1, int i, int n) { //计算num1*i的字符串结果, n:结果后面补零的个数
+        StringBuilder sb = new StringBuilder();
+        for (int j = 0; j < n; j++) {
+            sb.append('0');
+        }
+        int jinwei = 0;
+        for (int j = num1.length() - 1; j >= 0; j--) {
+            int tmp = (num1.charAt(j) - '0') * i;
+            sb.insert(0, (tmp + jinwei) % 10);
+            jinwei = (tmp + jinwei) / 10;
+        }
+        if (jinwei != 0) {
+            sb.insert(0, jinwei);
+        }
+
+        return sb.toString();
+    }
+
+    private StringBuilder add(String sb, String tmp) {//计算sb+tmp的字符串结果
+        StringBuilder res = new StringBuilder();
+        int jinwei = 0, i = 0;
+        while (i < sb.length() && i < tmp.length()) {
+            int sum = sb.charAt(sb.length() - 1 - i) - '0' + tmp.charAt(tmp.length() - 1 -i) - '0' + jinwei;
+            res.insert(0, sum % 10);
+            jinwei = sum / 10;
+            i++;
+        }
+        if (sb.length() == tmp.length() && jinwei > 0) {
+            res.insert(0, jinwei);
+            jinwei = 0;
+        } else if (sb.length() < tmp.length()) {
+            if (jinwei > 0) {
+                for (int j = tmp.length() - 1 - i; j >= 0; j--) {
+                    res.insert(0, (tmp.charAt(j) - '0' + jinwei) % 10);
+                    jinwei = (tmp.charAt(j) - '0' + jinwei) / 10;
+                }
+            } else {
+                res.insert(0, tmp.substring(0, tmp.length() - i));
+            }
+        } else {
+            if (jinwei > 0) {
+                for (int j = sb.length() - 1 - i; j >= 0; j--) {
+                    res.insert(0, (sb.charAt(j) - '0' + jinwei) % 10);
+                    jinwei = (tmp.charAt(j) - '0' + jinwei) / 10;
+                }
+            }else {
+                res.insert(0, sb.substring(0, sb.length() - i));
+            }
+        }
+        if (jinwei > 0) {
+            res.insert(0, jinwei);
+        }
+
+        return res;
+    }
+
+    //字符串相乘  模拟手算 优化
+    public String multiply2(String num1, String num2) {
+        if (num1.equals("0") || num2.equals("0")) {
+            return "0";
+        }
+        int m = num1.length();
+        int n = num2.length();
+        int [] res = new int [m+n];
+        for(int i=m-1;i>=0;i--){
+            for(int j=n-1;j>=0;j--){
+                int num = (num1.charAt(i)-'0')*(num2.charAt(j)-'0');
+                int p1 = i+j;
+                int p2 = i+j+1;
+                int sum = num+res[p2];
+                res[p2] = sum%10;
+                //此处的+=是为了处理进位用的，例如19*19，列出竖式看一下就知道了。
+                res[p1] += sum/10;
+            }
+        }
+        StringBuilder result = new StringBuilder();
+        for(int i=0;i<res.length;i++){
+            //这里的i==0是因为只可能出现首位为0的情况，例如一个三位数乘一个两位数不可能出现结果是一个三位数的情况。所以只需要判断首位即可。
+            if(res[i]==0&&i==0){
+                continue;
+            }
+            result.append(res[i]);
+        }
+        return result.toString();
+    }
+
+    //通配符匹配  超时
+    public boolean isMatchWildcard(String s, String p) {
+        if (s == null || p == null) {
+            return false;
+        }
+        if (s.length() == 0 && p.length() == 0 || "*".equals(p)) {
+            return true;
+        }
+
+        return doMatch(s, 0, p, 0);
+    }
+
+    private boolean doMatch(String s, int i, String p, int j) {
+        if (i == s.length()) {
+            while (j < p.length() && p.charAt(j) == '*') j++;
+            return j == p.length();
+        }
+        if (i == s.length() - 1 && j == p.length() - 1) {
+            return s.charAt(i) == p.charAt(j) || p.charAt(j) == '?' || p.charAt(j) == '*';
+        }
+        if (i < s.length() && j < p.length()) {
+            if (s.charAt(i) == p.charAt(j) || p.charAt(j) == '?') {
+                return doMatch(s, i + 1, p, j + 1);
+            } else if (p.charAt(j) == '*') {
+                return doMatch(s, i, p, j + 1) || doMatch(s, i + 1, p, j);
+            }
+        }
+
+        return false;
+    }
+
+    //通配符匹配 动态规划(自底向上)
+    public boolean isMatchWildcard2(String s, String p) {
+        int len1 = p.length(), len2 = s.length();
+        boolean[][] res = new boolean[len1 + 1][len2 + 2]; //boolean[i][j]:p的前i个字符和s的前j个字符是否匹配 true:匹配
+        res[0][0] = true; //空串是匹配的
+        //*****和空串也是匹配的
+        for (int i = 1; i <= len1; i++) {
+            if (p.charAt(i - 1) != '*') {
+                break;
+            }
+            res[i][0] = true;
+        }
+        for (int i = 1; i <= len1; i++) {
+            for (int j = 1; j <= len2; j++) {
+                if (p.charAt(i - 1) == s.charAt(j - 1) || p.charAt(i - 1) == '?') { //状态转移方程1
+                    res[i][j] = res[i - 1][j - 1];
+                } else if (p.charAt(i - 1) == '*') { //状态转移方程2
+                    res[i][j] = res[i - 1][j] || res[i][j - 1];
+                }
+            }
+        }
+
+        return res[len1][len2];
     }
 }
