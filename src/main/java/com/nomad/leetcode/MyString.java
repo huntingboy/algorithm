@@ -23,15 +23,18 @@ public class MyString {
         }*/
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
-            /*int n = scanner.nextInt();
+            int n = scanner.nextInt();
             String[] words = new String[n];
             for (int i = 0; i < n; i++) {
                 words[i] = scanner.next();
-            }*/
+            }
             //int n = scanner.nextInt();
-            String a = scanner.next();
-            String b = scanner.next();
-            System.out.println("new MyString().isMatchWildcard(a, b) = " + new MyString().isMatchWildcard(a, b));
+            /*String a = scanner.next();
+            String b = scanner.next();*/
+            List<List<String>> lists = new MyString().groupAnagrams(words);
+            for (int i = 0; i < lists.size(); i++) {
+                System.out.println("lists.get(i) = " + lists.get(i));
+            }
         }
     }
 
@@ -822,5 +825,52 @@ public class MyString {
         }
 
         return res[len1][len2];
+    }
+
+    //字母异位词分组
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> res = new ArrayList<>();
+        if (strs == null || strs.length == 0) {
+            return res;
+        }
+
+        int len = strs.length;
+        boolean[] used = new boolean[len];
+        for (int i = 0; i < len; i++) {
+            if (!used[i]) {
+                List<String> tmp = new ArrayList<>();
+                tmp.add(strs[i]);
+                for (int j = i + 1; j < len; j++) {
+                    if (!used[j] && match(strs[i], strs[j])) {
+                        tmp.add(strs[j]);
+                        used[j] = true;
+                    }
+                }
+                res.add(tmp);
+            }
+        }
+
+        return res;
+    }
+
+    private boolean match(String a, String b) {
+        if (a.length() != b.length()) {
+            return false;
+        }
+
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < a.length(); i++) {
+            char ch = a.charAt(i);
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
+        for (int i = 0; i < b.length(); i++) {
+            char ch = b.charAt(i);
+            if (!map.containsKey(ch) || map.get(ch) == 0) {
+                return false;
+            }
+            map.put(ch, map.get(ch) - 1);
+        }
+
+        return true;
     }
 }

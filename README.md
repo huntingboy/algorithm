@@ -359,7 +359,7 @@
 >> 树  
 >> 队列Queue(LinkedList:Deque和List的子类)  类似上题
 
-> **问题**： 请实现两个函数，分别用来序列化和反序列化二叉树。 二叉树的序列化是指：把一棵二叉树按照某种遍历方式的结果以某种格式保存为字符串，从而使得内存中建立起来的二叉树可以持久保存。序列化可以基于先序、中序、后序、层序的二叉树遍历方式来进行修改，序列化的结果是一个字符串，序列化时通过 某种符号表示空节点（#），以 ！ 表示一个结点值的结束（value!）。 二叉树的反序列化是指：根据某种遍历顺序得到的序列化字符串结果str，重构二叉树。  
+> **问题**： 请实现两个函数，分别用来序列化和反序列化二叉树。 二叉树的序列化是指：把一棵二叉树按照某种遍历方式的结果以某种格式保存为字符串，从而使得内存中建立起来的二叉树可以持久保存。序列化可以基于先序、中序、后序、层序的二叉树遍历方式来进行修改，序列化的结果是一个字符串，序列化时通过 某种符号表示空节点（#），以 ！ 表示一个结点值的结束（value!）。 二叉树的反序列化是指：根据某种遍历顺序得到的序列化字符串结果str，重构二叉树。    
 > [Serialize::serialize/deserialize](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)
 >> 树   
 >> 先序遍历的结果
@@ -369,13 +369,13 @@
 >> 树  
 >> 非递归中序遍历接住栈Stack   递归[KthNode::kthNode1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)
 
-> **问题**：如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用Insert()方法读取数据流，使用GetMedian()方法获取当前读取数据的中位数。　　
+> **问题**：如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用Insert()方法读取数据流，使用GetMedian()方法获取当前读取数据的中位数。　　  
 > [GetMedian::getMedian](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/GetMedian.java)  
 >> 树  
 >> LinkedList  也可以用PriorityQueue(默认小顶堆,底层是数组实现)
 
 ### 栈和队列
-> **问题**：定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}； 针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个： {[2,3,4],2,6,2,5,1}， {2,[3,4,2],6,2,5,1}， {2,3,[4,2,6],2,5,1}， {2,3,4,[2,6,2],5,1}， {2,3,4,2,[6,2,5],1}， {2,3,4,2,6,[2,5,1]}。  
+> **问题**：定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}； 针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个： {[2,3,4],2,6,2,5,1}， {2,[3,4,2],6,2,5,1}， {2,3,[4,2,6],2,5,1}， {2,3,4,[2,6,2],5,1}， {2,3,4,2,[6,2,5],1}， {2,3,4,2,6,[2,5,1]}。    
 > [MaxInWindows::maxInWindows](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/MaxInWindows.java) 
 >> 栈和队列  
 >> 妙解[MaxInWindows::maxInWindows1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/MaxInWindows.java)：用一个双端队列(用来记录每个窗口的最大值下标)，队列第一个位置保存当前窗口的最大值，当窗口滑动一次，判断当前最大值是否过期;新增加的值从队尾开始比较，把所有比他小的值丢掉
@@ -411,7 +411,7 @@
 
 ### 栈
 > **问题**：计算逆波兰式（后缀表达式）的值，运算符仅包含"+","-","*"和"/"，被操作数可能是整数或其他表达式   
-> e.g. ["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9↵ ["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6
+> e.g. ["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9↵ ["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6  
 > [EvalRPN::evalRPN](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/EvalRPN.java)  
 >> 栈  
 
@@ -1204,61 +1204,119 @@
       ]  
       [MyNumber::rotate](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >> 找转换前后关系   
-         原地情况:一圈圈(分奇数/偶数圈)连续交换
-         非原地情况:行:i ==>col - 1 - 1; 列:j ==>j;  (行, 列):(i,j)==>(col - 1 - i, j)    
-49.   
-**问题**：    
+         原地情况:一圈圈(分奇数/偶数圈)连续交换   
+         非原地情况:新建一个数组    
+         交换行列关系:**(i,j)===>(j,len-i)**  
+49. 字母异位词分组  
+**问题**：给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。所有输入均为小写字母。不考虑答案输出的顺序。      
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-50.   
-**问题**：    
+    > 输入: \["eat", "tea", "tan", "ate", "nat", "bat"]  
+      输出:  
+      \[  
+        \["ate","eat","tea"],  
+        \["nat","tan"],  
+        \["bat"]  
+      ]  
+      [NyString::groupAnagrams](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/NyString.java)  
+      >> Map，标志位数组    
+50. Pow(x, n)  
+**问题**：实现 pow(x, n) ，即计算 x 的 n 次幂函数。      
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-51.   
-**问题**：    
+    > 输入: 2.00000, 10   
+      输出: 1024.00000    
+      输入: 2.00000, -2  
+      输出: 0.25000  
+      解释: 2-2 = 1/22 = 1/4 = 0.25  
+      [MyNumber::myPow](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 递归+快速幂（否则栈溢出）   
+      >> Math.pow(x, n)(调用native函数)   
+51. N皇后  
+**问题**：n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。给定一个整数 n，返回所有不同的 n 皇后问题的解决方案。每一种解法包含一个明确的 n 皇后问题的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。    
+![](https://github.com/huntingboy/algorithm/blob/master/src/main/resouces/com/nomad/leetcode/51.png)  
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-52.   
-**问题**：    
+    > 输入: 4  
+      输出: \[  
+       \[".Q..",  // 解法 1  
+        "...Q",  
+        "Q...",  
+        "..Q."],  
+       \["..Q.",  // 解法 2  
+        "Q...",  
+        "...Q",  
+        ".Q.."]  
+      ]  
+      解释: 4 皇后问题存在两个不同的解法。  
+      [NQueens::solveNQueens](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/NQueens.java)  
+      >> 回溯(状态数组+递归求解函数，看成隐式树好理解一点)    
+52. N皇后 II  
+**问题**：n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。给定一个整数 n，返回 n 皇后不同的**解决方案的数量**。      
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-52.   
-**问题**：    
+    > 输入: 4  
+      输出: 2  
+      解释: 4 皇后问题存在如下两个不同的解法。  
+      \[  
+       \[".Q..",  // 解法 1  
+        "...Q",  
+        "Q...",  
+        "..Q."],  
+       \["..Q.",  // 解法 2  
+        "Q...",  
+        "...Q",  
+        ".Q.."]  
+      ]  
+      [NQueens::totalNQueens](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/NQueens.java)  
+      >> 同上    
+53. 最大子序和  
+**问题**：给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。      
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-53.   
-**问题**：    
+    > 输入: \[-2,1,-3,4,-1,2,1,-5,4],  
+      输出: 6  
+      解释: 连续子数组 \[4,-1,2,1] 的和最大，为 6。   
+      [MyNumber::maxSubArray](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 贪心算法（局部最优达到整体最优），负数不累加，重置sum，遍历一次    
+         动态规划(自底向上) ：dp\[i]=max(dp\[i-1]+nums\[i], nums\[i])  
+         分治法 ：每次从左边、右边和中间取最大值（因为最大和子序列一定在其中）  
+         暴力法  
+54. 螺旋矩阵    
+**问题**：给定一个包含 m x n 个元素的矩阵（m 行, n 列），请按照顺时针螺旋顺序，返回矩阵中的所有元素。      
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-54.   
-**问题**：    
+    > 输入:  
+      \[  
+       \[ 1, 2, 3 ],  
+       \[ 4, 5, 6 ],  
+       \[ 7, 8, 9 ]  
+      \]  
+      输出: \[1,2,3,6,9,8,7,4,5]    
+      输入:  
+      \[  
+        \[1, 2, 3, 4],  
+        \[5, 6, 7, 8],  
+        \[9,10,11,12]   
+      \]  
+      输出: \[1,2,3,4,8,12,11,10,9,5,6,7]  
+      [MyNumber::spiralOrder](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 设置4个边界并遍历和动态调整    
+55. 跳跃游戏  
+**问题**：给定一个非负整数数组，你最初位于数组的第一个位置。数组中的每个元素代表你在该位置可以跳跃的最大长度。判断你是否能够到达最后一个位置。      
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-55.   
-**问题**：    
+    > 输入: \[2,3,1,1,4]  
+      输出: true  
+      解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。    
+      输入: \[3,2,1,0,4]  
+      输出: false  
+      解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。  
+      [MyNumber::canJump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 从左往右倒着判断可以到达尾部的位置，然后更新当前尾部递归调用    
+56. 合并区间  
+**问题**：给出一个区间的集合，请合并所有重叠的区间      
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-56.   
-**问题**：    
-**示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    > 输入: \[\[1,3],\[2,6],\[8,10],\[15,18]]  
+      输出: \[\[1,6],\[8,10],\[15,18]]  
+      解释: 区间 \[1,3] 和 \[2,6] 重叠, 将它们合并为 \[1,6].  
+      输入: \[\[1,4],\[4,5]]  
+      输出: \[\[1,5]]  
+      解释: 区间 \[1,4] 和 \[4,5] 可被视为重叠区间    
+      [MyNumber::merge](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
 57.   
 **问题**：    
@@ -1279,6 +1337,12 @@
       [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
 60.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+61.   
 **问题**：    
 **示例**
     >   

@@ -8,11 +8,23 @@ public class MyNumber {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             int n = scanner.nextInt();
-            int nums[] = new int[n];
+
+            /*int nums[] = new int[n];
             for (int i = 0; i < n; i++) {
                 nums[i] = scanner.nextInt();
+            }*/
+
+            int nums[][] = new int[n][n];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    nums[i][j] = scanner.nextInt();
+                }
             }
-            System.out.println("new MyNumber().trap(nums) = " + new MyNumber().permuteUnique(nums));
+
+            new MyNumber().rotate(nums);
+            for (int i = 0; i < n; i++) {
+                System.out.println("Arrays.toString(nums[i]) = " + Arrays.toString(nums[i]));
+            }
         }
     }
 
@@ -91,7 +103,7 @@ public class MyNumber {
         StringBuilder sb = new StringBuilder(s);
         s = sb.reverse().toString();
         long ret = Long.valueOf(s);
-        if(!positive) ret = -ret;
+        if (!positive) ret = -ret;
         if (ret > Integer.MAX_VALUE || ret < Integer.MIN_VALUE) {
             return 0;
         }
@@ -188,7 +200,7 @@ public class MyNumber {
         map.put("M", 1000);
 
         int res = 0;
-        for (int i = 0; i < s.length();) {
+        for (int i = 0; i < s.length(); ) {
             if (i + 1 < s.length() && map.containsKey(s.substring(i, i + 2))) {
                 res += map.get(s.substring(i, i + 2));
                 i += 2;
@@ -228,7 +240,7 @@ public class MyNumber {
         }
 
         int res = nums.length;
-        for (int i = 0; i < res;) {
+        for (int i = 0; i < res; ) {
             if (nums[i] == val) {
                 nums[i] = nums[res - 1];
                 res--;
@@ -282,7 +294,7 @@ public class MyNumber {
             }
             swap(nums, i, j);
         }
-        reverse(nums, i+1); //从i+1开始反转
+        reverse(nums, i + 1); //从i+1开始反转
     }
 
     private void swap(int[] nums, int i, int j) {
@@ -368,16 +380,16 @@ public class MyNumber {
 
     /**
      * @param candidates 数组输入
-     * @param length        输入数组的长度，冗余变量
-     * @param target    剩余数值
-     * @param i      本轮搜索的起点下标
+     * @param length     输入数组的长度，冗余变量
+     * @param target     剩余数值
+     * @param i          本轮搜索的起点下标
      * @param path       从根结点到任意结点的路径
      * @param res        结果集变量
      */
     private void dfs(int[] candidates, int length, int target, int i, ArrayDeque<Integer> path, List<List<Integer>> res) {
         if (target == 0) {//找到一种方案
-             res.add(new ArrayList<>(path));
-             return;
+            res.add(new ArrayList<>(path));
+            return;
         }
         for (int j = i; j < length; j++) {
             if (target < candidates[j]) { //剪枝,提前终止
@@ -406,9 +418,9 @@ public class MyNumber {
 
     /**
      * @param candidates 数组输入
-     * @param length        输入数组的长度，冗余变量
-     * @param target    剩余数值
-     * @param i      本轮搜索的起点下标
+     * @param length     输入数组的长度，冗余变量
+     * @param target     剩余数值
+     * @param i          本轮搜索的起点下标
      * @param path       从根结点到任意结点的路径
      * @param res        结果集变量
      */
@@ -589,12 +601,112 @@ public class MyNumber {
 
     //旋转图像
     public void rotate(int[][] matrix) {
-        if (matrix == null || matrix.length == 0) {
+        if (matrix == null || matrix.length < 2) {
             return;
         }
 
-        for (int i = 0; i < matrix.length / 2; i++) { //4:2次  3:1次
-
+        for (int i = 0; i < matrix.length / 2; i++) { //4:2次  3:1次  圈数
+            for (int j = 0; j < matrix[0].length - 1 - 2 * i; j++) { //每圈交换次数
+                int row = i, col = i + j, tmp = matrix[row][col];
+                for (int k = 0; k < 3; k++) { //每次交换4个数字
+                    matrix[row][col] = matrix[matrix[0].length - 1 - col][row];
+                    int t = row;
+                    row = matrix[0].length - 1 - col;
+                    col = t;
+                }
+                matrix[row][col] = tmp;
+            }
         }
+    }
+
+    //Pow(x, n)
+    public double myPow(double x, int n) {
+        /*//栈溢出
+        if (n == 0) {
+            return 1;
+        } else if (n > 0) {
+            return x * myPow(x, n - 1);
+        } else {
+            return 1 / (x * myPow(x, -n - 1));
+        }*/
+        //return Math.pow(x, n);
+        return n >= 0 ? quickPow(x, n) : 1 / quickPow(x, n);
+    }
+
+    private double quickPow(double x, int n) {
+        if (n == 0) {
+            return 1;
+        }
+
+        double y = quickPow(x, n / 2);
+        return (n % 2 == 0) ? y * y : y * y * x;
+    }
+
+    //最大子序和 贪心
+    public int maxSubArray(int[] nums) {
+        int res = Integer.MIN_VALUE;
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            res = Math.max(res, sum);
+            if (sum < 0) {
+                sum = 0;
+            }
+        }
+
+        return res;
+    }
+
+    //螺旋矩阵
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> res = new ArrayList<>();
+        if (matrix == null || matrix.length == 0) {
+            return res;
+        }
+
+        int u = 0, d = matrix.length - 1, l = 0, r = matrix[0].length - 1; //上下左右边界
+        while (true) {
+            for (int i = l; i <= r; i++) { //遍历上边界
+                res.add(matrix[u][i]);
+            }
+            if (++u > d) break;
+            for (int i = u; i <= d; i++) {//遍历右边界
+                res.add(matrix[i][r]);
+            }
+            if (--r < l) break;
+            for (int i = r; i >= l; i--) {//遍历下边界
+                res.add(matrix[d][i]);
+            }
+            if (--d < u) break;
+            for (int i = d; i >= u; i--) {//遍历左边界
+                res.add(matrix[i][l]);
+            }
+            if (++l > r) break;
+        }
+
+        return res;
+    }
+
+    //跳跃游戏   从左往右倒着判断可以到达尾部的位置，然后更新当前尾部递归调用
+    public boolean canJump(int[] nums) {
+        int end = nums.length - 1;
+        return doJump(nums, end);
+    }
+
+    private boolean doJump(int[] nums, int end) {
+        if (end == 0) return true;
+        for (int i = 0; i < end; i++) {
+            if (i + nums[i] >= end) {
+                return doJump(nums, i);
+            }
+        }
+        return false;
+    }
+
+    //合并区间
+    public int[][] merge(int[][] intervals) {
+
+
+        return null;
     }
 }
