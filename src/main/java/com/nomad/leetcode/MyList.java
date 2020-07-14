@@ -173,8 +173,24 @@ public class MyList {
         return pre;
     }
 
-    //旋转链表
+    //旋转链表 双指针 固定步长k
     public ListNode rotateRight(ListNode head, int k) {
+        if (head == null) {
+            return null;
+        }
 
+        ListNode pre = head, p = head;
+        for (int i = 0; i < k; i++) {
+            p = (p.next == null) ? head : p.next;
+        }
+        while (p.next != null) {
+            pre = pre.next;
+            p = p.next;
+        }
+        p.next = head;
+        head = pre.next;
+        pre.next = null;
+
+        return head;
     }
 }

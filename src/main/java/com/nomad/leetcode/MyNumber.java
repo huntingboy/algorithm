@@ -7,6 +7,7 @@ public class MyNumber {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
+            int m = scanner.nextInt();
             int n = scanner.nextInt();
 
             /*int nums[] = new int[n];
@@ -14,17 +15,14 @@ public class MyNumber {
                 nums[i] = scanner.nextInt();
             }*/
 
-            int nums[][] = new int[n][n];
-            for (int i = 0; i < n; i++) {
+            int nums[][] = new int[m][n];
+            for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
                     nums[i][j] = scanner.nextInt();
                 }
             }
 
-            new MyNumber().rotate(nums);
-            for (int i = 0; i < n; i++) {
-                System.out.println("Arrays.toString(nums[i]) = " + Arrays.toString(nums[i]));
-            }
+            System.out.println("new MyNumber().uniquePathsWithObstacles(nums) = " + new MyNumber().uniquePathsWithObstacles(nums));
         }
     }
 
@@ -761,7 +759,8 @@ public class MyNumber {
         return res;
     }
 
-    //第k个排列
+    //第k个排列  从右往左找第一个降序的位置，和右边刚好大于它的数交换，然后从i+1反转。起始串为123...n，重复k次
+    //         参考31题下一个排列
     public String getPermutation(int n, int k) {
         StringBuilder sb = new StringBuilder();
         int[] nums = new int[n];
@@ -777,5 +776,36 @@ public class MyNumber {
         }
         return sb.toString();
     }
-}
 
+    //不同路径  C(m+n-2, n-1)=C(m+n-2, m-1)
+    public int uniquePaths(int m, int n) {
+        long res = 1;
+        for (int i = 0; i < Math.min(m - 1, n - 1); i++) {
+            res *= (m + n - 2 - i);
+            res /= (i + 1);
+        }
+
+        return (int) res;
+    }
+
+    //不同路径 II  动态规划dp\[i,j]=dp\[i-1,j]+dp\[i,j-1]
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid.length, n = obstacleGrid[0].length;
+        int[][] res = new int[m][n];
+        res[0][0] = (obstacleGrid[0][0] == 0) ? 1 : 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if ((i > 0 || j > 0) && obstacleGrid[i][j] == 0) {
+                    if (i > 0 && obstacleGrid[i-1][j] == 0) {
+                        res[i][j] += res[i-1][j];
+                    }
+                    if (j > 0 && obstacleGrid[i][j - 1] == 0) {
+                        res[i][j] += res[i][j - 1];
+                    }
+                }
+            }
+        }
+
+        return res[m-1][n-1];
+    }
+}

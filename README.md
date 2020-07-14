@@ -1373,20 +1373,39 @@
       向右旋转 3 步: 0->1->2->NULL  
       向右旋转 4 步: 2->0->1->NULL  
       [MyList::rotateRight](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
-      >>     
-62.   
-**问题**：    
+      >> 双指针 固定步长k    
+62. 不同路径   
+**问题**：一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。问总共有多少条不同的路径？1 <= m, n <= 100,题目数据保证答案小于等于 2 * 10 ^ 9      
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-63.   
-**问题**：    
+    > 输入: m = 3, n = 2  
+      输出: 3  
+      解释:  
+      从左上角开始，总共有 3 条路径可以到达右下角。  
+      1.向右 -> 向右 -> 向下  
+      2.向右 -> 向下 -> 向右  
+      3.向下 -> 向右 -> 向右   
+      输入: m = 7, n = 3  
+      输出: 28  
+      [MyNumber::uniquePaths](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 组合数学C(m+n-2, n-1)=C(m+n-2, m-1)    
+63. 不同路径 II  
+**问题**：现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？网格中的障碍物和空位置分别用 1 和 0 来表示。m 和 n 的值均不超过 100。      
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-64.   
+    > 输入:  
+      \[  
+        \[0,0,0],  
+        \[0,1,0],  
+        \[0,0,0]  
+      ]  
+      输出: 2  
+      解释:  
+      3x3 网格的正中间有一个障碍物。  
+      从左上角到右下角一共有 2 条不同的路径：  
+      1.向右 -> 向右 -> 向下 -> 向下  
+      2.向下 -> 向下 -> 向右 -> 向右  
+      [MyNumber::uniquePathsWithObstacles](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 动态规划dp\[i,j]=dp\[i-1,j]+dp\[i,j-1]   
+64.    
 **问题**：    
 **示例**
     >   
