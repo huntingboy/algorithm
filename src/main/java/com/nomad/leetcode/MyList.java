@@ -172,4 +172,9 @@ public class MyList {
 
         return pre;
     }
+
+    //旋转链表
+    public ListNode rotateRight(ListNode head, int k) {
+
+    }
 }

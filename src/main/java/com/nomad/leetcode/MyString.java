@@ -873,4 +873,16 @@ public class MyString {
 
         return true;
     }
+
+    //最后一个单词的长度
+    public int lengthOfLastWord(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        String s1 = s.trim();
+        int idx = s1.lastIndexOf(' ');
+
+        return (idx < 0) ? s1.length() : s1.length() - idx - 1;
+    }
 }

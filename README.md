@@ -1317,32 +1317,118 @@
       输出: \[\[1,5]]  
       解释: 区间 \[1,4] 和 \[4,5] 可被视为重叠区间    
       [MyNumber::merge](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 根据数组第一个元素排好序后多种情况变为3种（a包含b,a∩b和a<b）,然后一次遍历    
+57. 插入区间  
+**问题**：给出一个无重叠的 ，按照区间起始端点排序的区间列表。在列表中插入一个新的区间，你需要确保列表中的区间仍然有序且不重叠（如果有必要的话，可以合并区间）      
+**示例**
+    > 输入: intervals = \[\[1,3],\[6,9]], newInterval = \[2,5]   
+      输出: \[\[1,5],\[6,9]]     
+      输入: intervals = \[\[1,2],\[3,5],\[6,7],\[8,10],\[12,16]], newInterval = \[4,8]  
+      输出: \[\[1,2],\[3,10],\[12,16]]  
+      解释: 这是因为新的区间 \[4,8] 与 \[3,5],\[6,7],\[8,10] 重叠   
+      [MyNumber::insert](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 先合并为一个数组，然后同上    
+58. 最后一个单词的长度  
+**问题**：给定一个仅包含大小写字母和空格 ' ' 的字符串 s，返回其最后一个单词的长度。如果字符串从左向右滚动显示，那么最后一个单词就是最后出现的单词。如果不存在最后一个单词，请返回 0 。一个单词是指仅由字母组成、不包含任何空格字符的 最大子字符串。      
+**示例**
+    > 输入: "Hello World"  
+      输出: 5    
+      [MyString::lengthOfLastWord](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> String库函数,注意要首先trim一下    
+59. 螺旋矩阵 II  
+**问题**：给定一个正整数 n，生成一个包含 1 到 n2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵      
+**示例**
+    > 输入: 3  
+      输出:  
+      \[  
+       \[ 1, 2, 3 ],  
+       \[ 8, 9, 4 ],  
+       \[ 7, 6, 5 ]  
+      ]    
+      [MyNumber::generateMatrix](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 定义上下左右四个边界+死循环    
+60. 第k个排列  
+**问题**：按大小顺序列出所有排列情况，并一一标记，给定 n 和 k，返回第 k 个排列。给定 n 的范围是 \[1, 9]。给定 k 的范围是\[1,  n!]。      
+**示例**
+    > 输入: n = 3, k = 3  
+      输出: "213"   
+      输入: n = 4, k = 9  
+      输出: "2314"  
+      [MyNumber::getPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 从右往左找第一个降序的位置，和右边刚好大于它的数交换，然后从i+1反转。起始串为123...n，重复k次  
+         参考31题下一个排列    
+61. 旋转链表   
+**问题**：给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。      
+**示例**
+    > 输入: 1->2->3->4->5->NULL, k = 2  
+      输出: 4->5->1->2->3->NULL  
+      解释:  
+      向右旋转 1 步: 5->1->2->3->4->NULL  
+      向右旋转 2 步: 4->5->1->2->3->NULL  
+      输入: 0->1->2->NULL, k = 4  
+      输出: 2->0->1->NULL   
+      解释:  
+      向右旋转 1 步: 2->0->1->NULL   
+      向右旋转 2 步: 1->2->0->NULL  
+      向右旋转 3 步: 0->1->2->NULL  
+      向右旋转 4 步: 2->0->1->NULL  
+      [MyList::rotateRight](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
       >>     
-57.   
+62.   
 **问题**：    
 **示例**
     >   
       [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
-58.   
+63.   
 **问题**：    
 **示例**
     >   
       [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
-59.   
+64.   
 **问题**：    
 **示例**
     >   
       [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
-60.   
+65.   
 **问题**：    
 **示例**
     >   
       [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
-61.   
+66.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+67.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+68.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+69.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+70.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+71.   
 **问题**：    
 **示例**
     >   

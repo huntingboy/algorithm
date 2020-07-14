@@ -705,8 +705,77 @@ public class MyNumber {
 
     //合并区间
     public int[][] merge(int[][] intervals) {
+        int[][] res = new int[intervals.length][2];
+        int idx = -1;
+        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]); //根据数组第一个元素升序排好序后多种情况变为3种（a包含b,a∩b和a<b）
 
+        for (int[] interval : intervals) {
+            if (idx == -1 || interval[0] > res[idx][1]) { //不合并
+                res[++idx] = interval;
+            } else { //合并,更新右边界
+                res[idx][1] = Math.max(res[idx][1], interval[1]);
+            }
+        }
 
-        return null;
+        return Arrays.copyOf(res, idx + 1);
+    }
+
+    //插入区间
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        int[][] res = new int[intervals.length + 1][2];
+        for (int i = 0; i < intervals.length; i++) {
+            res[i] = Arrays.copyOf(intervals[i], 2);
+        }
+        res[intervals.length] = newInterval;
+
+        return merge(res);
+    }
+
+    //螺旋矩阵 II
+    public int[][] generateMatrix(int n) {
+        if (n < 1) {
+            return null;
+        }
+
+        int[][] res = new int[n][n];
+        int u = 0, d = n - 1, l = 0, r = n - 1, count = 1;
+        while (true) {
+            for (int i = l; i <= r; i++) { //上边界
+                res[u][i] = count++;
+            }
+            if (++u > d) break;
+            for (int i = u; i <= d; i++) {//右边界
+                res[i][r] = count++;
+            }
+            if (--r < l) break;
+            for (int i = r; i >= l; i--) {//下边界
+                res[d][i] = count++;
+            }
+            if (--d < u) break;
+            for (int i = d; i >= u; i--) {//左边界
+                res[i][l] = count++;
+            }
+            if (++l > r) break;
+        }
+
+        return res;
+    }
+
+    //第k个排列
+    public String getPermutation(int n, int k) {
+        StringBuilder sb = new StringBuilder();
+        int[] nums = new int[n];
+        for (int i = 1; i <= n; i++) {
+            nums[i - 1] = i;
+        }
+        while (--k > 0) {
+            nextPermutation(nums);
+        }
+
+        for (int i = 0; i < n; i++) {
+            sb.append(nums[i]);
+        }
+        return sb.toString();
     }
 }
+
