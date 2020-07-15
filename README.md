@@ -1441,41 +1441,155 @@
       >> BigDecimal未通过：44e016912630333 （小数位数太多）  
          正则  未通过：导入java.util.regex;还是找不到符号 
          常规做法  
-66.   
-**问题**：    
+66. 加一  
+**问题**：给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。    
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-67.   
-**问题**：    
+    > 输入: \[1,2,3]  
+      输出: \[1,2,4]  
+      解释: 输入数组表示数字 123。    
+      输入: \[4,3,2,1]  
+      输出: \[4,3,2,2]  
+      解释: 输入数组表示数字 4321。  
+      [MyNumber::plusOne](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 从右往左找第一个不是9的位置，然后根据位置分为3种情况处理    
+67. 二进制求和  
+**问题**：给你两个二进制字符串，返回它们的和（用二进制表示）。输入为 非空 字符串且只包含数字 1 和 0。1 <= a.length, b.length <= 10^4. 字符串如果不是 "0" ，就都不含前导零。    
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-68.   
-**问题**：    
+    > 输入: a = "11", b = "1"   
+      输出: "100"   
+      输入: a = "1010", b = "1011"  
+      输出: "10101"   
+      [MyNumber::addBinary](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> i,j分别指向a,b串    
+68. 文本左右对齐  
+**问题**：给定一个单词数组和一个长度 maxWidth，重新排版单词，使其成为每行恰好有 maxWidth 个字符，且左右两端对齐的文本。你应该使用“贪心算法”来放置给定的单词；也就是说，尽可能多地往每行中放置单词。必要时可用空格 ' ' 填充，使得每行恰好有 maxWidth 个字符。要求尽可能均匀分配单词间的空格数量。如果某一行单词间的空格不能均匀分配，则左侧放置的空格数要多于右侧的空格数。文本的最后一行应为左对齐，且单词之间不插入额外的空格。单词是指由非空格字符组成的字符序列。每个单词的长度大于 0，小于等于 maxWidth。输入单词数组 words 至少包含一个单词。    
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-69.   
-**问题**：    
+    > 输入:
+      words = \["This", "is", "an", "example", "of", "text", "justification."]  
+      maxWidth = 16  
+      输出:  
+      \[  
+         "This    is    an",  
+         "example  of text",  
+         "justification.  "  
+      ]  
+      输入:  
+      words = \["What","must","be","acknowledgment","shall","be"]  
+      maxWidth = 16  
+      输出:  
+      \[  
+        "What   must   be",  
+        "acknowledgment  ",  
+        "shall be        "  
+      ]  
+      解释: 注意最后一行的格式应为 "shall be    " 而不是 "shall     be",  
+           因为最后一行应为左对齐，而不是左右两端对齐。         
+           第二行同样为左对齐，这是因为这行只包含一个单词.  
+      输入:  
+      words = \["Science","is","what","we","understand","well","enough","to","explain",  
+               "to","a","computer.","Art","is","everything","else","we","do"]  
+      maxWidth = 20  
+      输出:  
+      \[  
+        "Science  is  what we",  
+        "understand      well",  
+        "enough to explain to",  
+        "a  computer.  Art is",  
+        "everything  else  we",  
+        "do                  "  
+      ]  
+      [MyString::fullJustify](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+      >> currentLen:累计单词长度 wordIdx:每行开始单词的数组下标  每遇到换行（即放不下当前单词）就把上一行放入结果     
+69. x 的平方根  
+**问题**：实现 int sqrt(int x) 函数。计算并返回 x 的平方根，其中 x 是非负整数。由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。    
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-70.   
-**问题**：    
+    > 输入: 4  
+      输出: 2  
+      输入: 8  
+      输出: 2  
+      说明: 8 的平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。  
+      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 牛顿法   
+         ![](https://github.com/huntingboy/algorithm/blob/master/src/main/resources/com/nomad/leetcode/69.gif) 
+         ![](https://github.com/huntingboy/algorithm/blob/master/src/main/resources/com/nomad/leetcode/69.png) 
+         二分查找  
+70. 爬楼梯  
+**问题**：假设你正在爬楼梯。需要 n 阶你才能到达楼顶。每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？给定 n 是一个正整数。      
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
+    > 输入： 2  
+      输出： 2  
+      解释： 有两种方法可以爬到楼顶。  
+      1.1 阶 + 1 阶  
+      2.2 阶   
+      [MyNumber::climbStairs](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      [MyNumber::climbStairs2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 递归(动态规划自顶向下:超时) 斐波那契数列   
+         动态规划自底向上(空换时)   
 71.   
 **问题**：    
 **示例**
     >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+72.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+73.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+74.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+75.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+76.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+77.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+78.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+79.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+80.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>     
+81.   
+**问题**：    
+**示例**
+    >   
+      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >>     
 
 ## 校招

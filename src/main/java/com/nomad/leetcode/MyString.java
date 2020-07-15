@@ -28,13 +28,10 @@ public class MyString {
             for (int i = 0; i < n; i++) {
                 words[i] = scanner.next();
             }
-            //int n = scanner.nextInt();
+            int m = scanner.nextInt();
             /*String a = scanner.next();
             String b = scanner.next();*/
-            List<List<String>> lists = new MyString().groupAnagrams(words);
-            for (int i = 0; i < lists.size(); i++) {
-                System.out.println("lists.get(i) = " + lists.get(i));
-            }
+            System.out.println("new MyString().fullJustify(words, m) = " + new MyString().fullJustify(words, m));
         }
     }
 
@@ -457,7 +454,7 @@ public class MyString {
     //串联所有单词的子串
     public List<Integer> findSubstring(String s, String[] words) {
         List<Integer> res = new ArrayList<>();
-        if (s == null || s.isEmpty() || words ==null || words.length == 0) {
+        if (s == null || s.isEmpty() || words == null || words.length == 0) {
             return res;
         }
 
@@ -468,7 +465,7 @@ public class MyString {
         int wordNum = words.length;
         int wordLen = words[0].length();
         for (int i = 0; i < wordLen; i++) {//分类以固定步长words.len向后移动 (感觉也可以分多个线程,每个线程处理一个类别,最后综合结果,需要用到CountDownLatch)
-            for (int k = i; k <= s.length() - wordLen * wordNum; k+=wordLen) {//每种类别需要遍历的次数,步长为单词组 (内部可优化, 前面已经比较的部分可以直接跳过)
+            for (int k = i; k <= s.length() - wordLen * wordNum; k += wordLen) {//每种类别需要遍历的次数,步长为单词组 (内部可优化, 前面已经比较的部分可以直接跳过)
                 Map<String, Integer> hasWordCounts = new HashMap<>(); //(优化:可以不用重置,只需要移除第一个单词的计数)
                 for (int j = 0; j < wordNum; j++) {//判断每一个单词
                     int start = k + j * wordLen;
@@ -558,8 +555,8 @@ public class MyString {
                 if (row[i][number] || col[j][number] || box[index][number]) {
                     return false;
                 }
-                row[i][number]=true;
-                col[j][number]=true;
+                row[i][number] = true;
+                col[j][number] = true;
                 box[index][number] = true;
             }
         }
@@ -572,6 +569,7 @@ public class MyString {
     boolean[][] col = new boolean[9][10];
     boolean[][] box = new boolean[9][10];
     boolean sudoSolved;
+
     //解数独 回溯
     public void solveSudoku(char[][] board) {
         this.board = board;
@@ -615,7 +613,7 @@ public class MyString {
         board[i][j] = '.';
         row[i][number] = false;
         col[j][number] = false;
-        int index = (i / 3) * 3 + j /  3;
+        int index = (i / 3) * 3 + j / 3;
         box[index][number] = false;
     }
 
@@ -707,7 +705,7 @@ public class MyString {
         StringBuilder res = new StringBuilder();
         int jinwei = 0, i = 0;
         while (i < sb.length() && i < tmp.length()) {
-            int sum = sb.charAt(sb.length() - 1 - i) - '0' + tmp.charAt(tmp.length() - 1 -i) - '0' + jinwei;
+            int sum = sb.charAt(sb.length() - 1 - i) - '0' + tmp.charAt(tmp.length() - 1 - i) - '0' + jinwei;
             res.insert(0, sum % 10);
             jinwei = sum / 10;
             i++;
@@ -730,7 +728,7 @@ public class MyString {
                     res.insert(0, (sb.charAt(j) - '0' + jinwei) % 10);
                     jinwei = (tmp.charAt(j) - '0' + jinwei) / 10;
                 }
-            }else {
+            } else {
                 res.insert(0, sb.substring(0, sb.length() - i));
             }
         }
@@ -748,22 +746,22 @@ public class MyString {
         }
         int m = num1.length();
         int n = num2.length();
-        int [] res = new int [m+n];
-        for(int i=m-1;i>=0;i--){
-            for(int j=n-1;j>=0;j--){
-                int num = (num1.charAt(i)-'0')*(num2.charAt(j)-'0');
-                int p1 = i+j;
-                int p2 = i+j+1;
-                int sum = num+res[p2];
-                res[p2] = sum%10;
+        int[] res = new int[m + n];
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                int num = (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
+                int p1 = i + j;
+                int p2 = i + j + 1;
+                int sum = num + res[p2];
+                res[p2] = sum % 10;
                 //此处的+=是为了处理进位用的，例如19*19，列出竖式看一下就知道了。
-                res[p1] += sum/10;
+                res[p1] += sum / 10;
             }
         }
         StringBuilder result = new StringBuilder();
-        for(int i=0;i<res.length;i++){
+        for (int i = 0; i < res.length; i++) {
             //这里的i==0是因为只可能出现首位为0的情况，例如一个三位数乘一个两位数不可能出现结果是一个三位数的情况。所以只需要判断首位即可。
-            if(res[i]==0&&i==0){
+            if (res[i] == 0 && i == 0) {
                 continue;
             }
             result.append(res[i]);
@@ -884,5 +882,64 @@ public class MyString {
         int idx = s1.lastIndexOf(' ');
 
         return (idx < 0) ? s1.length() : s1.length() - idx - 1;
+    }
+
+    //文本左右对齐
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        List<String> res = new ArrayList<>();
+        int currentLen = words[0].length(); //累计单词长度
+        int wordIdx = 0; //每行开始单词的数组下标
+
+        for (int i = 1; i < words.length; i++) {
+            if (currentLen + words[i].length() + (i - wordIdx) <= maxWidth) { //i:单词间隙个数
+                currentLen += words[i].length();
+            } else { //一行结束
+                StringBuilder sb = new StringBuilder();
+                int avgSpace, plusNum = 0; //avgSpace:每个间隙最少的空格数  plusNum:需要加一个空格的间隙数
+                if (i - wordIdx == 1) { //只有一个单词+空格
+                    avgSpace = maxWidth - currentLen;
+
+                    sb.append(words[wordIdx]);//把上一行放入结果中
+                    for (int j = 0; j < avgSpace; j++) {
+                        sb.append(' ');
+                    }
+                } else { //多个单词+间隙空格
+                    avgSpace = (maxWidth - currentLen) / (i - wordIdx - 1);
+                    plusNum = (maxWidth - currentLen) % (i - wordIdx - 1);
+
+                    for (int j = wordIdx; j < i; j++) { //把上一行放入结果中
+                        sb.append(words[j]);
+                        if (j < i - 1) {
+                            for (int k = 0; k < avgSpace; k++) {
+                                sb.append(' ');
+                            }
+                            if (plusNum > 0) {
+                                sb.append(' ');
+                                plusNum--;
+                            }
+                        }
+                    }
+                }
+                res.add(sb.toString());
+
+                wordIdx = i;
+                currentLen = words[i].length();
+            }
+        }
+        //处理最后一行
+        StringBuilder sb = new StringBuilder();
+        for (int i = wordIdx; i < words.length; i++) {
+            sb.append(words[i]);
+            if (i < words.length - 1) {
+                sb.append(' ');
+            } else {
+                for (int j = 0; j < (maxWidth - currentLen - (i - wordIdx)); j++) {
+                    sb.append(' ');
+                }
+            }
+        }
+        res.add(sb.toString());
+
+        return res;
     }
 }

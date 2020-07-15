@@ -15,6 +15,7 @@ public class MyNumber {
             /*int m = scanner.nextInt();
             int n = scanner.nextInt();*/
             String s = scanner.nextLine();
+            String s1 = scanner.nextLine();
 
             /*int nums[] = new int[n];
             for (int i = 0; i < n; i++) {
@@ -28,7 +29,7 @@ public class MyNumber {
                 }
             }*/
 
-            System.out.println("new MyNumber().isNumber(n) = " + new MyNumber().isNumber2(s));
+            System.out.println("new MyNumber().addBinary(s, s1) = " + new MyNumber().addBinary(s, s1));
         }
     }
 
@@ -896,5 +897,81 @@ public class MyNumber {
             }
         }
         return numSeen;
+    }
+
+    //加一
+    public int[] plusOne(int[] digits) {
+        int i = digits.length - 1;
+        for (; i >= 0; i--) { //从后往前找第一个不是9的位置
+            if (digits[i] != 9) {
+                break;
+            }
+        }
+        if (i == digits.length - 1) {//没找到
+            int[] res = Arrays.copyOf(digits, digits.length);
+            res[digits.length - 1]++;
+            return res;
+        } else if (i >= 0) {//找到，且不是999...99情况
+            int[] res = new int[digits.length];
+            for (int j = 0; j <= i; j++) {
+                res[j] = digits[j];
+            }
+            res[i]++;
+            return res;
+        } else { //找到，且是进位情况
+            int[] res = new int[digits.length + 1];
+            res[0] = 1;
+            return res;
+        }
+    }
+
+    //二进制求和
+    public String addBinary(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+        int len_a = a.length(), len_b = b.length(), jinwei = 0;
+        for (int i = len_a - 1, j = len_b - 1; i >= 0 || j >= 0; i--, j--) {
+            int sum = jinwei;
+            sum += (i >= 0) ? Character.getNumericValue(a.charAt(i)) : 0;
+            sum += (j >= 0) ? Character.getNumericValue(b.charAt(j)) : 0;
+            sb.insert(0, sum % 2);
+            jinwei = sum / 2;
+        }
+        if (jinwei > 0) sb.insert(0, 1);
+
+        return sb.toString();
+    }
+
+    //x 的平方根
+    public int mySqrt(int x) {
+        //return (int) Math.sqrt(x);
+        long x0 = x;
+        while (x0 * x0 > x) {
+            x0 = (x0 + x / x0) / 2;
+        }
+
+        return (int) x0;
+    }
+
+    //爬楼梯  动态规划自顶向下 超时
+    public int climbStairs(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        return climbStairs(n - 1) + climbStairs(n - 2);
+    }
+
+    //爬楼梯  动态规划自底向上
+    public int climbStairs2(int n) {
+        int[] res = new int[n + 1];
+        res[0] = 1;
+        res[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            res[i] = res[i - 1] + res[i - 2];
+        }
+
+        return res[n];
     }
 }
