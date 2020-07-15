@@ -1405,18 +1405,42 @@
       2.向下 -> 向下 -> 向右 -> 向右  
       [MyNumber::uniquePathsWithObstacles](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >> 动态规划dp\[i,j]=dp\[i-1,j]+dp\[i,j-1]   
-64.    
-**问题**：    
+64. 最小路径和   
+**问题**：给定一个包含非负整数的 m x n 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。每次只能向下或者向右移动一步。    
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-65.   
-**问题**：    
+    > 输入:  
+      \[  
+        \[1,3,1],  
+        \[1,5,1],  
+        \[4,2,1]  
+      ]  
+      输出: 7  
+      解释: 因为路径 1→3→1→1→1 的总和最小。   
+      [MyNumber::minPathSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >>  动态规划dp\[i,j]=min(dp\[i-1,j]+grid\[i,j], dp\[i,j-1]+grid\[i,j])   
+65. 有效数字  
+**问题**：验证给定的字符串是否可以解释为十进制数字。数字 0-9、指数 - "e"、正/负号 - "+"/"-"、小数点 - "."      
 **示例**
-    >   
-      [MyNumber::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
+    > "0" => true  
+      " 0.1 " => true  
+      "abc" => false  
+      "1 a" => false  
+      "2e10" => true  
+      " -90e3   " => true  
+      " 1e" => false  
+      "e3" => false  
+      " 6e-1" => true  
+      " 99e2.5 " => false  
+      "53.5e93" => true  
+      " --6 " => false  
+      "-+3" => false  
+      "95a54e53" => false  
+      [MyNumber::isNumber](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      [MyNumber::isNumber2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      [MyNumber::isNumber3](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> BigDecimal未通过：44e016912630333 （小数位数太多）  
+         正则  未通过：导入java.util.regex;还是找不到符号 
+         常规做法  
 66.   
 **问题**：    
 **示例**

@@ -1,28 +1,34 @@
 package com.nomad.leetcode;
 
-import java.util.*;
+import lombok.extern.java.Log;
 
+import java.math.BigDecimal;
+import java.util.*;
+import java.util.regex.Pattern;
+
+@Log
 public class MyNumber {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
-            int m = scanner.nextInt();
-            int n = scanner.nextInt();
+            /*int m = scanner.nextInt();
+            int n = scanner.nextInt();*/
+            String s = scanner.nextLine();
 
             /*int nums[] = new int[n];
             for (int i = 0; i < n; i++) {
                 nums[i] = scanner.nextInt();
             }*/
 
-            int nums[][] = new int[m][n];
+            /*int nums[][] = new int[m][n];
             for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
                     nums[i][j] = scanner.nextInt();
                 }
-            }
+            }*/
 
-            System.out.println("new MyNumber().uniquePathsWithObstacles(nums) = " + new MyNumber().uniquePathsWithObstacles(nums));
+            System.out.println("new MyNumber().isNumber(n) = " + new MyNumber().isNumber2(s));
         }
     }
 
@@ -807,5 +813,88 @@ public class MyNumber {
         }
 
         return res[m-1][n-1];
+    }
+
+    //最小路径和 动态规划dp\[i,j]=min(dp\[i-1,j]+grid\[i,j], dp\[i,j-1]+grid\[i,j])
+    public int minPathSum(int[][] grid) {
+        if (grid == null) {
+            return Integer.MIN_VALUE;
+        }
+
+        int m = grid.length, n = grid[0].length;
+        int[][] res = new int[m][n];
+        res[0][0] = grid[0][0];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i > 0 && j > 0) {
+                    res[i][j] = Math.min(res[i - 1][j], res[i][j - 1]) + grid[i][j];
+                } else if (i > 0) {
+                    res[i][j] = res[i - 1][j] + grid[i][j];
+                } else if (j > 0) {
+                    res[i][j] = res[i][j - 1] + grid[i][j];
+                }
+            }
+        }
+
+        return res[m - 1][n - 1];
+    }
+
+    //有效数字  BigDecimal未通过：44e016912630333 （小数位数太多）
+    public boolean isNumber(String s) {
+        if (s == null || s.trim().isEmpty()) {
+            return false;
+        }
+
+        try {
+            new BigDecimal(s.trim());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    //有效数字  正则  未通过：导入java.util.regex;还是找不到符号
+    public boolean isNumber2(String s) {
+        if (s == null || s.trim().isEmpty()) {
+            return false;
+        }
+
+        String regex = "[-+]?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?";
+        return Pattern.compile(regex).matcher(s.trim()).matches();
+    }
+
+    //有效数字  常规做法
+    public boolean isNumber3(String s) {
+        if (s == null || s.trim().isEmpty()) {
+            return false;
+        }
+
+        boolean numSeen=false, dotSeen=false, eSeen=false;
+        s = s.trim();
+        for(int i=0; i< s.length(); i++){
+            if(s.charAt(i)>='0'&&s.charAt(i)<='9'){
+                numSeen=true;
+            }else if(s.charAt(i)=='.'){
+                if(dotSeen||eSeen){
+                    return false;
+                }
+                dotSeen=true;
+            }else if(s.charAt(i)=='E'||s.charAt(i)=='e'){
+                if(eSeen||!numSeen){
+                    return false;
+                }
+                eSeen=true;
+                numSeen=false;
+            }else if(s.charAt(i)=='+'||s.charAt(i)=='-'){
+                if(i!=0&&s.charAt(i - 1)!='e'&&s.charAt(i - 1)!='E'){
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+        return numSeen;
     }
 }
