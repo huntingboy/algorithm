@@ -8,6 +8,7 @@
     - [Alibaba](#Alibaba)
     - [美团](#美团)
     - [ByteDance](#ByteDance)
+    - [网易](#网易)
     
 ## 剑指offer
 ### 集合
@@ -24,24 +25,26 @@
 
 ### 树
 > **问题**：输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。  
-> [ReConstructBinaryTree::reConstructBinaryTree](https://github.com/huntingboy/algorithm/blob/master/src/test/java/com/nomad/sort/TreeNode.java)  
+> [ReConstructBinaryTree::reConstructBinaryTree](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)
 >> 树  
 >> 递归  关键在于递归函数的参数的确定  一般都是固定的，可以记住一些常见的
 
 ### 查找和排序
 > **问题**：把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。  
-> [MinNumberInRotateArray::minNumberInRotateArray](https://github.com/huntingboy/algorithm/blob/master/src/test/java/com/nomad/sort/MinNumberInRotateArray.java)
+> [MinNumberInRotateArray::minNumberInRotateArray](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/MinNumberInRotateArray.java)
 >> 查找和排序  
 >> 等价于找旋转支点（梯度）下标位置
 
 ### 递归和循环
 > **问题**：斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项（从0开始，第0项为0）  
 > [Fibonacci::fibonacci](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/Fibonacci.java)
->> 递归和循环
+>
+> > 递归和循环
 
 > **问题**：一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。  
 > [Fibonacci::JumpFloorII](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/Fibonacci.java)
->> 递归和循环
+>
+> > 递归和循环
 
 > **问题**：
 一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。  
@@ -78,7 +81,7 @@
 >> 1.要想保证原有次序，则只能顺次移动或相邻交换。  
 >> 2.i从左向右遍历，找到第一个偶数。  
 >> 3.j从i+1开始向后找，直到找到第一个奇数。  
->> 4.将[i,...,j-1]的元素整体后移一位，最后将找到的奇数放入i位置，然后i++。  
+>> 4.将\[i,...,j-1]的元素整体后移一位，最后将找到的奇数放入i位置，然后i++。  
 >> 5.終止條件：j向後遍歷查找失敗。  
 
 ### 代码的鲁棒性
@@ -107,7 +110,8 @@
 ***
 > **问题**：操作给定的二叉树，将其变换为源二叉树的镜像。        
 > [Mirror::mirror](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/TreeNode.java)
->> 面试思路 
+>
+> > 面试思路 
 
 ***
 > **问题**：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，例如，如果输入如下4 X 4矩阵：1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.  
@@ -165,7 +169,7 @@
 > **问题**：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。  
 > [MoreThanHalfNum::moreThanHalfNum_Solution](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/MoreThanHalfNum.java)
 >> 时间效率  
->> HashMap的key存放array[i],value存放出现的次数  没有用桶是因为不知道最大的数是多少   
+>> HashMap的key存放array\[i],value存放出现的次数  没有用桶是因为不知道最大的数是多少  
 >> 妙解：注意到超过数组长度一半，那么每次同时去掉两个不同的数字，到最后只剩下一个数字或者两个相同的数字就是结果，最后对该数字回到数组做一下验证就即可。
 
 > **问题**：输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,  
@@ -175,10 +179,10 @@
 >> 数组的深复制：Arrays.copyOf()(超过长度范围的默认值填充),Arrays.copyOfRange()(超过长度范围的默认值填充),System.arrayCopy()(不能超过数组长度),Object.clone()  
 >> 排序 最大堆保存K个最小的数（PriorityQueue:底层为数组实现的小顶堆,可以通过传入Comparator改变比较规则）  冒泡排序的最外层循环k次
 
-> **问题**：HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。给一个数组，返回它的最大连续子序列的和，你会不会被他忽悠住？(子向量的长度至少是1)  
+> **问题**：HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。给一个数组，返回它的最大连续子序列的和，你会不会被他忽悠住？(子向量的长度至少是1)  
 > [FindGreatestSumOfSubArray::findGreatestSumOfSubArray](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/FindGreatestSumOfSubArray.java)  
 >> 时间效率  
->> 动态规划(dp) 关键在于状态转移方程: F（i）：以array[i]为末尾元素的子数组的和的最大值，子数组的元素的相对位置不变;F（i）=max（F（i-1）+array[i] ， array[i]）
+>> 动态规划(dp) 关键在于状态转移方程: F（i）：以array\[i]为末尾元素的子数组的和的最大值，子数组的元素的相对位置不变;F（i）=max（F（i-1）+array\[i] ， array\[i]）
 
 > **问题**：求出1~13的整数中1出现的次数,并算出100~1300的整数中1出现的次数？为此他特别数了一下1~13中包含1的数字有1、10、11、12、13因此共出现6次,但是对于后面问题他就没辙了。ACMer希望你们帮帮他,并把问题更加普遍化,可以很快的求出任意非负整数区间中1出现的次数（从1 到 n 中1出现的次数）。  
 > [NumberOf1Between1AndN::numberOf1Between1AndN_Solution](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/NumberOf1Between1AndN.java)  
@@ -203,7 +207,8 @@
 
 > **问题**：在一个字符串(0<=字符串长度<=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置, 如果没有则返回 -1（需要区分大小写）.  
 > [FirstNotRepeatingChar::firstNotRepeatingChar](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/FirstNotRepeatingChar.java)  
->> 时间空间效率的平衡  
+>
+> > 时间空间效率的平衡  
 
 > **问题**：在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。 即输出P%1000000007  
 > 输入描述：  
@@ -274,7 +279,7 @@
 > [LastRemaining::lastRemaining_Solution](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/LastRemaining.java)
 >> 抽象建模能力  
 >> 约瑟夫环  最后一个报数问题  
->> 妙解[LastRemaining::lastRemaining_Solution1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/LastRemaining.java)： 通过归纳找出递归关系 f[1]=0; f[i]=(f[i-1]+m)%i (i>1)  
+>> 妙解[LastRemaining::lastRemaining_Solution1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/LastRemaining.java)： 通过归纳找出递归关系 f\[1]=0; f\[i]=(f\[i-1]+m)%i (i>1)
 
 ### 发散思维能力
 > **问题**：求1+2+3+...+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。  
@@ -298,9 +303,10 @@
 ### 数组
 > **问题**：在一个长度为n的数组里的所有数字都在0到n-1的范围内。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。 例如，如果输入长度为7的数组{2,3,1,0,2,5,3}，那么对应的输出是第一个重复的数字2。  
 > [Duplicate::duplicate](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/Duplicate.java)  
->> 数组  
+>
+> > 数组  
 
-> **问题**：给定一个数组A[0,1,...,n-1],请构建一个数组B[0,1,...,n-1],其中B中的元素B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。不能使用除法。  
+> **问题**：给定一个数组A\[0,1,...,n-1],请构建一个数组B\[0,1,...,n-1],其中B中的元素B\[i]=A\[0]*A\[1]*...*A\[i-1]*A\[i+1]*...*A\[n-1]。不能使用除法。  
 > [Multiply::multiply](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/Multiply.java) 
 >> 数组  
 >> 看做n×n矩阵，先求下三角乘积，然后求上三角累乘
@@ -375,7 +381,7 @@
 >> LinkedList  也可以用PriorityQueue(默认小顶堆,底层是数组实现)
 
 ### 栈和队列
-> **问题**：定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}； 针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个： {[2,3,4],2,6,2,5,1}， {2,[3,4,2],6,2,5,1}， {2,3,[4,2,6],2,5,1}， {2,3,4,[2,6,2],5,1}， {2,3,4,2,[6,2,5],1}， {2,3,4,2,6,[2,5,1]}。    
+> **问题**：定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}； 针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个： {\[2,3,4],2,6,2,5,1}， {2,\[3,4,2],6,2,5,1}， {2,3,\[4,2,6],2,5,1}， {2,3,4,\[2,6,2],5,1}， {2,3,4,2,\[6,2,5],1}， {2,3,4,2,6,\[2,5,1]}。  
 > [MaxInWindows::maxInWindows](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/MaxInWindows.java) 
 >> 栈和队列  
 >> 妙解[MaxInWindows::maxInWindows1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/jzoffer/MaxInWindows.java)：用一个双端队列(用来记录每个窗口的最大值下标)，队列第一个位置保存当前窗口的最大值，当窗口滑动一次，判断当前最大值是否过期;新增加的值从队尾开始比较，把所有比他小的值丢掉
@@ -395,7 +401,8 @@
 ### 树
 > **问题**：求给定二叉树的最小深度。最小深度是指树的根结点到最近叶子结点的最短路径上结点的数量。  
 > [MinDepth::run](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MinDepth.java)  
->> 树  
+>
+> > 树  
 
 > **问题**：求给定的二叉树的后序遍历。   
 > [Traversal::postorderTraversal](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Traversal.java)
@@ -411,9 +418,10 @@
 
 ### 栈
 > **问题**：计算逆波兰式（后缀表达式）的值，运算符仅包含"+","-","*"和"/"，被操作数可能是整数或其他表达式   
-> e.g. ["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9↵ ["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6  
+> e.g. \["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9↵ \["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6  
 > [EvalRPN::evalRPN](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/EvalRPN.java)  
->> 栈  
+>
+> > 栈  
 
 ### 穷举
 > **问题**：对于给定的n个位于同一二维平面上的点，求最多能有多少个点位于同一直线上  
@@ -443,45 +451,48 @@
 1. 两数之和   
 **问题**：给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍   
 **示例**：
-    > 给定 nums = [2, 7, 11, 15], target = 9  
-      因为 nums[0] + nums[1] = 2 + 7 = 9  
-      所以返回 [0, 1]  
+    > 给定 nums = \[2, 7, 11, 15], target = 9  
+      因为 nums\[0] + nums\[1] = 2 + 7 = 9  
+      所以返回 \[0, 1]  
       [Sum::twoSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Sum.java)  
 2. 两数相加  
 **问题**：给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。您可以假设除了数字 0 之外，这两个数都不会以 0 开头。  
 **示例**：
     > 输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)  
-      输出：7 -> 0 -> 8  
-      原因：342 + 465 = 807  
-      [Sum::addTwoNumbers](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Sum.java)  
-      >> 链表
+    > 输出：7 -> 0 -> 8  
+    > 原因：342 + 465 = 807  
+    > [Sum::addTwoNumbers](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Sum.java)  
+    >
+    > > 链表
 3. 无重复字符的最长子串  
 **问题**：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。  
 **示例**：
     > 输入: "abcabcbb"  
-      输出: 3   
-      解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。  
-      输入: "bbbbb"  
-      输出: 1  
-      解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。  
-      输入: "pwwkew"  
-      输出: 3  
-      解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。  
-      请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。  
-      [MyString::lengthOfLongestSubstring0](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)    
-      [MyString::lengthOfLongestSubstring](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >> 字符串 双指针 Set
+    > 输出: 3   
+    > 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。  
+    > 输入: "bbbbb"  
+    > 输出: 1  
+    > 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。  
+    > 输入: "pwwkew"  
+    > 输出: 3  
+    > 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。  
+    > 请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。  
+    > [MyString::lengthOfLongestSubstring0](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)    
+    > [MyString::lengthOfLongestSubstring](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    >
+    > > 字符串 双指针 Set
 4. 寻找两个正序数组的中位数  
 **问题**：给定两个大小为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出这两个正序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。你可以假设 nums1 和 nums2 不会同时为空  
 **示例**：
-    > nums1 = [1, 3]  
-      nums2 = [2]  
-      则中位数是 2.0  
-      nums1 = [1, 2]  
-      nums2 = [3, 4]  
-      则中位数是 (2 + 3)/2 = 2.5  
-      [MyNumber::findMedianSortedArrays](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 二分查找 O(logm+n) 中位数（分奇数和偶数） 第k小的数
+    > nums1 = \[1, 3]  
+    > nums2 = \[2]  
+    > 则中位数是 2.0  
+    > nums1 = \[1, 2]  
+    > nums2 = \[3, 4]  
+    > 则中位数是 (2 + 3)/2 = 2.5  
+    > [MyNumber::findMedianSortedArrays](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 二分查找 O(logm+n) 中位数（分奇数和偶数） 第k小的数
 5. 最长回文子串  
 **问题**：给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。  
 **示例**
@@ -494,18 +505,18 @@
       >> 回文串（左右剥皮后仍是回文串）  
          暴力枚举法 O(n^2)  
          动态规划法 O(n^2)：
-         
+   
          状态转移方程：P(i,j)=P(i+1,j-1)&&(Si==Sj), P(i,j)表示Si...j是否为回文串。
          边界条件：P(i,i)=true和P(i,i+1)=(Si==Si+1)
-         
+   
       >> 中心拓展法 O(n^2) O(1)：  
-       
+   
          S(i,i)->S(i-1,i+1)->... 直到无法拓展，拓展条件Si-1==Si+1
          S(i,i+1)->S(i-1,i+2)->... 直到无法拓展，拓展条件Si-1==Si+2
          取上两者长度最大值, start、end记录回文串边界下标
-           
+   
       >> Manacher法（马拉车） O(n) :
-      
+   
          对中心拓展法的优化，跳过重复检查，验证i时先验证2j-i处的臂长并跳过
          只处理奇数长度串，偶数/奇数长度串通过在每个间隙插入任意相同的一个字符即可变为奇数长度
          aaba 处理后会变成 #a#a#b#a#
@@ -516,7 +527,7 @@
         L   C   I   R
         E T O E S I I G
         E   D   H   N
-       
+   
     &emsp;&emsp;之后，你的输出需要从左往右逐行读取，产生出一个新的字符串，比如："LCIRETOESIIGEDHN"。  
 **示例**
     > 输入: s = "LEETCODEISHIRING", numRows = 3  
@@ -524,12 +535,12 @@
       输入: s = "LEETCODEISHIRING", numRows = 4  
       输出: "LDREOEIIECIHNTSG"  
       解释:
-      
+   
         L     D     R
         E   O E   I I
         E C   I H   N
         T     S     G
-      
+   
     > [MyString::convert](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)        
       [MyString::convert1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)        
     >> 法一：按行存储+方向控制(n==0||n==numRows-1处反向，步长=1/-1)  
@@ -546,7 +557,7 @@
       输出: -321  
       输入: 120  
       输出: 21  
-      注意：假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−2^31,  2^31 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。  
+      注意：假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 \[−2^31,  2^31 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。  
       [MyNumber::reverse](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >> try...catch 捕获溢出异常return 0  
          整数->String->整数  
@@ -559,24 +570,25 @@
     &emsp;&emsp;注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换，即无法进行有效转换。  
     &emsp;&emsp;在任何情况下，若函数不能进行有效的转换时，请返回 0 。  
     &emsp;&emsp;本题中的空白字符只包括空格字符 ' ' 。   
-    &emsp;&emsp;假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−2^31,  2^31 − 1]。如果数值超过这个范围，请返回  INT_MAX (2^31 − 1) 或 INT_MIN (−2^31) 。  
+    &emsp;&emsp;假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 \[−2^31,  2^31 − 1]。如果数值超过这个范围，请返回  INT_MAX (2^31 − 1) 或 INT_MIN (−2^31) 。  
 **示例**  
     > 输入: "42"  
-      输出: 42  
-      输入: "   -42"  
-      输出: -42  
-      解释: 第一个非空白字符为 '-', 它是一个负号。我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。  
-      输入: "4193 with words"  
-      输出: 4193  
-      解释: 转换截止于数字 '3' ，因为它的下一个字符不为数字。   
-      输入: "words and 987"  
-      输出: 0  
-      解释: 第一个非空字符是 'w', 但它不是数字或正、负号。因此无法执行有效的转换。  
-      输入: "-91283472332"  
-      输出: -2147483648  
-      解释: 数字 "-91283472332" 超过 32 位有符号整数范围。因此返回 INT_MIN (−2^31) 。  
-      [MyString::myAtoi](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)        
-      >> 也可用有限状态向量机  
+    > 输出: 42  
+    > 输入: "   -42"  
+    > 输出: -42  
+    > 解释: 第一个非空白字符为 '-', 它是一个负号。我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。  
+    > 输入: "4193 with words"  
+    > 输出: 4193  
+    > 解释: 转换截止于数字 '3' ，因为它的下一个字符不为数字。   
+    > 输入: "words and 987"  
+    > 输出: 0  
+    > 解释: 第一个非空字符是 'w', 但它不是数字或正、负号。因此无法执行有效的转换。  
+    > 输入: "-91283472332"  
+    > 输出: -2147483648  
+    > 解释: 数字 "-91283472332" 超过 32 位有符号整数范围。因此返回 INT_MIN (−2^31) 。  
+    > [MyString::myAtoi](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)        
+    >
+    > > 也可用有限状态向量机  
 9. 回文数  
 **问题**：判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。  
 **示例**
@@ -659,21 +671,22 @@
     &emsp;&emsp;给定一个整数，将其转为罗马数字。输入确保在 1 到 3999 的范围内。         
 **示例**
     > 输入: 3  
-      输出: "III"  
-      输入: 4  
-      输出: "IV"  
-      输入: 9  
-      输出: "IX"  
-      输入: 58  
-      输出: "LVIII"  
-      解释: L = 50, V = 5, III = 3.  
-      输入: 1994  
-      输出: "MCMXCIV"  
-      解释: M = 1000, CM = 900, XC = 90, IV = 4.  
-      [MyNumber::intToRoman](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)    
-      [MyNumber::intToRoman1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 贪心算法 同找零钱问题：用最少的张数，面值如下（第二列）：    
-      
+    > 输出: "III"  
+    > 输入: 4  
+    > 输出: "IV"  
+    > 输入: 9  
+    > 输出: "IX"  
+    > 输入: 58  
+    > 输出: "LVIII"  
+    > 解释: L = 50, V = 5, III = 3.  
+    > 输入: 1994  
+    > 输出: "MCMXCIV"  
+    > 解释: M = 1000, CM = 900, XC = 90, IV = 4.  
+    > [MyNumber::intToRoman](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)    
+    > [MyNumber::intToRoman1](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 贪心算法 同找零钱问题：用最少的张数，面值如下（第二列）：    
+    
         M 	1000
         CM 	900
         D 	500
@@ -725,13 +738,14 @@
     &emsp;&emsp;注意：答案中不可以包含重复的三元组。  
 **示例**
     > 给定数组 nums = \[-1, 0, 1, 2, -1, -4]，        
-      满足要求的三元组集合为：  
-      \[  
-        \[-1, 0, 1],  
-        \[-1, -1, 2]  
-      ]        
-      [Sum::threeSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Sum.java)  
-      >> 排序+双指针  
+    > 满足要求的三元组集合为：  
+    > \[  
+    > \[-1, 0, 1],  
+    > \[-1, -1, 2]  
+    > ]        
+    > [Sum::threeSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Sum.java)  
+    >
+    > > 排序+双指针  
 16. 最接近的三数之和   
 **问题**：给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。    
 **示例**
@@ -767,22 +781,24 @@
 **问题**：给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。    
 **示例**
     > 给定数组 nums = \[1, 0, -1, 0, -2, 2]，和 target = 0。  
-      满足要求的四元组集合为：  
-      \[  
-        \[-1,  0, 0, 1],  
-        \[-2, -1, 1, 2],  
-        \[-2,  0, 0, 2]   
-      ]  
-      [MyNumber::fourSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 排序+外面双层循环+双指针 每层循环跳过重复元素   
+    > 满足要求的四元组集合为：  
+    > \[  
+    > \[-1,  0, 0, 1],  
+    > \[-2, -1, 1, 2],  
+    > \[-2,  0, 0, 2]   
+    > ]  
+    > [MyNumber::fourSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 排序+外面双层循环+双指针 每层循环跳过重复元素   
 19. 删除链表的倒数第N个节点  
 **问题**：给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。   
 **示例**
     > 给定一个链表: 1->2->3->4->5, 和 n = 2.  
-      当删除了倒数第二个节点后，链表变为 1->2->3->5.  
-      给定的 n 保证是有效的  
-      [MyList::removeNthFromEnd](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
-      >> 双指针+固定步长  
+    > 当删除了倒数第二个节点后，链表变为 1->2->3->5.  
+    > 给定的 n 保证是有效的  
+    > [MyList::removeNthFromEnd](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
+    >
+    > > 双指针+固定步长  
 20. 有效的括号  
 **问题**：给定一个只包括 '('，')'，'{'，'}'，'\['，']' 的字符串，判断字符串是否有效。有效字符串需满足：  
     &emsp;&emsp;左括号必须用相同类型的右括号闭合。  
@@ -790,97 +806,106 @@
     &emsp;&emsp;注意空字符串可被认为是有效字符串。   
 **示例**
     > 输入: "()"  
-      输出: true  
-      输入: "()[]{}"  
-      输出: true  
-      输入: "(]"  
-      输出: false  
-      输入: "(\[)]"  
-      输出: false  
-      输入: "{[]}"  
-      输出: true  
-      [MyString::isValid](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >> Stack继承自Vector,多了push,peek,top,empty,search方法,两者都是方法线程安全  
+    > 输出: true  
+    > 输入: "()[]{}"  
+    > 输出: true  
+    > 输入: "(]"  
+    > 输出: false  
+    > 输入: "(\[)]"  
+    > 输出: false  
+    > 输入: "{[]}"  
+    > 输出: true  
+    > [MyString::isValid](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    >
+    > > Stack继承自Vector,多了push,peek,top,empty,search方法,两者都是方法线程安全  
 21. 合并两个有序链表  
 **问题**：将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。   
 **示例**
     > 输入：1->2->4, 1->3->4  
-      输出：1->1->2->3->4->4
-      [MyList::mergeTwoLists](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
-      >> 链表  
+    > 输出：1->1->2->3->4->4
+    > [MyList::mergeTwoLists](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
+    >
+    > > 链表  
 22. 括号生成  
 **问题**：数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且**有效**括号组合。   
 **示例**
     > 输入：n = 3  
-      输出：\[  
-             "((()))",  
-             "(()())",  
-             "(())()",  
-             "()(())",  
-             "()()()"  
-           ]  
-      [MyString::generateParenthesis](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >> 动态规划(自底向上):状态转移方程(**F(n) = "(" + \[i=p时所有括号的排列组合] + ")" + \[i=q时所有括号的排列组合],中 p + q = n-1，且 p,q 均为非负整数**)  
+    > 输出：\[  
+    >     "((()))",  
+    >     "(()())",  
+    >     "(())()",  
+    >     "()(())",  
+    >     "()()()"  
+    >   ]  
+    > [MyString::generateParenthesis](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    >
+    > > 动态规划(自底向上):状态转移方程(**F(n) = "(" + \[i=p时所有括号的排列组合] + ")" + \[i=q时所有括号的排列组合],中 p + q = n-1，且 p,q 均为非负整数**)  
 23. 合并K个排序链表  
 **问题**：合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。   
 **示例**
     > 输入:  
-      \[  
-        1->4->5,  
-        1->3->4,  
-        2->6  
-      ]  
-      输出: 1->1->2->3->4->4->5->6  
-      [MyList::mergeKLists](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
-      >> 链表  
+    > \[  
+    > 1->4->5,  
+    > 1->3->4,  
+    > 2->6  
+    > ]  
+    > 输出: 1->1->2->3->4->4->5->6  
+    > [MyList::mergeKLists](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
+    >
+    > > 链表  
 24. 两两交换链表中的节点  
 **问题**：给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。   
 **示例**
     > 给定 1->2->3->4, 你应该返回 2->1->4->3.  
-      [MyList::swapPairs](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
-      >> 链表  
+    > [MyList::swapPairs](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
+    >
+    > > 链表  
 25. K 个一组翻转链表  
 **问题**：给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。k 是一个正整数，它的值小于或等于链表的长度。如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。   
 **示例**
     > 给你这个链表：1->2->3->4->5  
-      当 k = 2 时，应当返回: 2->1->4->3->5  
-      当 k = 3 时，应当返回: 3->2->1->4->5  
-      说明:你的算法只能使用常数的额外空间。你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。  
-      [MyList::reverseKGroup](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
-      >> 递归(衔接各个组)+迭代(反转一个组)  
+    > 当 k = 2 时，应当返回: 2->1->4->3->5  
+    > 当 k = 3 时，应当返回: 3->2->1->4->5  
+    > 说明:你的算法只能使用常数的额外空间。你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。  
+    > [MyList::reverseKGroup](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
+    >
+    > > 递归(衔接各个组)+迭代(反转一个组)  
 26. 删除排序数组中的重复项  
 **问题**：给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。   
 **示例**
     > 给定数组 nums = \[1,1,2],         
-      函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。              
-      你不需要考虑数组中超出新长度后面的元素。  
-      给定 nums = \[0,0,1,1,1,2,2,3,3,4],        
-      函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。        
-      你不需要考虑数组中超出新长度后面的元素。             
-      [MyNumber::removeDuplicates](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 数组原地移动  
+    > 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。              
+    > 你不需要考虑数组中超出新长度后面的元素。  
+    > 给定 nums = \[0,0,1,1,1,2,2,3,3,4],        
+    > 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。        
+    > 你不需要考虑数组中超出新长度后面的元素。             
+    > [MyNumber::removeDuplicates](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 数组原地移动  
 27. 移除元素  
 **问题**：给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。   
 **示例**
     > 给定 nums = \[3,2,2,3], val = 3,  
-      函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。  
-      你不需要考虑数组中超出新长度后面的元素。  
-      给定 nums = \[0,1,2,2,3,0,4,2], val = 2,  
-      函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。  
-      注意这五个元素可为任意顺序。  
-      你不需要考虑数组中超出新长度后面的元素。  
-      [MyNumber::removeElement](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 数组原地移动,和上一题的区别:不用考虑数组顺序,所以每次从数组尾部找一个数来填充重复的数  
+    > 函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。  
+    > 你不需要考虑数组中超出新长度后面的元素。  
+    > 给定 nums = \[0,1,2,2,3,0,4,2], val = 2,  
+    > 函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。  
+    > 注意这五个元素可为任意顺序。  
+    > 你不需要考虑数组中超出新长度后面的元素。  
+    > [MyNumber::removeElement](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 数组原地移动,和上一题的区别:不用考虑数组顺序,所以每次从数组尾部找一个数来填充重复的数  
 28. 实现 strStr()  
 **问题**：实现 strStr() 函数。给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。  
 **示例**
     > 输入: haystack = "hello", needle = "ll"  
-      输出: 2  
-      输入: haystack = "aaaaa", needle = "bba"  
-      输出: -1  
-      注意:当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。  
-      [MyString::strStr](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >> 字符串匹配kmp算法(最长公共子串)  
+    > 输出: 2  
+    > 输入: haystack = "aaaaa", needle = "bba"  
+    > 输出: -1  
+    > 注意:当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。  
+    > [MyString::strStr](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    >
+    > > 字符串匹配kmp算法(最长公共子串)  
 29. 两数相除  
 **问题**：给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。返回被除数 dividend 除以除数 divisor 得到的商。  整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2  
 **示例**
@@ -901,26 +926,28 @@
 **问题**：给定一个字符串 s 和一些长度相同的单词 words。找出 s 中恰好可以由 words 中所有单词串联形成的子串的起始位置。注意子串要与 words 中的单词完全匹配，中间不能有其他字符，但不需要考虑 words 中单词串联的顺序。    
 **示例**
     > 输入：  
-        s = "barfoothefoobarman",  
-        words = \["foo","bar"]  
-      输出：\[0,9]  
-      解释：  
-      从索引 0 和 9 开始的子串分别是 "barfoo" 和 "foobar" 。
-      输出的顺序不重要, \[9,0] 也是有效答案。   
-      输入：  
-        s = "wordgoodgoodgoodbestword",  
-        words = \["word","good","best","word"]  
-      输出：[]  
-      [MyString::findSubstring](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >> HashMap1/2存放单词计数+滑动窗口    
+    > s = "barfoothefoobarman",  
+    > words = \["foo","bar"]  
+    > 输出：\[0,9]  
+    > 解释：  
+    > 从索引 0 和 9 开始的子串分别是 "barfoo" 和 "foobar" 。
+    > 输出的顺序不重要, \[9,0] 也是有效答案。   
+    > 输入：  
+    > s = "wordgoodgoodgoodbestword",  
+    > words = \["word","good","best","word"]  
+    > 输出：[]  
+    > [MyString::findSubstring](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    >
+    > > HashMap1/2存放单词计数+滑动窗口    
 31. 下一个排列  
 **问题**：实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。必须原地修改，只允许使用额外常数空间。  
 **示例**
     > 1,2,3 → 1,3,2  
-      3,2,1 → 1,2,3  
-      1,1,5 → 1,5,1  
-      [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 从右向左扫描,升序直接跳过(因为升序的下一个排列是最小值,只需要反转即可.e.g. 6,5,4->4,5,6),直到遇到降序:a\[i-1]<a\[i],就把a\[i-1]和a\[j](j>=i)交换并且保证a\[i-1]右侧仍是升序,最后反转a\[i-1]~a\[n.length-1]即可    
+    > 3,2,1 → 1,2,3  
+    > 1,1,5 → 1,5,1  
+    > [MyNumber::nextPermutation](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 从右向左扫描,升序直接跳过(因为升序的下一个排列是最小值,只需要反转即可.e.g. 6,5,4->4,5,6),直到遇到降序:a\[i-1]<a\[i],就把a\[i-1]和a\[j](j>=i)交换并且保证a\[i-1]右侧仍是升序,最后反转a\[i-1]~a\[n.length-1]即可    
 32. 最长有效括号  
 **问题**：给定一个只包含 '(' 和 ')' 的字符串，找出最长的包含有效括号的子串的长度    
 **示例**
@@ -934,24 +961,25 @@
       [MyString::longestValidParenthesesDP](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
       >> 栈:存放符号下标, stack.push(-1), 防止栈空pop抛异常并和正常"()"匹配区分开,因为"()"匹配情况stack是不会为空的  
          动态规划:
-         
+    
          用dp[i]表示字符串前i个字符的最长有效括号。
          a. 第i个字符是左括号"("，那么以他结尾的是构不成有效括号的，所以dp[i]=0(此处"dp[i]!=dp[i-1)",因为后面基于它,不能累加,要重新开始计算);
          b. 第i个字符是右括号")"，那么以他结尾的是有可能构成有效括号的，所以还需要判断
             i. 类似于这种"……()"，我们需要判断第i-1个字符是不是"("，如果是的话，那么最长有效括号就是第i-2个字符之前构成的最长有效括号+2，也就是dp[i]=dp[i-2]+2。
             ii. 类似于这种"……((……))"，我们看一下下面的图来看下，所以我们要判断第i -1- dp[i - 1]个字符是否是"(",如果是，那么递推公式是dp[i]=dp[i] = dp[i - 1] + 2 + dp[i - dp[i - 1] - 2].
-            
+    
        ![图解](https://github.com/huntingboy/algorithm/blob/master/src/main/resources/com/nomad/leetcode/32.png)
 33. 搜索旋转排序数组  
 **问题**：假设按照升序排序的数组在预先未知的某个点上进行了旋转。( 例如，数组 \[0,1,2,4,5,6,7] 可能变为 \[4,5,6,7,0,1,2] )。搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。你可以假设数组中不存在重复的元素。你的算法时间复杂度必须是 O(log n) 级别。    
 **示例**
     > 输入: nums = \[4,5,6,7,0,1,2], target = 0  
-      输出: 4  
-      输入: nums = \[4,5,6,7,0,1,2], target = 3  
-      输出: -1  
-      [MyNumber::search](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 二分搜索:
-      
+    > 输出: 4  
+    > 输入: nums = \[4,5,6,7,0,1,2], target = 3  
+    > 输出: -1  
+    > [MyNumber::search](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 二分搜索:
+    
          a. nums[0] <= nums[mid]（0 - mid不包含旋转）且nums[0] <= target <= nums[mid] 时 high 向前规约；
          b. nums[mid] < nums[0]（0 - mid包含旋转），target <= nums[mid] < nums[0] 时向前规约（target 在旋转位置到 mid 之间）
          c. nums[mid] < nums[0]，nums[mid] < nums[0] <= target 时向前规约（target 在 0 到旋转位置之间）
@@ -970,15 +998,16 @@
 **问题**：给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。你可以假设数组中无重复元素。    
 **示例**
     > 输入: \[1,3,5,6], 5  
-      输出: 2  
-      输入: \[1,3,5,6], 2  
-      输出: 1  
-      输入: \[1,3,5,6], 7  
-      输出: 4  
-      输入: \[1,3,5,6], 0  
-      输出: 0  
-      [MyNumber::searchInsert](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>  数组遍历   
+    > 输出: 2  
+    > 输入: \[1,3,5,6], 2  
+    > 输出: 1  
+    > 输入: \[1,3,5,6], 7  
+    > 输出: 4  
+    > 输入: \[1,3,5,6], 0  
+    > 输出: 0  
+    > [MyNumber::searchInsert](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > >  数组遍历   
 36. 有效的数独  
 **问题**：判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。  
 
@@ -989,31 +1018,33 @@
       &emsp;&emsp;数独部分空格内已填入了数字，空白格用 '.' 表示。  
 **示例**
     > 输入:      
-      \[
-        \["5","3",".",".","7",".",".",".","."],  
-        \["6",".",".","1","9","5",".",".","."],  
-        \[".","9","8",".",".",".",".","6","."],  
-        \["8",".",".",".","6",".",".",".","3"],  
-        \["4",".",".","8",".","3",".",".","1"],  
-        \["7",".",".",".","2",".",".",".","6"],  
-        \[".","6",".",".",".",".","2","8","."],  
-        \[".",".",".","4","1","9",".",".","5"],  
-        \[".",".",".",".","8",".",".","7","9"]     
-      ]           
-      输出: true     
-      说明:  
-      一个有效的数独（部分已被填充）不一定是可解的。  
-      只需要根据以上规则，验证已经填入的数字是否有效即可。  
-      给定数独序列只包含数字 1-9 和字符 '.' 。  
-      给定数独永远是 9x9 形式的。   
-      [MyString::isValidSudoku](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >> 一次遍历 空换时   
+    > \[
+    > \["5","3",".",".","7",".",".",".","."],  
+    > \["6",".",".","1","9","5",".",".","."],  
+    > \[".","9","8",".",".",".",".","6","."],  
+    > \["8",".",".",".","6",".",".",".","3"],  
+    > \["4",".",".","8",".","3",".",".","1"],  
+    > \["7",".",".",".","2",".",".",".","6"],  
+    > \[".","6",".",".",".",".","2","8","."],  
+    > \[".",".",".","4","1","9",".",".","5"],  
+    > \[".",".",".",".","8",".",".","7","9"]     
+    > ]           
+    > 输出: true     
+    > 说明:  
+    > 一个有效的数独（部分已被填充）不一定是可解的。  
+    > 只需要根据以上规则，验证已经填入的数字是否有效即可。  
+    > 给定数独序列只包含数字 1-9 和字符 '.' 。  
+    > 给定数独永远是 9x9 形式的。   
+    > [MyString::isValidSudoku](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    >
+    > > 一次遍历 空换时   
 37. 解数独  
 **问题**：编写一个程序，通过已填充的空格来解决数独问题。  
 **示例**
     > 同上题  
-      [MyString::solveSudoku](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >> 约束编程(状态数组更新)+回溯(状态重置,换条路/换数据重新尝试, e.g. 迷宫问题,9皇后问题等)       
+    > [MyString::solveSudoku](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    >
+    > > 约束编程(状态数组更新)+回溯(状态重置,换条路/换数据重新尝试, e.g. 迷宫问题,9皇后问题等)       
 38. 外观数列  
 **问题**：给定一个正整数 n（1 ≤ n ≤ 30），输出外观数列的第 n 项。注意：整数序列中的每一项将表示为一个字符串。「外观数列」是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。前五项如下：
 
@@ -1029,29 +1060,31 @@
     &emsp;&emsp;描述前一项，这个数是 1211 即 “一个 1 一个 2 两个 1 ” ，记作 111221  
 **示例**
     > 输入: 1  
-      输出: "1"  
-      输入: 4  
-      输出: "1211"  
-      [MyString::countAndSay](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >> 字符串计数遍历  
+    > 输出: "1"  
+    > 输入: 4  
+    > 输出: "1211"  
+    > [MyString::countAndSay](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    >
+    > > 字符串计数遍历  
 39. 组合总和  
 **问题**：给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。所有数字（包括 target）都是正整数。解集不能包含重复的组合。   
 **示例**
     > 输入: candidates = \[2,3,6,7], target = 7,  
-      所求解集为:                                    
-      \[                                        
-        \[7],                                   
-        \[2,2,3]                                
-      ]    
-      输入: candidates = \[2,3,5], target = 8,  
-      所求解集为:                                  
-      \[                                      
-        \[2,2,2,2],                           
-        \[2,3,3],                             
-        \[3,5]                                
-      ]                                       
-      [MyNumber::combinationSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 回溯法 DFS 递归函数:
+    > 所求解集为:                                    
+    > \[                                        
+    > \[7],                                   
+    > \[2,2,3]                                
+    > ]    
+    > 输入: candidates = \[2,3,5], target = 8,  
+    > 所求解集为:                                  
+    > \[                                      
+    > \[2,2,2,2],                           
+    > \[2,3,3],                             
+    > \[3,5]                                
+    > ]                                       
+    > [MyNumber::combinationSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+> > 回溯法 DFS 递归函数:
 
          /**
               * @param candidates 数组输入
@@ -1072,77 +1105,82 @@
 **问题**：给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的每个数字在每个组合中**只能使用一次**。所有数字（包括目标数）都是正整数。解集不能包含重复的组合。   
 **示例**
     > 输入: candidates = \[10,1,2,7,6,1,5], target = 8,  
-      所求解集为:                                           
-      \[                                               
-        \[1, 7],                                       
-        \[1, 2, 5],                                    
-        \[2, 6],                                       
-        \[1, 1, 6]                                     
-      ]                                                
-      输入: candidates = \[2,5,2,1,2], target = 5,       
-      所求解集为:                                           
-      \[                                               
-        \[1,2,2],                                      
-        \[5]                                           
-      ]                                                
-      [MyNumber::combinationSum2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 同上,dfs函数从j+1开始   
+    > 所求解集为:                                           
+    > \[                                               
+    > \[1, 7],                                       
+    > \[1, 2, 5],                                    
+    > \[2, 6],                                       
+    > \[1, 1, 6]                                     
+    > ]                                                
+    > 输入: candidates = \[2,5,2,1,2], target = 5,       
+    > 所求解集为:                                           
+    > \[                                               
+    > \[1,2,2],                                      
+    > \[5]                                           
+    > ]                                                
+    > [MyNumber::combinationSum2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 同上,dfs函数从j+1开始   
 41. 缺失的第一个正数  
 **问题**：给你一个未排序的整数数组，请你找出其中没有出现的最小的正整数。你的算法的时间复杂度应为O(n)，并且只能使用常数级别的额外空间。    
 **示例**
     > 输入: \[1,2,0]      
-      输出: 3  
-      输入: \[3,4,-1,1]  
-      输出: 2  
-      输入: \[7,8,9,11,12]  
-      输出: 1   
-      [MyNumber::firstMissingPositive](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 将数组视为hash表进行原地hash: f(nums\[i])=nums\[i]-1 (0<nums\[i]<=len才进行hash),最后遍历nums,nums\[i]!=i+1时结果为i+1   
+    > 输出: 3  
+    > 输入: \[3,4,-1,1]  
+    > 输出: 2  
+    > 输入: \[7,8,9,11,12]  
+    > 输出: 1   
+    > [MyNumber::firstMissingPositive](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 将数组视为hash表进行原地hash: f(nums\[i])=nums\[i]-1 (0<nums\[i]<=len才进行hash),最后遍历nums,nums\[i]!=i+1时结果为i+1   
 42. 接雨水   
 **问题**：给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。下面是由数组 \[0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）    
 ![](https://github.com/huntingboy/algorithm/blob/master/src/main/resources/com/nomad/leetcode/42.png)  
 **示例**
     > 输入: \[0,1,0,2,1,0,1,3,2,1,2,1]  
-      输出: 6  
-      [MyNumber::trap](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 木桶原理 双指针 先找到最高的柱子,然后从两侧向中间遍历并累计面积   
+    > 输出: 6  
+    > [MyNumber::trap](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 木桶原理 双指针 先找到最高的柱子,然后从两侧向中间遍历并累计面积   
 43. 字符串相乘  
 **问题**：给定两个以字符串形式表示的非负整数 num1 和 num2，返回 num1 和 num2 的乘积，它们的乘积也表示为字符串形式。num1 和 num2 的长度小于110。num1 和 num2 只包含数字 0-9。num1 和 num2 均不以零开头，除非是数字 0 本身。能使用任何标准库的大数类型（比如 BigInteger）或直接将输入转换为整数来处理。    
 **示例**
     > 输入: num1 = "2", num2 = "3"  
-      输出: "6"  
-      输入: num1 = "123", num2 = "456"  
-      输出: "56088"  
-      [MyString::multiply](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      [MyString::multiply2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >> 模拟手算  优化版模拟手算(每次计算两个数字.最终位置为i+j和i+j-1)    
+    > 输出: "6"  
+    > 输入: num1 = "123", num2 = "456"  
+    > 输出: "56088"  
+    > [MyString::multiply](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    > [MyString::multiply2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    >
+    > > 模拟手算  优化版模拟手算(每次计算两个数字.最终位置为i+j和i+j-1)    
 44. 通配符匹配   
 **问题**：给定一个字符串 (s) 和一个字符模式 (p) ，实现一个支持 '?' 和 '*' 的通配符匹配。'?' 可以匹配任何单个字符。'\*' 可以匹配任意字符串（包括空字符串）。两个字符串完全匹配才算匹配成功。s 可能为空，且只包含从 a-z 的小写字母。p 可能为空，且只包含从 a-z 的小写字母，以及字符 ? 和 *。    
 **示例**
     > 输入:  
-      s = "aa"  
-      p = "a"  
-      输出: false  
-      输入:  
-      s = "aa"  
-      p = "\*"  
-      输出: true  
-      输入:  
-      s = "cb"  
-      p = "?a"  
-      输出: false  
-      输入:  
-      s = "adceb"  
-      p = "\*a\*b"  
-      输出: true  
-      输入:  
-      s = "acdcb"  
-      p = "a*c?b"  
-      输出: false  
-      [NyString::isMatchWildcard](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/NyString.java)  
-      [NyString::isMatchWildcard2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/NyString.java)  
-      >> 递归(超时) 动态规划
-      
+    > s = "aa"  
+    > p = "a"  
+    > 输出: false  
+    > 输入:  
+    > s = "aa"  
+    > p = "\*"  
+    > 输出: true  
+    > 输入:  
+    > s = "cb"  
+    > p = "?a"  
+    > 输出: false  
+    > 输入:  
+    > s = "adceb"  
+    > p = "\*a\*b"  
+    > 输出: true  
+    > 输入:  
+    > s = "acdcb"  
+    > p = "a*c?b"  
+    > 输出: false  
+    > [MyString::isMatchWildcard](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    > [MyString::isMatchWildcard2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)
+    >
+    > > 递归(超时) 动态规划
+    
         if (p.charAt(i - 1) == s.charAt(j - 1) || p.charAt(i - 1) == '?') { //状态转移方程1
             res[i][j] = res[i - 1][j - 1];
         } else if (p.charAt(i - 1) == '*') { //状态转移方程2
@@ -1211,14 +1249,15 @@
 **问题**：给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。所有输入均为小写字母。不考虑答案输出的顺序。      
 **示例**
     > 输入: \["eat", "tea", "tan", "ate", "nat", "bat"]  
-      输出:  
-      \[  
-        \["ate","eat","tea"],  
-        \["nat","tan"],  
-        \["bat"]  
-      ]  
-      [NyString::groupAnagrams](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/NyString.java)  
-      >> Map，标志位数组    
+    > 输出:  
+    > \[  
+    > \["ate","eat","tea"],  
+    > \["nat","tan"],  
+    > \["bat"]  
+    > ]  
+    > [MyString::groupAnagrams](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)
+    >
+    > > Map，标志位数组    
 50. Pow(x, n)  
 **问题**：实现 pow(x, n) ，即计算 x 的 n 次幂函数。      
 **示例**
@@ -1232,40 +1271,42 @@
       >> Math.pow(x, n)(调用native函数)   
 51. N皇后  
 **问题**：n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。给定一个整数 n，返回所有不同的 n 皇后问题的解决方案。每一种解法包含一个明确的 n 皇后问题的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。    
-![](https://github.com/huntingboy/algorithm/blob/master/src/main/resouces/com/nomad/leetcode/51.png)  
+![](https://github.com/huntingboy/algorithm/blob/master/src/main/resources/com/nomad/leetcode/51.png)  
 **示例**
     > 输入: 4  
-      输出: \[  
-       \[".Q..",  // 解法 1  
-        "...Q",  
-        "Q...",  
-        "..Q."],  
-       \["..Q.",  // 解法 2  
-        "Q...",  
-        "...Q",  
-        ".Q.."]  
-      ]  
-      解释: 4 皇后问题存在两个不同的解法。  
-      [NQueens::solveNQueens](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/NQueens.java)  
-      >> 回溯(状态数组+递归求解函数，看成隐式树好理解一点)    
+    > 输出: \[  
+    > \[".Q..",  // 解法 1  
+    > "...Q",  
+    > "Q...",  
+    > "..Q."],  
+    > \["..Q.",  // 解法 2  
+    > "Q...",  
+    > "...Q",  
+    > ".Q.."]  
+    > ]  
+    > 解释: 4 皇后问题存在两个不同的解法。  
+    > [NQueens::solveNQueens](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/NQueens.java)  
+    >
+    > > 回溯(状态数组+递归求解函数，看成隐式树好理解一点)    
 52. N皇后 II  
 **问题**：n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。给定一个整数 n，返回 n 皇后不同的**解决方案的数量**。      
 **示例**
     > 输入: 4  
-      输出: 2  
-      解释: 4 皇后问题存在如下两个不同的解法。  
-      \[  
-       \[".Q..",  // 解法 1  
-        "...Q",  
-        "Q...",  
-        "..Q."],  
-       \["..Q.",  // 解法 2  
-        "Q...",  
-        "...Q",  
-        ".Q.."]  
-      ]  
-      [NQueens::totalNQueens](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/NQueens.java)  
-      >> 同上    
+    > 输出: 2  
+    > 解释: 4 皇后问题存在如下两个不同的解法。  
+    > \[  
+    > \[".Q..",  // 解法 1  
+    > "...Q",  
+    > "Q...",  
+    > "..Q."],  
+    > \["..Q.",  // 解法 2  
+    > "Q...",  
+    > "...Q",  
+    > ".Q.."]  
+    > ]  
+    > [NQueens::totalNQueens](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/NQueens.java)  
+    >
+    > > 同上    
 53. 最大子序和  
 **问题**：给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。      
 **示例**
@@ -1281,72 +1322,78 @@
 **问题**：给定一个包含 m x n 个元素的矩阵（m 行, n 列），请按照顺时针螺旋顺序，返回矩阵中的所有元素。      
 **示例**
     > 输入:  
-      \[  
-       \[ 1, 2, 3 ],  
-       \[ 4, 5, 6 ],  
-       \[ 7, 8, 9 ]  
-      \]  
-      输出: \[1,2,3,6,9,8,7,4,5]    
-      输入:  
-      \[  
-        \[1, 2, 3, 4],  
-        \[5, 6, 7, 8],  
-        \[9,10,11,12]   
-      \]  
-      输出: \[1,2,3,4,8,12,11,10,9,5,6,7]  
-      [MyNumber::spiralOrder](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 设置4个边界并遍历和动态调整    
+    > \[  
+    > \[ 1, 2, 3 ],  
+    > \[ 4, 5, 6 ],  
+    > \[ 7, 8, 9 ]  
+    > \]  
+    > 输出: \[1,2,3,6,9,8,7,4,5]    
+    > 输入:  
+    > \[  
+    > \[1, 2, 3, 4],  
+    > \[5, 6, 7, 8],  
+    > \[9,10,11,12]   
+    > \]  
+    > 输出: \[1,2,3,4,8,12,11,10,9,5,6,7]  
+    > [MyNumber::spiralOrder](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 设置4个边界并遍历和动态调整    
 55. 跳跃游戏  
 **问题**：给定一个非负整数数组，你最初位于数组的第一个位置。数组中的每个元素代表你在该位置可以跳跃的最大长度。判断你是否能够到达最后一个位置。      
 **示例**
     > 输入: \[2,3,1,1,4]  
-      输出: true  
-      解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。    
-      输入: \[3,2,1,0,4]  
-      输出: false  
-      解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。  
-      [MyNumber::canJump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 从左往右倒着判断可以到达尾部的位置，然后更新当前尾部递归调用    
+    > 输出: true  
+    > 解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。    
+    > 输入: \[3,2,1,0,4]  
+    > 输出: false  
+    > 解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。  
+    > [MyNumber::canJump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 从左往右倒着判断可以到达尾部的位置，然后更新当前尾部递归调用    
 56. 合并区间  
 **问题**：给出一个区间的集合，请合并所有重叠的区间      
 **示例**
     > 输入: \[\[1,3],\[2,6],\[8,10],\[15,18]]  
-      输出: \[\[1,6],\[8,10],\[15,18]]  
-      解释: 区间 \[1,3] 和 \[2,6] 重叠, 将它们合并为 \[1,6].  
-      输入: \[\[1,4],\[4,5]]  
-      输出: \[\[1,5]]  
-      解释: 区间 \[1,4] 和 \[4,5] 可被视为重叠区间    
-      [MyNumber::merge](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 根据数组第一个元素排好序后多种情况变为3种（a包含b,a∩b和a<b）,然后一次遍历    
+    > 输出: \[\[1,6],\[8,10],\[15,18]]  
+    > 解释: 区间 \[1,3] 和 \[2,6] 重叠, 将它们合并为 \[1,6].  
+    > 输入: \[\[1,4],\[4,5]]  
+    > 输出: \[\[1,5]]  
+    > 解释: 区间 \[1,4] 和 \[4,5] 可被视为重叠区间    
+    > [MyNumber::merge](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 根据数组第一个元素排好序后多种情况变为3种（a包含b,a∩b和a<b）,然后一次遍历    
 57. 插入区间  
 **问题**：给出一个无重叠的 ，按照区间起始端点排序的区间列表。在列表中插入一个新的区间，你需要确保列表中的区间仍然有序且不重叠（如果有必要的话，可以合并区间）      
 **示例**
     > 输入: intervals = \[\[1,3],\[6,9]], newInterval = \[2,5]   
-      输出: \[\[1,5],\[6,9]]     
-      输入: intervals = \[\[1,2],\[3,5],\[6,7],\[8,10],\[12,16]], newInterval = \[4,8]  
-      输出: \[\[1,2],\[3,10],\[12,16]]  
-      解释: 这是因为新的区间 \[4,8] 与 \[3,5],\[6,7],\[8,10] 重叠   
-      [MyNumber::insert](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 先合并为一个数组，然后同上    
+    > 输出: \[\[1,5],\[6,9]]     
+    > 输入: intervals = \[\[1,2],\[3,5],\[6,7],\[8,10],\[12,16]], newInterval = \[4,8]  
+    > 输出: \[\[1,2],\[3,10],\[12,16]]  
+    > 解释: 这是因为新的区间 \[4,8] 与 \[3,5],\[6,7],\[8,10] 重叠   
+    > [MyNumber::insert](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 先合并为一个数组，然后同上    
 58. 最后一个单词的长度  
 **问题**：给定一个仅包含大小写字母和空格 ' ' 的字符串 s，返回其最后一个单词的长度。如果字符串从左向右滚动显示，那么最后一个单词就是最后出现的单词。如果不存在最后一个单词，请返回 0 。一个单词是指仅由字母组成、不包含任何空格字符的 最大子字符串。      
 **示例**
     > 输入: "Hello World"  
-      输出: 5    
-      [MyString::lengthOfLastWord](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >> String库函数,注意要首先trim一下    
+    > 输出: 5    
+    > [MyString::lengthOfLastWord](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    >
+    > > String库函数,注意要首先trim一下    
 59. 螺旋矩阵 II  
 **问题**：给定一个正整数 n，生成一个包含 1 到 n2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵      
 **示例**
     > 输入: 3  
-      输出:  
-      \[  
-       \[ 1, 2, 3 ],  
-       \[ 8, 9, 4 ],  
-       \[ 7, 6, 5 ]  
-      ]    
-      [MyNumber::generateMatrix](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 定义上下左右四个边界+死循环    
+    > 输出:  
+    > \[  
+    > \[ 1, 2, 3 ],  
+    > \[ 8, 9, 4 ],  
+    > \[ 7, 6, 5 ]  
+    > ]    
+    > [MyNumber::generateMatrix](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 定义上下左右四个边界+死循环    
 60. 第k个排列  
 **问题**：按大小顺序列出所有排列情况，并一一标记，给定 n 和 k，返回第 k 个排列。给定 n 的范围是 \[1, 9]。给定 k 的范围是\[1,  n!]。      
 **示例**
@@ -1361,63 +1408,67 @@
 **问题**：给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。      
 **示例**
     > 输入: 1->2->3->4->5->NULL, k = 2  
-      输出: 4->5->1->2->3->NULL  
-      解释:  
-      向右旋转 1 步: 5->1->2->3->4->NULL  
-      向右旋转 2 步: 4->5->1->2->3->NULL  
-      输入: 0->1->2->NULL, k = 4  
-      输出: 2->0->1->NULL   
-      解释:  
-      向右旋转 1 步: 2->0->1->NULL   
-      向右旋转 2 步: 1->2->0->NULL  
-      向右旋转 3 步: 0->1->2->NULL  
-      向右旋转 4 步: 2->0->1->NULL  
-      [MyList::rotateRight](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
-      >> 双指针 固定步长k    
+    > 输出: 4->5->1->2->3->NULL  
+    > 解释:  
+    > 向右旋转 1 步: 5->1->2->3->4->NULL  
+    > 向右旋转 2 步: 4->5->1->2->3->NULL  
+    > 输入: 0->1->2->NULL, k = 4  
+    > 输出: 2->0->1->NULL   
+    > 解释:  
+    > 向右旋转 1 步: 2->0->1->NULL   
+    > 向右旋转 2 步: 1->2->0->NULL  
+    > 向右旋转 3 步: 0->1->2->NULL  
+    > 向右旋转 4 步: 2->0->1->NULL  
+    > [MyList::rotateRight](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyList.java)  
+    >
+    > > 双指针 固定步长k    
 62. 不同路径   
 **问题**：一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。问总共有多少条不同的路径？1 <= m, n <= 100,题目数据保证答案小于等于 2 * 10 ^ 9      
 **示例**
     > 输入: m = 3, n = 2  
-      输出: 3  
-      解释:  
-      从左上角开始，总共有 3 条路径可以到达右下角。  
-      1.向右 -> 向右 -> 向下  
-      2.向右 -> 向下 -> 向右  
-      3.向下 -> 向右 -> 向右   
-      输入: m = 7, n = 3  
-      输出: 28  
-      [MyNumber::uniquePaths](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 组合数学C(m+n-2, n-1)=C(m+n-2, m-1)    
+    > 输出: 3  
+    > 解释:  
+    > 从左上角开始，总共有 3 条路径可以到达右下角。  
+    > 1.向右 -> 向右 -> 向下  
+    > 2.向右 -> 向下 -> 向右  
+    > 3.向下 -> 向右 -> 向右   
+    > 输入: m = 7, n = 3  
+    > 输出: 28  
+    > [MyNumber::uniquePaths](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 组合数学C(m+n-2, n-1)=C(m+n-2, m-1)    
 63. 不同路径 II  
 **问题**：现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？网格中的障碍物和空位置分别用 1 和 0 来表示。m 和 n 的值均不超过 100。      
 **示例**
     > 输入:  
-      \[  
-        \[0,0,0],  
-        \[0,1,0],  
-        \[0,0,0]  
-      ]  
-      输出: 2  
-      解释:  
-      3x3 网格的正中间有一个障碍物。  
-      从左上角到右下角一共有 2 条不同的路径：  
-      1.向右 -> 向右 -> 向下 -> 向下  
-      2.向下 -> 向下 -> 向右 -> 向右  
-      [MyNumber::uniquePathsWithObstacles](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 动态规划dp\[i,j]=dp\[i-1,j]+dp\[i,j-1]   
+    > \[  
+    > \[0,0,0],  
+    > \[0,1,0],  
+    > \[0,0,0]  
+    > ]  
+    > 输出: 2  
+    > 解释:  
+    > 3x3 网格的正中间有一个障碍物。  
+    > 从左上角到右下角一共有 2 条不同的路径：  
+    > 1.向右 -> 向右 -> 向下 -> 向下  
+    > 2.向下 -> 向下 -> 向右 -> 向右  
+    > [MyNumber::uniquePathsWithObstacles](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 动态规划dp\[i,j]=dp\[i-1,j]+dp\[i,j-1]   
 64. 最小路径和   
 **问题**：给定一个包含非负整数的 m x n 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。每次只能向下或者向右移动一步。    
 **示例**
     > 输入:  
-      \[  
-        \[1,3,1],  
-        \[1,5,1],  
-        \[4,2,1]  
-      ]  
-      输出: 7  
-      解释: 因为路径 1→3→1→1→1 的总和最小。   
-      [MyNumber::minPathSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>  动态规划dp\[i,j]=min(dp\[i-1,j]+grid\[i,j], dp\[i,j-1]+grid\[i,j])   
+    > \[  
+    > \[1,3,1],  
+    > \[1,5,1],  
+    > \[4,2,1]  
+    > ]  
+    > 输出: 7  
+    > 解释: 因为路径 1→3→1→1→1 的总和最小。   
+    > [MyNumber::minPathSum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > >  动态规划dp\[i,j]=min(dp\[i-1,j]+grid\[i,j], dp\[i,j-1]+grid\[i,j])   
 65. 有效数字  
 **问题**：验证给定的字符串是否可以解释为十进制数字。数字 0-9、指数 - "e"、正/负号 - "+"/"-"、小数点 - "."      
 **示例**
@@ -1445,61 +1496,64 @@
 **问题**：给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。    
 **示例**
     > 输入: \[1,2,3]  
-      输出: \[1,2,4]  
-      解释: 输入数组表示数字 123。    
-      输入: \[4,3,2,1]  
-      输出: \[4,3,2,2]  
-      解释: 输入数组表示数字 4321。  
-      [MyNumber::plusOne](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> 从右往左找第一个不是9的位置，然后根据位置分为3种情况处理    
+    > 输出: \[1,2,4]  
+    > 解释: 输入数组表示数字 123。    
+    > 输入: \[4,3,2,1]  
+    > 输出: \[4,3,2,2]  
+    > 解释: 输入数组表示数字 4321。  
+    > [MyNumber::plusOne](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > 从右往左找第一个不是9的位置，然后根据位置分为3种情况处理    
 67. 二进制求和  
 **问题**：给你两个二进制字符串，返回它们的和（用二进制表示）。输入为 非空 字符串且只包含数字 1 和 0。1 <= a.length, b.length <= 10^4. 字符串如果不是 "0" ，就都不含前导零。    
 **示例**
     > 输入: a = "11", b = "1"   
-      输出: "100"   
-      输入: a = "1010", b = "1011"  
-      输出: "10101"   
-      [MyNumber::addBinary](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >> i,j分别指向a,b串    
+    > 输出: "100"   
+    > 输入: a = "1010", b = "1011"  
+    > 输出: "10101"   
+    > [MyNumber::addBinary](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    > > i,j分别指向a,b串    
 68. 文本左右对齐  
 **问题**：给定一个单词数组和一个长度 maxWidth，重新排版单词，使其成为每行恰好有 maxWidth 个字符，且左右两端对齐的文本。你应该使用“贪心算法”来放置给定的单词；也就是说，尽可能多地往每行中放置单词。必要时可用空格 ' ' 填充，使得每行恰好有 maxWidth 个字符。要求尽可能均匀分配单词间的空格数量。如果某一行单词间的空格不能均匀分配，则左侧放置的空格数要多于右侧的空格数。文本的最后一行应为左对齐，且单词之间不插入额外的空格。单词是指由非空格字符组成的字符序列。每个单词的长度大于 0，小于等于 maxWidth。输入单词数组 words 至少包含一个单词。    
 **示例**
     > 输入:
-      words = \["This", "is", "an", "example", "of", "text", "justification."]  
-      maxWidth = 16  
-      输出:  
-      \[  
-         "This    is    an",  
-         "example  of text",  
-         "justification.  "  
-      ]  
-      输入:  
-      words = \["What","must","be","acknowledgment","shall","be"]  
-      maxWidth = 16  
-      输出:  
-      \[  
-        "What   must   be",  
-        "acknowledgment  ",  
-        "shall be        "  
-      ]  
-      解释: 注意最后一行的格式应为 "shall be    " 而不是 "shall     be",  
-           因为最后一行应为左对齐，而不是左右两端对齐。         
-           第二行同样为左对齐，这是因为这行只包含一个单词.  
-      输入:  
-      words = \["Science","is","what","we","understand","well","enough","to","explain",  
-               "to","a","computer.","Art","is","everything","else","we","do"]  
-      maxWidth = 20  
-      输出:  
-      \[  
-        "Science  is  what we",  
-        "understand      well",  
-        "enough to explain to",  
-        "a  computer.  Art is",  
-        "everything  else  we",  
-        "do                  "  
-      ]  
-      [MyString::fullJustify](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
-      >> currentLen:累计单词长度 wordIdx:每行开始单词的数组下标  每遇到换行（即放不下当前单词）就把上一行放入结果     
+    > words = \["This", "is", "an", "example", "of", "text", "justification."]  
+    > maxWidth = 16  
+    > 输出:  
+    > \[  
+    > "This    is    an",  
+    > "example  of text",  
+    > "justification.  "  
+    > ]  
+    > 输入:  
+    > words = \["What","must","be","acknowledgment","shall","be"]  
+    > maxWidth = 16  
+    > 输出:  
+    > \[  
+    > "What   must   be",  
+    > "acknowledgment  ",  
+    > "shall be        "  
+    > ]  
+    > 解释: 注意最后一行的格式应为 "shall be    " 而不是 "shall     be",  
+    >   因为最后一行应为左对齐，而不是左右两端对齐。         
+    >   第二行同样为左对齐，这是因为这行只包含一个单词.  
+    > 输入:  
+    > words = \["Science","is","what","we","understand","well","enough","to","explain",  
+    >       "to","a","computer.","Art","is","everything","else","we","do"]  
+    > maxWidth = 20  
+    > 输出:  
+    > \[  
+    > "Science  is  what we",  
+    > "understand      well",  
+    > "enough to explain to",  
+    > "a  computer.  Art is",  
+    > "everything  else  we",  
+    > "do                  "  
+    > ]  
+    > [MyString::fullJustify](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    >
+    > > currentLen:累计单词长度 wordIdx:每行开始单词的数组下标  每遇到换行（即放不下当前单词）就把上一行放入结果     
 69. x 的平方根  
 **问题**：实现 int sqrt(int x) 函数。计算并返回 x 的平方根，其中 x 是非负整数。由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。    
 **示例**
@@ -1525,87 +1579,245 @@
       [MyNumber::climbStairs2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
       >> 递归(动态规划自顶向下:超时) 斐波那契数列   
          动态规划自底向上(空换时)   
-71.   
-**问题**：    
+71. 简化路径  
+**问题**：以 Unix 风格给出一个文件的绝对路径，你需要简化它。或者换句话说，将其转换为规范路径。返回的规范路径必须始终以斜杠 / 开头，并且两个目录名之间必须只有一个斜杠 /。最后一个目录名（如果存在）不能以 / 结尾。此外，规范路径必须是表示绝对路径的最短字符串  
 **示例**
-    >   
-      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
-72.   
-**问题**：    
+    > 输入："/home/"  
+    > 输出："/home"  
+    > 解释：注意，最后一个目录名后面没有斜杠。  
+    > 输入："/../"  
+    > 输出："/"  
+    > 解释：从根目录向上一级是不可行的，因为根是你可以到达的最高级。  
+    > 输入："/home//foo/"  
+    > 输出："/home/foo"  
+    > 解释：在规范路径中，多个连续斜杠需要用一个斜杠替换。    
+    > 输入："/a/./b/../../c/"  
+    > 输出："/c"  
+    > 输入："/a/../../b/../c//.//"  
+    > 输出："/c"  
+    > 输入："/a//b////c/d//././/.."  
+    > 输出："/a/b/c"  
+    > [MyString::simplifyPath](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyString.java)  
+    >
+    > > 栈 用'/'分隔，此时数组有"路径"、""、"."、".."这四种情况    
+72. 编辑距离    
+**问题**：给你两个单词 word1 和 word2，请你计算出将 word1 转换成 word2 所使用的最少操作数 。你可以对一个单词进行如下三种操作：插入一个字符、删除一个字符、替换一个字符    
 **示例**
-    >   
-      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
+    > 输入：word1 = "horse", word2 = "ros"  
+      输出：3  
+      解释：  
+      horse -> rorse (将 'h' 替换为 'r')  
+      rorse -> rose (删除 'r')  
+      rose -> ros (删除 'e')  
+      输入：word1 = "intention", word2 = "execution"  
+      输出：5  
+      解释：  
+      intention -> inention (删除 't')  
+      inention -> enention (将 'i' 替换为 'e')  
+      enention -> exention (将 'n' 替换为 'x')  
+      exention -> exection (将 'n' 替换为 'c')  
+      exection -> execution (插入 'u')  
+      [MyNumber::minDistance](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+      >> 动态规划    
+         ![](https://github.com/huntingboy/algorithm/blob/master/src/main/resources/com/nomad/leetcode/72.png)
+         dp\[i]\[j] 代表 word1 到 i 位置转换成 word2 到 j 位置需要最少步数  
+         当 word1\[i] == word2\[j]，dp\[i]\[j] = dp\[i-1]\[j-1]；  
+         当 word1\[i] != word2\[j]，dp\[i]\[j] = min(dp\[i-1]\[j-1], dp\[i-1]\[j], dp\[i]\[j-1]) + 1   
+         其中，dp\[i-1]\[j-1] 表示替换操作，dp\[i-1]\[j] 表示删除操作，dp\[i]\[j-1] 表示插入操作。         
 73.   
 **问题**：    
 **示例**
-    >   
-      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
+    >
+    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    >   >     
 74.   
 **问题**：    
 **示例**
-    >   
-      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
+    >
+    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    >   >     
 75.   
 **问题**：    
 **示例**
-    >   
-      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
+    >
+    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    >   >     
 76.   
 **问题**：    
 **示例**
-    >   
-      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
+    >
+    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    >   >     
 77.   
 **问题**：    
 **示例**
-    >   
-      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
+    >
+    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    >   >     
 78.   
 **问题**：    
 **示例**
-    >   
-      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
+    >
+    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    >   >     
 79.   
 **问题**：    
 **示例**
-    >   
-      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
+    >
+    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    >   >     
 80.   
 **问题**：    
 **示例**
-    >   
-      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
+    >
+    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    >   >     
 81.   
 **问题**：    
 **示例**
-    >   
-      [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-      >>     
+    >
+    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
+    >
+    >   >     
 
 ## 校招
 ### Tencent
 **2020**
+
 > **问题**：压缩字符串解压缩  
-> 输入：HG[3|B[2|CA]]F  
-> 输出：HGBCACABCACABCACAF(HG[3|B[2|CA]]F->HG[3|BCACA]F->HGBCACABCACABCACAF)  
-> [Unzip::unzip](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/tencent/twozero/Unzip.java)
->> 递归  
->> (input, begin, end)
+> **输入**：HG\[3|B\[2|CA]]F  
+> **输出**：HGBCACABCACABCACAF(HG\[3|B\[2|CA]]F->HG\[3|BCACA]F->HGBCACABCACABCACAF)  
+> [Main_20::unzip](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/tencent/Main_20.java)
+>
+> > 递归  
+> > (input, begin, end)
 
 **2019**
 
 
 ### Alibaba
-### 美团
-### ByteDance
 
+
+### 美团
+45.   
+**问题**：    
+**示例**
+    >   [Main_20::discount](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/mt/Main_20.java)  
+    >
+    >   >    
+46. 外卖满减   
+**问题**：你打开了美了么外卖，选择了一家店，你手里有一张满X元减10元的券，店里总共有n种菜，第i种菜一份需要A_i元，因为你不想吃太多份同一种菜，所以每种菜你最多只能点一份，现在问你最少需要选择多少元的商品才能使用这张券。      
+**示例**
+    
+    > 第一行两个正整数n和X，分别表示菜品数量和券的最低使用价格。（1≤n≤100, 1≤X≤10000） 接下来一行n个整数，第i个整数表示第i种菜品的价格。（1≤A_i≤100）  
+    > 一个数，表示最少需要选择多少元的菜才能使用这张满X元减10元的券，保证有解。  
+    > 输入：  
+    > 5 20  
+    > 18 19 17 6 7  
+    > 输出：  
+    > 23    
+    > [Main_20::discount](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/mt/Main_20.java)  
+    >
+    > >           
+47. 种花  
+**问题**：公园里有N个花园，初始时每个花园里都没有种花，园丁将花园从1到N编号并计划在编号为i的花园里恰好种A_i朵花，他每天会选择一个区间\[L，R]（1≤L≤R≤N）并在编号为L到R的花园里各种一朵花，那么园丁至少要花多少天才能完成计划？      
+**示例**
+    > 第一行包含一个整数N，1≤N≤10^5。  
+      第二行包含N个空格隔开的整数A_1到A_N，0≤A_i≤10^4。  
+      输出完成计划所需的最少天数。  
+      输入：  
+      5  
+      4 1 8 2 5    
+      输出：  
+      14  
+      [Main_20::platFlower](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/mt/Main_20.java)  
+      [Main_20::platFlower2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/mt/Main_20.java)  
+      >
+      > 数组 贪心算法  
+         超时：每天的跨度尽量大，每次找最小的数并从周围连续的数中减去该值    
+         找降序位置，累加进结果
+48. 考试策略   
+**问题**：小明同学在参加一场考试，考试时间2个小时。试卷上一共有n道题目，小明要在规定时间内，完成一定数量的题目。  考试中不限制试题作答顺序，对于 i 第道题目，小明有三种不同的策略可以选择:  (1)直接跳过这道题目，不花费时间，本题得0分。(2)只做一部分题目，花费pi分钟的时间，本题可以得到ai分。  (3)做完整个题目，花费qi分钟的时间，本题可以得到bi分。小明想知道，他最多能得到多少分。      
+**示例**
+    
+    > 第一行输入一个n数表示题目的数量。  
+    > 接下来n行，每行四个数p_i，a_i，q_i，b_i。(1≤n≤100，1≤p_i≤q_i≤120，0≤a_i≤b_i≤1000)。  
+    > 输出一个数，小明的最高得分。  
+    > 输入：
+    > 4  
+    > 20 20 100 60  
+    > 50 30 80 55  
+    > 100 60 110 88  
+    > 5 3 10 6  
+    > 输出：
+    > 94
+    > [Main_20::examStratage](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/mt/Main_20.java)  
+    >
+    > > 0/1背包问题 动态规划自底向上      
+49.   **问题**：    
+**示例**
+
+    >   [Main_20::discount](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/mt/Main_20.java)  
+    >
+    >   >
+
+### ByteDance
+> hi
+>> hihi
+  hihi
+  hihi
+
+### 网易
+**2020**
+
+1. **问题**：序列交换。序列中和为奇数的两个数可以交换，求最小的序列。
+
+   **示例**：
+
+   >[Main_20::seqSwap](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_20.java)
+   >
+   >> 排序 问题转化
+   >>
+   >> 全是奇数或者全是偶数，直接输出并返回，否则只需排个序就行
+
+2. **问题**：小易的英语软件。输出排名，百分比。
+
+   **示例**：
+   
+   > [Main_20::enSoftware](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_20.java)
+   >
+   > >  数组
+   
+3. **问题**：序列维护
+
+   **示例**：
+
+   > [Main_20::seqMaintain](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_20.java)
+   >
+   > >  数组
+
+4. **问题**：数字圆环
+
+   **示例**：
+
+   > [Main_20::numberRing](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_20.java)
+   >
+   > >  Top3
+   > >
+   > >  只要次大的两个数之和>最大的数就是true  思路：首先对数组进行从大到小排序，排序后，只剩最后一个可能不满足条件，这个时候与倒数第二个交换如果满足的话就可以，所以直接判断最后三个数即可
+   
+5. **问题**：
+
+   **示例**：
+
+   > [Main_20::seqSwap](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_20.java)
+   >
+   > >   

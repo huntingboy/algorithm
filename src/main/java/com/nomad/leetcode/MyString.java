@@ -23,15 +23,15 @@ public class MyString {
         }*/
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
-            int n = scanner.nextInt();
+            /*int n = scanner.nextInt();
             String[] words = new String[n];
             for (int i = 0; i < n; i++) {
                 words[i] = scanner.next();
-            }
-            int m = scanner.nextInt();
-            /*String a = scanner.next();
-            String b = scanner.next();*/
-            System.out.println("new MyString().fullJustify(words, m) = " + new MyString().fullJustify(words, m));
+            }*/
+            //int m = scanner.nextInt();
+            String a = scanner.next();
+            //String b = scanner.next();
+            System.out.println("new MyString().simplifyPath(a) = " + new MyString().simplifyPath(a));
         }
     }
 
@@ -941,5 +941,52 @@ public class MyString {
         res.add(sb.toString());
 
         return res;
+    }
+
+    //简化路径
+    public String simplifyPath(String path) {
+        String[] names = path.split("/"); //此时数组有"路径"、""、"."、".."这四种情况
+        Stack<String> res = new Stack<>();
+        for (int i = 0; i < names.length; i++) {
+            if (!res.empty() && names[i].equals("..")) {
+                res.pop();
+            } else if (!names[i].equals(".") && !names[i].equals("") && !names[i].equals("..")) {
+                res.push(names[i]);
+            }
+        }
+        if (res.empty()) {
+            return "/";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        int size = res.size();
+        for (int i = 0; i < size; i++) {
+            sb.insert(0, "/" + res.pop());
+        }
+
+        return sb.toString();
+    }
+
+    //编辑距离  动态规划(自底向上)
+    //dp\[i]\[j] 代表 word1 到 i 位置转换成 word2 到 j 位置需要最少步数
+    //当 word1\[i] == word2\[j]，dp\[i]\[j] = dp\[i-1]\[j-1]；
+    //当 word1\[i] != word2\[j]，dp\[i]\[j] = min(dp\[i-1]\[j-1], dp\[i-1]\[j], dp\[i]\[j-1]) + 1
+    //其中，dp\[i-1]\[j-1] 表示替换操作，dp\[i-1]\[j] 表示删除操作，dp\[i]\[j-1] 表示插入操作。
+    public int minDistance(String word1, String word2) {
+        int len1 = word1.length(), len2 = word2.length();
+        int[][] res = new int[len1+1][len2+1];
+        for (int i = 0; i <= len1; i++) {
+            for (int j = 0; j <= len2; j++) {
+                if (i == 0 || j == 0) {
+                    res[i][j] = Math.max(i, j);
+                } else if (word1.charAt(i-1) == word2.charAt(j-1)) {
+                    res[i][j] = res[i - 1][j - 1];
+                } else {
+                    res[i][j] = Math.min(res[i - 1][j - 1], Math.min(res[i - 1][j], res[i][j - 1])) + 1;
+                }
+            }
+        }
+
+        return res[len1][len2];
     }
 }

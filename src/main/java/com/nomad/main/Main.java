@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //new Main().testSerialize();
+        //new Main_20().testSerialize();
     }
 
     public void testPower() {

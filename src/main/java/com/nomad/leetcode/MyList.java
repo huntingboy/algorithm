@@ -169,7 +169,6 @@ public class MyList {
             pre = head;
             head = p;
         }
-
         return pre;
     }
 
