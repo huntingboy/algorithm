@@ -8,6 +8,7 @@
     - [Alibaba](#Alibaba)
     - [美团](#美团)
     - [ByteDance](#ByteDance)
+    - [华为](#华为)
     - [网易](#网易)
     
 ## 剑指offer
@@ -20,8 +21,9 @@
 > 输入：10,\[20000000,40000000,40000000,40000000,20000000,10000000,25000000,25000000,25000000,26000000\]  
 > 输出：40000000,25000000,20000000,10000000,26000000   
 > [SortTest::testSort1](https://github.com/huntingboy/algorithm/blob/master/src/test/java/com/nomad/sort/SortTest.java)  
->> Map, Collections, Comparator的使用  
->> 工资范围如果小可以考虑使用array\[salaryCount++\]来做  
+>
+> > Map, Collections, Comparator的使用  
+> > 工资范围如果小可以考虑使用array\[salaryCount++\]来做  
 
 ### 树
 > **问题**：输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。  
@@ -1775,6 +1777,12 @@
   hihi
   hihi
 
+### 华为
+
+> hi
+>
+> > hihi
+
 ### 网易
 **2020**
 
@@ -1813,11 +1821,47 @@
    > >  Top3
    > >
    > >  只要次大的两个数之和>最大的数就是true  思路：首先对数组进行从大到小排序，排序后，只剩最后一个可能不满足条件，这个时候与倒数第二个交换如果满足的话就可以，所以直接判断最后三个数即可
-   
-5. **问题**：
+
+**2019**
+
+1. **问题**：访友
 
    **示例**：
 
-   > [Main_20::seqSwap](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_20.java)
+   > [Main_19::visit](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_19.java)
    >
-   > >   
+   > >   贪心
+
+2. **问题**：代价
+
+   **示例**：
+
+   > [Main_19::cost](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_19.java)
+   >
+   > >   3个数的最小间距和
+
+3. **问题**：翻转翻转
+
+   **示例**：
+
+   > [Main_19::rotate](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_19.java)
+   >
+   > >    规律
+
+4. **问题**：买房
+
+   **示例**：
+
+   > [Main_19::buyHouse](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_19.java)
+   >
+   > >   问题简化，转化
+   > >
+   > >   `res = Math.min(n - k, k - 1); //剩余房子很少或剩余房子很多`
+
+5. **问题**：香槟塔
+
+   **示例**：
+
+   > [Main_19::tower](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_19.java)
+   >
+   > >   贪心 数组
