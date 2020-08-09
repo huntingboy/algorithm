@@ -1,4 +1,7 @@
 package com.nomad.xz.ne;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Main_21 {
@@ -7,26 +10,68 @@ public class Main_21 {
     }
 
     /**
-     * 生成树中输出最大权值和最小权值差最小
+     * 生成树(prim算法和krusta算法:基于Edge类,一维数组回路判断)中输出最大权值和最小权值差最小
      * todo
      */
-    public void tree(){
+    private void tree(){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt(), m = sc.nextInt();
-        int[][] w = new int[n][m];
+        int[][] w = new int[n][n];
         boolean[] visited = new boolean[n];
         for (int i = 0; i < m; i++) {
-            w[sc.nextInt()][sc.nextInt()] = sc.nextInt();
+            w[sc.nextInt() - 1][sc.nextInt() - 1] = sc.nextInt();
         }
 
-        System.out.println(2);
+        //处理带平行边的无向图的情况 todo  w(复杂图)==>w1(多个简单图,遍历)
+        treeWithPrim(w1, n);
+    }
+
+    /**
+     * prim算法
+     * @param w       所有顶点间的距离
+     * @param len     顶点个数
+     */
+    private void treeWithPrim(int[][] w, int len) {
+        int[] lowcost = Arrays.copyOf(w[0], len); //已访问顶点(初始v0)到各个顶点的距离 0:已访问  Integer.MAX_VALUE:不可达
+        int maxW = Integer.MIN_VALUE, minW = Integer.MAX_VALUE;
+
+        for (int i = 0; i < len - 1; i++) {
+
+            //找出距离已访问顶点集合最近的顶点
+            int min = -1;
+            for (int j = 0; j < len; j++) {
+                if (lowcost[j] > 0) {
+                    if (min == -1 || lowcost[min] > lowcost[j]) {
+                        min = j;
+                    }
+                }
+            }
+
+            //判断距离是否全部为0，找不到最小值
+            if (min == -1) {
+                break;
+            }
+
+            //访问距离最短的一个顶点
+            lowcost[min] = 0;
+            minW = Math.min(minW, lowcost[min]);
+            maxW = Math.max(maxW, lowcost[min]);
+
+            //更新lowcost数组
+            for (int j = 0; j < len; j++) {
+                if (w[min][j] < lowcost[j]) {
+                    lowcost[j] = w[min][j];
+                }
+            }
+        }
+
+        System.out.println(maxW - minW);
     }
 
     /**
      * 把物品分配给2人,使价值相等,输出最小扔掉的价值
-     * todo
      */
-    public void avg(){
+    private void avg(){
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt(), n  = sc.nextInt();
         for (int i = 0; i < t; i++) {
@@ -35,15 +80,38 @@ public class Main_21 {
                 a[i] = sc.nextInt();
             }
 
-            System.out.println(a[n - 1] - a[0]);
+            dfs(n, a, n - 1, 0, 0, 0);
+            System.out.println(res);
         }
     }
 
     /**
-     * 最小字典序列
-     * fixme
+     * 递归:a[i]分配到 p1,p2,value 3种情况考虑所有情况
+     * @param n 当前价值数组长度
+     * @param a 价值数组
+     * @param i 当前位置
+     * @param p1 第一个人得到的
+     * @param p2 第二个人得到的
+     * @param value 累计丢掉的
+     * res 最少丢掉的价值数
      */
-    public void seq(){
+    private int res = Integer.MAX_VALUE;
+    private void dfs(int n, int[] a, int i, int p1, int p2, int value) {
+        if (i == -1) { //递归出口
+            if (p1 == p2 && res > value) res = value; //更新res
+            return;
+        }
+
+        dfs(n, a, i - 1, p1 + a[i], p2, value);//把a[i]给第一个人
+        dfs(n, a, i - 1, p1, p2 + a[i], value);//把a[i]给第二个人
+        dfs(n, a, i - 1, p1, p2, value + a[i]);//把a[i]丢弃
+    }
+
+    /**
+     * 最小字典序列
+     * fixme 0.3AC
+     */
+    private void seq(){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt(), m = sc.nextInt();
         int[] nums = new int[m];
@@ -77,10 +145,31 @@ public class Main_21 {
         }
     }
 
+    private void seq2(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        boolean[] vis = new boolean[n + 1];
+        Queue<Integer> q = new LinkedList();
+        for(int i = 0; i < m; i++){
+            int num = sc.nextInt();
+            vis[num] = true;
+            q.offer(num);
+        }
+        StringBuilder ans =new StringBuilder();
+        for(int i = 1; i <= n; i++) { //以下5行为关键
+            if(vis[i]) continue;
+            while(!q.isEmpty() && q.peek() < i) ans.append(q.poll() + " ");
+            ans.append(i + " ");
+        }
+        while(!q.isEmpty()) ans.append(q.poll() + " ");
+        System.out.print(ans.toString().substring(0, ans.length() - 1));
+    }
+
     /**
      * 每个数可拆分,输出最多的素数总个数
      */
-    public void sushuCounts(){
+    private void sushuCounts(){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         long res = 0;
