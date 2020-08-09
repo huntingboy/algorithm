@@ -1784,6 +1784,52 @@
 > > hihi
 
 ### 网易
+
+**2021**
+
+1. **问题**：每个数可拆分,统计输出最多的素数总个数
+
+   **示例**：
+
+   >[Main_21::sushuCounts](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_21.java)
+   >
+   >> 每个数可以表示为`a[i]/2`个素数的和 
+
+2. **问题**：最小字典序列
+
+   **示例**：
+
+   >[Main_21::seq](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_21.java)
+   >
+   >[Main_21::seq2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_21.java)
+   >
+   >>  ```
+   >> StringBuilder ans =new StringBuilder();
+   >> for(int i = 1; i <= n; i++) { //以下5行为关键
+   >> 	if(vis[i]) continue;
+   >>     while(!q.isEmpty() && q.peek() < i) ans.append(q.poll() + " ");
+   >>     ans.append(i + " ");
+   >> }
+   >> while(!q.isEmpty()) ans.append(q.poll() + " ");
+   >> System.out.print(ans.toString().substring(0, ans.length() - 1));
+   >>  ```
+
+3. **问题**：把物品分配给2人,使价值相等,输出最小扔掉的价值
+
+   **示例**：
+
+   >[Main_21::avg](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_21.java)
+   >
+   >> 递归:a[i]分配到 p1,p2,value 3种情况考虑所有情况
+
+4. **问题**：生成树中输出最大权值和最小权值差最小
+
+   **示例**：
+
+   >[Main_21::tree](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_21.java)
+   >
+   >> prim算法或krusta算法:基于Edge类+一维数组回路判断
+
 **2020**
 
 1. **问题**：序列交换。序列中和为奇数的两个数可以交换，求最小的序列。
