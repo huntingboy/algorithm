@@ -23,7 +23,7 @@ public class Main_21 {
         }
 
         //处理带平行边的无向图的情况 todo  w(复杂图)==>w1(多个简单图,遍历)
-        treeWithPrim(w1, n);
+        //treeWithPrim(w1, n);
     }
 
     /**
