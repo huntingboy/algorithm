@@ -1772,10 +1772,99 @@
     >   >
 
 ### ByteDance
-> hi
->> hihi
-  hihi
-  hihi
+**2019**
+
+1. **问题**：万万没想到之聪明的编辑
+
+   **示例**：
+
+   >[Main_19::editor](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/bytedance/Main_19.java)
+   >
+   >> 分情况处理：AAA情况\==>AA    AABB情况\==>AAB
+
+2. **问题**：万万没想到之抓捕孔连顺
+
+   **示例**：
+
+   >[Main_19::arrest](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/bytedance/Main_19.java)
+   >
+   >> 窗口滑动，左右边界，每次固定选中r指向的数，从前面选出2个数
+
+3. **问题**：雀魂启动
+
+   **示例**：
+
+   >[Main_19::sparrow](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/bytedance/Main_19.java)
+   >
+   >> 回溯递归
+   >>
+   >> 首先确定雀头并从 nums[] 中去掉，然后加入一张牌，最后递归判断新的 nums[] 是否符合规则，是则放到结果集 arraylist
+
+4. **问题**：特征提取
+
+   **示例**：
+
+   >[Main_19::feature](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/bytedance/Main_19.java)
+   >
+   >> 双map
+   >>
+   >> map1​ : key : ​"x y"  value : 最近特征连续出现次数
+   >>
+   >> map2 : 同上  辅助实现重置，保证连续有效
+
+5. **问题**：毕业旅行问题
+
+   **示例**：
+
+   >[Main_19::travel](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/bytedance/Main_19.java)
+   >
+   >> 动态规划  位运算
+   >>
+   >> e.g. n = 4 的情况:
+   >>
+   >> ```
+   >> dp[k][s] : 从k城市出发，经过城市子集V[s]，回到0号城市所花费的最小距离
+   >> dp(0,{1,2,3}) = min({C01 + dp(1, {2,3}}, {C02 + dp(2, {1,3})}, {C03 + dp(3, {1,2})})
+   >> Cik : dist[i][k]
+   >> d(k, {}) = dist[0][k]
+   >> ```
+   >>
+   >> ```java
+   >> for (int j = 1; j < V; j++) {
+   >>     for (int i = 0; i < n; i++) {
+   >>         dp[i][j] = Integer.MAX_VALUE;
+   >>         if (((j >> (i - 1)) & 1) == 0) { //((j >> (i - 1))是把第i号城市取出来  位与上1，等于0，说明是从i号城市出发，经过城市子集V[j]，回到起点0号城市
+   >>             for (int k = 0; k < n; k++) {
+   >>                 if (((j >> (k - 1)) & 1) == 1) { //遍历城市子集V[j], k为该集合中的每个元素
+   >>                     dp[i][j] = Math.min(dp[i][j], dist[i][k] + dp[k][j ^ (1 << (k - 1))]); //dp[k][j ^ (1 << (k - 1))，是将dp定位到，从k城市出发，经过城市子集V[s]，回到0号城市所花费的最小距离
+   >>                 }
+   >>             }
+   >>         }
+   >>     }
+   >> }
+   >> ```
+
+6. **问题**：找零
+
+   **示例**：
+
+   >[Main_19::charge](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/bytedance/Main_19.java)
+   >
+   >>  贪心或者dp
+
+7. **问题**：机器人跳跃问题
+
+   **示例**：
+
+   >[Main_19::jump](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/bytedance/Main_19.java)
+   >
+   >> 逆向求解
+   >>
+   >> ```
+   >> e(k)+e(k)-H(k+1)=e(k+1)
+   >> e(k)=(ek+1)+H(k+1))/2
+   >> 这是临界条件，要用浮点数,完了向上取整
+   >> ```
 
 ### 华为
 
