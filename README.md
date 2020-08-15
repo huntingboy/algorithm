@@ -10,6 +10,7 @@
     - [ByteDance](#ByteDance)
     - [华为](#华为)
     - [网易](#网易)
+    - [滴滴](#滴滴)
     
 ## 剑指offer
 ### 集合
@@ -2000,3 +2001,98 @@
    > [Main_19::tower](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/ne/Main_19.java)
    >
    > >   贪心 数组
+
+### 滴滴
+
+**2017**
+
+1. **问题**：连续最大和
+
+   **示例**：
+
+   > [Main_17::sum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/dd/Main_17.java)
+   >
+   > >   ```java
+   > >   sum += nums[i];
+   > >   res = Math.max(res, sum);
+   > >   if (sum < 0) {
+   > >       sum = 0;
+   > >   }
+   > >   ```
+
+2. **问题**：餐馆
+
+   **示例**：
+
+   > [Main_17::restaurant](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/dd/Main_17.java)
+   >
+   > >   桌子容量要升序排序
+   > >
+   > >   按照消费排序后==贪心==安排桌子
+   > >
+   > >   二分查找找第一个容的下的桌子, 如果顺序查找超时
+
+3. **问题**：地下迷宫
+
+   **示例**：
+
+   > [Main_17::maze](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/dd/Main_17.java)
+   >
+   > >    ==回溯（递归出口+状态改变+递归体带剪枝+状态重置）== 走迷宫 八皇后
+
+4. **问题**：末尾0的个数
+
+   **示例**：
+
+   > [Main_17::countZero](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/dd/Main_17.java)
+   >
+   > >   要相乘产生0，那肯定是与5相乘的结果
+   > >
+   > >   对n!如果==分解质因数==的话，结果为0的个数只与2与5的个数有关，每一次2*5就能产生一个0
+   > >
+   > >   因为2的个数肯定要大于5的个数，所以只要关注5的个数就可以了
+   > >
+   > >   不需要对<=n的每个数分解质因子计算，只需要计算5的倍数累加
+
+5. **问题**：进制转换
+
+   **示例**：
+
+   > [Main_17::dec2N](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/dd/Main_17.java)
+   >
+   > >    递归或者栈
+
+6. **问题**：数字和为sum的方法数
+
+   **示例**：
+
+   > [Main_17::sumCount](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/dd/Main_17.java)
+   >
+   > [Main_17::sumCountDP](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/dd/Main_17.java)
+   >
+   > [Main_17::sumCount](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/dd/Main_17.java)
+   >
+   > >    回溯 超时 0.5ac
+   > >
+   > >    动态规划 dp[i][j]:前i个数和为j的方案个数
+   > >    dp\[i][j]=dp\[i-1][j] + d\[i-1][j-nums[i]]
+   > >
+   > >    0/1背包 动态规划 二维dp优化为一维dp
+   > >    dp[j]:和为j的方案个数
+   > >
+   > >    ```java
+   > >    for (int i = 0; i < n; i++) {//依次加数，前i个数
+   > >        nums[i] = sc.nextInt();
+   > >        for (int j = sum; j >= nums[i]; j--) { //一定是从右往左遍历更新dp，因为01背包每个数只能取一次，若从左往右更新，则会重复取nums[i]
+   > >            dp[j] += dp[j - nums[i]];
+   > >        }
+   > >    }
+   > >    ```
+
+7. **问题**：连续最大和
+
+   **示例**：
+
+   > [Main_17::sum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/dd/Main_17.java)
+   >
+   > >    
