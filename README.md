@@ -11,6 +11,8 @@
     - [华为](#华为)
     - [网易](#网易)
     - [滴滴](#滴滴)
+    - [京东](#京东)
+    - [拼多多](#拼多多)
     
 ## 剑指offer
 ### 集合
@@ -2089,10 +2091,37 @@
    > >    }
    > >    ```
 
-7. **问题**：连续最大和
+7. **问题**：
 
    **示例**：
 
    > [Main_17::sum](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/dd/Main_17.java)
    >
+   > >     
+
+### 京东
+
+**2019**
+
+1. **问题**：测试多线程
+
+   **示例**：
+
+   > [Main_19::testThread](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/jd/Main_19.java)
+   >
+   > >    setPriority(1:min_priority, 5默认:mormal_priority, 10:max_priority)，优先级高只是获取cpu几率高
+   > >
+   > >    join
+   > >
+   > >    yield放弃当前cpu并进入就绪状态，下次仍可能是它执行
+
+2. **问题**：
+
+   **示例**：
+
+   > [Main_19::testThread](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/jd/Main_19.java)
+   >
    > >    
+
+### 拼多多
+
