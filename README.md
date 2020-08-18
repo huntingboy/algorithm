@@ -2125,3 +2125,56 @@
 
 ### 拼多多
 
+**2020**
+
+1. **问题**：多多的魔术盒子
+
+   **示例**：
+
+   > [Main_20::magixBox](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/pdd/Main_20.java)
+   >
+   > >     ceil(logn) 二进制位数
+   > >
+   > >    `Integer.toBinaryString(n).length()`
+
+2. **问题**：多多的排列函数
+
+   **示例**：
+
+   > [Main_20::pailieFunc](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/pdd/Main_20.java)
+   >
+   > [Main_20::pailieFunc2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/pdd/Main_20.java)
+   >
+   > >     第一种超时 因为把全排列都求出来了，实际上有规律
+   > >
+   > >    min : `Math.ceil(n / 2F) % 2 == 0 ? 0 : 1`
+   > >
+   > >    max :`Math.floorDiv(n, 2) % 2 == 0 ? n : n - 1`
+
+3. **问题**：多多的电子字典
+
+   **示例**：
+
+   > [Main_20::dict](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/pdd/Main_20.java)
+   >
+   > >     0.4ac 数组越界
+   > >
+   > >    可以建模为二叉树的先序遍历
+
+4. **问题**：骰子期望
+
+   **示例**：
+
+   > [Main_20::expect](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/pdd/Main_20.java)
+   >
+   > >    `p(x=k)=p(x<=k)-p(x<=k-1)`
+
+5. **问题**：二维表第k大数
+
+   **示例**：
+
+   > [Main_20::maxkth](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/pdd/Main_20.java)
+   >
+   > >    0.3ac 数组越界
+   > >
+   > >    可以用二分查找
