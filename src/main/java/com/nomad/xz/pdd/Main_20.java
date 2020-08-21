@@ -6,9 +6,9 @@ import java.util.*;
  * @author nomad
  * @create 2020-08-17 5:21 PM
  */
-public class Main_2020 {
+public class Main_20 {
     public static void main(String[] args) {
-        new Main_2020().maxkth();
+        new Main_20().maxkth();
     }
 
     /**

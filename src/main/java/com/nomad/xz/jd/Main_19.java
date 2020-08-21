@@ -6,10 +6,10 @@ import java.util.ArrayList;
  * @author nomad
  * @create 2020-08-16 10:49 PM
  */
-public class Main_2019 {
+public class Main_19 {
 
     public static void main(String[] args) throws Exception {
-        new Main_2019().testThread();
+        new Main_19().testThread();
     }
 
     /**
@@ -20,8 +20,8 @@ public class Main_2019 {
      */
     public static ArrayList<String> list = new ArrayList<>();
     public static void testThread() throws Exception{
-        Thread t1 = new Main_2019().new MyThread();
-        Thread t2 = new Thread(new Main_2019().new MyRunnable());
+        Thread t1 = new Main_19().new MyThread();
+        Thread t2 = new Thread(new Main_19().new MyRunnable());
         t1.setPriority(3);
         t2.setPriority(8);
         t1.start();
