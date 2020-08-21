@@ -1707,14 +1707,36 @@
 
 **2019**
 
-
 ### Alibaba
+
+**2021**
+
+1. **问题**：小明去春游（过河问题）
+
+   **示例**
+
+   > [Main_21::discount](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/alibaba/Main_21.java) 
+   >
+   > > 递归
+   > >
+   > > ```java
+   > > private int crossRiver0(int[] a, int n) {
+   > >     if (n < 3) return a[n - 1];
+   > >     if (n == 3) return a[2] + a[0] + a[1];
+   > > 
+   > >     //每次送2个最大的数到河对岸
+   > >     int t1 = a[1] + a[0] + a[n - 1] + a[1];  //方式一
+   > >     int t2 = a[n - 1] + a[0] + a[n - 2] + a[0]; //方式二
+   > >     int t = Math.min(t1, t2);
+   > >     return crossRiver0(a, n - 2) + t;
+   > > }
+   > > ```
 
 
 ### 美团
-45.   
-**问题**：    
+45.   **问题**：    
 **示例**
+
     >   [Main_20::discount](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/mt/Main_20.java)  
     >
     >   >    
