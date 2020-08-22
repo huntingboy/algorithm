@@ -1732,8 +1732,42 @@
    > > }
    > > ```
 
-
 ### 美团
+
+**2021**
+
+1. **问题**：小美的校验用户名程序
+
+   **示例**
+
+   > [Main_21::validateUsername](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/mt/Main_21.java) 
+
+2. **问题**：小美的代购产品
+
+   **示例**
+
+   > [Main_21::proxyBuy](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/mt/Main_21.java) 
+   >
+   > > 也可以用堆排序  top m
+
+3. **问题**：小美的仓库管理
+
+   **示例**
+
+   > [Main_21::repoManage](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/mt/Main_21.java) 
+
+4. **问题**：小美的会议区域参与人选取方案数
+
+   **示例**
+
+   > [Main_21::areaMeeting](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/mt/Main_21.java) 
+
+5. **问题**：小美的AB队
+
+   **示例**
+
+   > [Main_21::ABQueue](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/xz/mt/Main_21.java) 
+
 45.   **问题**：    
 **示例**
 
