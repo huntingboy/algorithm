@@ -4,14 +4,15 @@ import java.util.*;
 
 public class Main_21 {
     public static void main(String[] args) {
-        new Main_21().areaMeeting();
+        new Main_21().ABQueue();
     }
 
     /**
      * 小美的AB队
-     * 回溯或动态规划
+     * todo 回溯或动态规划
      */
-    List<String> res = new ArrayList<>();
+    List<String> res = new LinkedList<>();
+    int max = Integer.MIN_VALUE;
     public void ABQueue() {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt(), m = sc.nextInt();
@@ -23,14 +24,44 @@ public class Main_21 {
         boolean[] flag = new boolean[m + n]; //true表示A队
         for (int i = 0; i < n + m; i++) {
             flag[i] = true;
-            //ABQueue0(nums, 0, path, sum);
+            ABQueue0(nums, 1, flag, nums[0]);
             flag[i] = false;
         }
 
+        res.forEach(s -> System.out.println(s));
+    }
+
+    private void ABQueue0(int[] nums, int i, boolean[] flag, int sum) {
+        if(i == nums.length){
+            if (sum >= max){
+                if (sum > max) {
+                    max = sum;
+                    res.clear();
+                }
+                StringBuilder sb = new StringBuilder();
+                for (boolean b : flag) {
+                    if (b) {
+                        sb.append('A');
+                    } else {
+                        sb.append('B');
+                    }
+                }
+
+                res.add(sb.toString());
+            }
+            return;
+        }
+
+        for (int j = i; j < nums.length; j++) {
+            flag[j] = true;
+            ABQueue0(nums, j + 1, flag, sum + nums[j]);
+            flag[j] = false;
+        }
     }
 
     /**
      * 小美的会议区域参与人选取方案数
+     * todo
      */
     private class Node {
         int id;
@@ -106,8 +137,9 @@ public class Main_21 {
 
     /**
      * 小美的代购产品
-     * todo 用堆排序  top m
-     * 0.18ac
+     * 也可以用堆排序  top m
+     * 0.18ac （感觉是idx没有从小到大排序）
+     * 已修改
      */
     private class Item implements Comparable<Item>{
         int x;
@@ -127,8 +159,9 @@ public class Main_21 {
             if (sum > o.sum) return 1;
             if (sum == o.sum) {
                 if (x > o.x) return -1;
+                else if (y > o.y) return -1;
                 else
-                    return y >= o.y ? -1 : 1;
+                    return idx >= o.idx ? -1 : 1;
             }
 
             return -1;
@@ -144,6 +177,7 @@ public class Main_21 {
         }
 
         Arrays.sort(res, Comparator.reverseOrder());
+        List<Integer> ret = new ArrayList<>();
         for (int i = 0; i < m; i++) {
             System.out.print(res[i].idx);
             if (i < m - 1) System.out.print(" ");
