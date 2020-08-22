@@ -2,9 +2,9 @@ package com.nomad.xz.mt;
 
 import java.util.*;
 
-public class Main {
+public class Main_21 {
     public static void main(String[] args) {
-        new Main().areaMeeting();
+        new Main_21().areaMeeting();
     }
 
     /**
