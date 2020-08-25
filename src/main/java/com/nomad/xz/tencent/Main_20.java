@@ -4,8 +4,60 @@ import java.util.Scanner;
 
 public class Main_20 {
     public static void main(String[] args) {
-        new Main_20().unzip();
+        new Main_20().wandering();
     }
+
+    /**
+     * 逛街
+     * 从当前位置向两侧找递增子序列（可以非连续）
+     * 0.6ac
+     */
+    public void wandering(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] h = new int[n];
+        for (int i = 0; i < n; i++) {
+            h[i] = sc.nextInt();
+        }
+
+        for (int i = 0; i < n; i++) {
+            System.out.print(descendLen(h, i) + ascendLen(h, i + 1) + 1);
+            System.out.print(" ");
+        }
+    }
+
+    private int descendLen(int[] h, int end) {
+        int res = 0;
+        if (end > 0) {
+            int first = h[end - 1];
+            res++;
+            while (--end > 0) {
+                if (h[end - 1] >= first) {
+                    first = h[end - 1];
+                    res++;
+                }
+            }
+        }
+
+        return res;
+    }
+
+    private int ascendLen(int[] h, int start) {
+        int res = 0;
+        if (start < h.length) {
+            int first = h[start];
+            res++;
+            while (++start < h.length) {
+                if (h[start] >= first) {
+                    first = h[start];
+                    res++;
+                }
+            }
+        }
+
+        return res;
+    }
+
 
     /**
      * 字符串固定格式解压缩

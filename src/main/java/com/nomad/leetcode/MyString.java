@@ -31,7 +31,12 @@ public class MyString {
             //int m = scanner.nextInt();
             String a = scanner.next();
             //String b = scanner.next();
-            System.out.println("new MyString().simplifyPath(a) = " + new MyString().simplifyPath(a));
+            int n = scanner.nextInt();
+            String[] words = new String[n];
+            for (int i = 0; i < n; i++) {
+                words[i] = scanner.next();
+            }
+            System.out.println("new MyString().findSubstring(a, words) = " + new MyString().findSubstring(a, words));
         }
     }
 

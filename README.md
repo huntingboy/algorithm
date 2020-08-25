@@ -930,6 +930,7 @@
 30. 串联所有单词的子串  
 **问题**：给定一个字符串 s 和一些长度相同的单词 words。找出 s 中恰好可以由 words 中所有单词串联形成的子串的起始位置。注意子串要与 words 中的单词完全匹配，中间不能有其他字符，但不需要考虑 words 中单词串联的顺序。    
 **示例**
+    
     > 输入：  
     > s = "barfoothefoobarman",  
     > words = \["foo","bar"]  
@@ -947,6 +948,7 @@
 31. 下一个排列  
 **问题**：实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。必须原地修改，只允许使用额外常数空间。  
 **示例**
+    
     > 1,2,3 → 1,3,2  
     > 3,2,1 → 1,2,3  
     > 1,1,5 → 1,5,1  
@@ -1664,34 +1666,39 @@
     >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
     >
     >   >     
-78.   
-**问题**：    
+78.   **问题**：股票的最佳买卖时机  原则：低买高抛  最多一笔交易，即一次买卖 (121)
 **示例**
+
+    >[Stock::maxProfit](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Stock.java)  
     >
-    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-    >
-    >   >     
-79.   
-**问题**：    
+    >  >     最大高度差
+    >  >
+    >  >     ```java
+    >  >     buy = Math.max(buy, -prices[i]); //买入状态（本金0, 类似涉账） 绝对值尽可能小 低买
+    >  >     sell = Math.max(sell, prices[i] + buy); //卖出状态（净收益） 高抛
+    >  >     ```
+79.   **问题**：股票的最佳买卖时机  原则：低买高抛  可以依次多笔交易 (122)
 **示例**
+
+    >[Stock::maxProfit2](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Stock.java)   
     >
-    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-    >
-    >   >     
-80.   
-**问题**：    
+    >  >     ```java
+    >  >     buy = Math.max( buy,sell - prices[i]); //因为可以是多次买卖，所以买入状态sell - prices[i]
+    >  >     sell = Math.max(sell, prices[i] + buy);
+    >  >     ```
+80.   **问题**：股票的最佳买卖时机  原则：低买高抛 最多2笔交易 (123) 
 **示例**
+
+    >[Stock::maxProfit3](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/Stock.java)  
     >
-    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-    >
-    >   >     
-81.   
-**问题**：    
-**示例**
-    >
-    >   [MyNumber::mySqrt](https://github.com/huntingboy/algorithm/blob/master/src/main/java/com/nomad/leetcode/MyNumber.java)  
-    >
-    >   >     
+    >  >     4种（2对）状态
+    >  >
+    >  >     ```java
+    >  >     fstBuy = Math.max(fstBuy, -prices[i]); //第一次买入状态
+    >  >     fstSell = Math.max(fstSell, fstBuy + prices[i]); //第一次卖出状态
+    >  >     secBuy = Math.max(secBuy, fstSell -  prices[i]); //第二次买入状态
+    >  >     secSell = Math.max(secSell, secBuy +  prices[i]); //第二次卖出状态
+    >  >     ```
 
 ## 校招
 ### Tencent
