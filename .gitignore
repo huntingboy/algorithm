@@ -5,6 +5,7 @@
 # IntelliJ project files
 .idea
 *.iml
+*.log
 out
 gen
 ### Maven template
@@ -18,4 +19,3 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
-
