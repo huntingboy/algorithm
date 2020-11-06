@@ -1,8 +1,5 @@
 package com.nomad.xz.ne;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main_21 {
     public static void main(String[] args) {
@@ -180,5 +177,52 @@ public class Main_21 {
         }
 
         System.out.println(res);
+    }
+
+    /**
+     * 按照个数排序
+     */
+    class Item implements Comparable<Item>{
+        String val;
+        int count;
+
+        Item(){}
+        Item(String val, int count){
+            this.val = val;
+            this.count = count;
+        }
+
+        public int compareTo(Item item){
+            return this.count - item.count;
+        }
+
+        public String toString(){
+            return val + " " + count;
+        }
+    }
+    public void x1(){
+        Scanner sc = new Scanner(System.in);
+        Map<String, Integer> res = new HashMap<>();
+        while(sc.hasNextLine()) {
+            String str = sc.nextLine();
+            res.put(str, res.getOrDefault(str, 0) + 1);
+        }
+
+        List<Item> items = new ArrayList<>();
+        for(String key : res.keySet()){
+            items.add(new Item(key, res.get(key)));
+        }
+
+        Collections.sort(items, Comparator.reverseOrder());
+        Collections.sort(items, (o1, o2) -> o1.count - o2.count); //升序，item可以不用实现Comparable
+        Collections.sort(items, Comparator.comparingInt(o -> o.count)); //同上
+        Collections.sort(items, (o1, o2) -> o1.val.compareTo(o2.val));
+        Collections.sort(items, Comparator.comparing(o -> o.val));
+        Collections.sort(items, (o1, o2) -> o2.count - o1.count);//降序，item可以不用实现Comparable
+        Collections.sort(items, Comparator.reverseOrder()); //降序，item必须实现Comparable
+
+        for(int i = 0; i < items.size(); i++){
+            System.out.println(items.get(i));
+        }
     }
 }
