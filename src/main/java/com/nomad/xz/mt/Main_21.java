@@ -7,6 +7,9 @@ public class Main_21 {
         new Main_21().ABQueue();
     }
 
+    //链表判断是否有环(方法1.map标记元素是否已经访问  方法2.快慢指针：slow每次走一步，fast每次走两步)
+    //链表[m,n]反转
+
     /**
      * 小美的AB队
      * todo 回溯或动态规划

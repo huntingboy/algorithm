@@ -2,12 +2,23 @@ package com.nomad.main;
 
 import com.nomad.jzoffer.*;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(3);
+        list.add(2);
+        System.out.println(list.toString());
+        System.out.println(list.toArray());
+
+        int[] array = new int[]{1, 3, 2};
+        System.out.println(array);
+        System.out.println(Arrays.asList(array));
+        System.out.println(Arrays.toString(array));
+        //System.out.println(5.00 - 4.90);
+        //System.out.println(200 - 100);
         //new Main_20().testSerialize();
     }
 
