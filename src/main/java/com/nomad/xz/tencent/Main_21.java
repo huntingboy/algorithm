@@ -1,12 +1,186 @@
 package com.nomad.xz.tencent;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main_21 {
 
     public static void main(String[] args) {
         new Main_21().sum();
     }
+
+    public void x5(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+    }
+
+    public void x4(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Integer> nums = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            nums.add(sc.nextInt());
+        }
+
+        for (int i = 0; i < n; i++) {
+            List<Integer> nums1 = new ArrayList<>(nums);
+            //Queue<Integer> queue = new PriorityQueue<>(n / 2, Comparator.reverseOrder());
+            nums1.remove(i);
+            Collections.sort(nums1);
+            System.out.println(nums1.get((n - 1) / 2));
+        }
+    }
+
+    class Item{
+        String val;
+        int counts;
+
+        public Item(String key, Integer value) {
+            this.val = key;
+            this.counts = value;
+        }
+
+        @Override
+        public String toString() {
+            return val + " " + counts;
+        }
+    }
+    public void x3(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), k = sc.nextInt();
+        Queue<Item> maxK = new PriorityQueue<>(k, (Comparator<Item>) (o1, o2) -> {
+            if (o1.counts != o2.counts) {
+                return o2.counts - o1.counts;
+            } else {
+                return o1.val.compareTo(o2.val);
+            }
+        }); //放出现次数最多的k个
+        Queue<Item> minK = new PriorityQueue<>(k, (o1, o2) -> {
+            if (o1.counts != o2.counts) {
+                return o2.counts - o1.counts;
+            } else {
+                return o1.val.compareTo(o2.val);
+            }
+        });//放出现次数最少的K个  同上 堆顶放出现次数最多且字典序最小的item，只是堆满的时候入堆的规则不一样
+        Map<String, Integer> str_counts = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String str = sc.next();
+            str_counts.put(str, str_counts.getOrDefault(str, 0) + 1);
+        }
+
+        int i = 0;
+        for (Map.Entry<String, Integer> entry : str_counts.entrySet()) {
+            Item item = new Item(entry.getKey(), entry.getValue());
+            if (i < k) {
+                minK.add(item);
+                maxK.add(item);
+                i++;
+            } else {
+                if (minK.peek().counts > item.counts || (minK.peek().counts == item.counts && minK.peek().val.compareTo(item.val) > 0)) {
+                    minK.poll();
+                    minK.add(item);
+                } //次数小且字典序小才入堆
+                if (maxK.peek().counts < item.counts || (maxK.peek().counts == item.counts && maxK.peek().val.compareTo(item.val) > 0)) {
+                    maxK.poll();
+                    maxK.add(item);
+                } //次数大且字典序小才入堆
+            }
+        }
+
+        int maxSize = maxK.size();
+        for (int j = 0; j < maxSize; j++) {
+            System.out.println(maxK.poll());
+        }
+        int minSize = minK.size();
+        for (int j = 0; j < minSize; j++) {
+            System.out.println(minK.poll());
+        }
+    }
+
+    /**
+     * 50 5
+     * 2 1 2
+     * 5 10 11 12 13 14
+     * 2 0 1
+     * 2 49 2
+     * 4 6 7 8 2
+     */
+    public void x2(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), m = sc.nextInt();
+        List[] nums = new ArrayList[m];
+        Set<Integer> visited = new HashSet<>();
+        Stack<Integer> stack = new Stack<>();
+        int res = 1;
+        Map<Integer, Integer> nid_qid = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            int t = sc.nextInt();
+            for (int i1 = 0; i1 < t; i1++) {
+                int e = sc.nextInt();
+                if (nums[i] == null) {
+                    nums[i] = new ArrayList();
+                }
+                nums[i].add(e);
+                nid_qid.put(e, i);
+            }
+        }
+
+        stack.add(0);
+        visited.add(0);
+        while (!stack.isEmpty()) {
+            int nid = stack.pop();
+            int qid = nid_qid.get(nid);
+            for (int i = 0; i < nums[qid].size(); i++) {
+                if (!visited.contains(nums[qid].get(i))) {
+                    res++;
+                    stack.push((Integer) nums[qid].get(i));
+                    visited.add((Integer) nums[qid].get(i));
+                }
+            }
+        }
+
+        System.out.println(res);
+    }
+
+    public void x1(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int m = sc.nextInt();
+        int[] b = new int[m];
+        for (int i = 0; i < m; i++) {
+            b[i] = sc.nextInt();
+        }
+
+        int p = 0, q = 0;
+        int[] res = new int[Math.min(m, n)];
+        int i = 0;
+        while (p < n && q < m) {
+            if (a[p] < b[q]) {
+                q++;
+            } else if (a[p] > b[q]) {
+                p++;
+            } else {
+                res[i] = a[p];
+                i++;
+                p++;
+                q++;
+            }
+        }
+
+        for (int j = 0; j < i; j++) {
+            System.out.print(res[j]);
+            if (j < i - 1) {
+                System.out.print(" ");
+            } else {
+                System.out.println();
+            }
+        }
+    }
+
 
     /**
      * 最长回文串
